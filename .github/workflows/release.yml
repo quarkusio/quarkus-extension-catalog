@@ -1,0 +1,44 @@
+name: Release 
+
+on:
+  push:
+    branches:
+    - 'master'
+
+jobs:
+  build:
+    name: Perform release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Index Catalog
+        uses: maxandersen/jbang-action@v0.23.0
+        with:
+          script: https://raw.githubusercontent.com/quarkusio/quarkus-extension-catalog-service/master/jbang/src/main/java/index.java
+          args: . registry.json
+      - name: Generate build number
+        id: buildnumber
+        uses: einaregilsson/build-number@v2 
+        with:
+          token: ${{secrets.github_token}}
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: 'v${{ steps.buildnumber.outputs.build_number }}'
+          release_name: Release ${{ steps.buildnumber.outputs.build_number }}
+          draft: false
+          prerelease: false
+      - name: Upload a Release Asset
+        uses: actions/upload-release-asset@v1.0.2
+        id: upload-release-asset 
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: registry.json
+          asset_name: registry.json
+          asset_content_type: application/json

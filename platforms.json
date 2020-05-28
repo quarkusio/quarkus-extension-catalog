@@ -1,25 +1,5 @@
 [
   {
-    "group-id": "com.redhat.quarkus",
-    "artifact-id": "quarkus-universe-bom",
-    "releases": [
-      {
-        "version": "1.3.2.Final-redhat-00001",
-        "repository-url": "https://maven.repository.redhat.com/ga/"
-      }
-    ]
-  },
-  {
-    "group-id": "com.redhat.quarkus",
-    "artifact-id": "quarkus-product-bom",
-    "releases": [
-      {
-        "version": "1.3.2.Final-redhat-00001",
-        "repository-url": "https://maven.repository.redhat.com/ga/"
-      }
-    ]
-  },
-  {
     "group-id": "io.quarkus",
     "artifact-id": "quarkus-universe-bom",
     "releases": [
@@ -36,10 +16,6 @@
     "artifact-id": "quarkus-bom",
     "artifact-id-json": "quarkus-bom-descriptor-json",
     "releases": [
-      {
-        "version": "1.3.2.Final-redhat-00001",
-        "repository-url": "https://maven.repository.redhat.com/ga/"
-      },
       {
         "version": "1.5.0.Final"
       },

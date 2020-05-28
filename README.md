@@ -30,12 +30,29 @@ Platforms are a set of extensions and MUST exist as a BOM. Since the order is im
 [
   {
     "group-id": "io.quarkus",
-    "artifact-id": "quarkus-universe-bom"
+    "artifact-id": "quarkus-universe-bom",
+    "releases": [
+      {
+        "version": "1.4.2.Final"
+      },      
+      {
+        "version": "1.3.2.Final"
+      }
+    ]    
   },
   {
     "group-id": "io.quarkus",
     "artifact-id": "quarkus-bom",
-    "artifact-id-json": "quarkus-bom-descriptor-json"
+    "artifact-id-json": "quarkus-bom-descriptor-json",
+    "releases": [
+      {
+        "version": "1.5.0.Final"
+      },      
+      {
+        "version": "1.4.2.Final"
+      }
+    ]
+    
   }
 ]
 ```

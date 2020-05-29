@@ -15,7 +15,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Index Catalog
-        uses: maxandersen/jbang-action@v0.23.0
+        uses: jbangdev/jbang-action@v0.25.0
         with:
           script: https://github.com/quarkusio/quarkus-extension-catalog-service/blob/master/jbang/src/main/java/index.java
           args: . ./registry.json

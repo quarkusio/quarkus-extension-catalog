@@ -3,8 +3,10 @@ name: Release
 on:
   push:
     branches:
-    - 'master'
-
+      - 'master'
+    paths:
+      - 'extensions/*'
+      - 'platforms.json'
 jobs:
   build:
     name: Perform release
@@ -15,7 +17,7 @@ jobs:
       - name: Index Catalog
         uses: maxandersen/jbang-action@v0.23.0
         with:
-          script: https://raw.githubusercontent.com/quarkusio/quarkus-extension-catalog-service/master/jbang/src/main/java/index.java
+          script: https://github.com/quarkusio/quarkus-extension-catalog-service/blob/master/jbang/src/main/java/index.java
           args: . ./registry.json
       - name: Generate build number
         id: buildnumber

@@ -71,5 +71,5 @@ jobs:
           cd app
           docker build . -t quarkus/registry-app:latest
           docker tag quarkus/registry-app:latest quarkus/registry-app:v${{ steps.buildnumber.outputs.build_number }}
-          docker push quay.io/quarkus/registry-app:latest
-          docker push quay.io/quarkus/registry-app:v${{ steps.buildnumber.outputs.build_number }}
+          docker push quarkus/registry-app:latest
+          docker push quarkus/registry-app:v${{ steps.buildnumber.outputs.build_number }}

@@ -1,4 +1,4 @@
-FROM quay.io/openshiftio/rhel-base-openshift-nginx:latest
+FROM nginx
 
 LABEL author "Quarkus Team <quarkus-dev@googlegroups.com>"
 LABEL maintainer "Quarkus Team <quarkus-dev@googlegroups.com>"

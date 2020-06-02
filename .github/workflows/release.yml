@@ -4,9 +4,9 @@ on:
   push:
     branches:
       - 'master'
-#     paths:
-#       - 'extensions/*'
-#       - 'platforms.json'
+    paths:
+      - 'extensions/*'
+      - 'platforms.json'
 jobs:
   build:
     name: Perform release
@@ -69,7 +69,9 @@ jobs:
       - name: Build and push Docker images
         run: |
           cd app
+          # IMAGE_TAG=$(git rev-parse --short=7 HEAD)
+          IMAGE_TAG=v${{ steps.buildnumber.outputs.build_number }}
           docker build . -t quay.io/quarkus/registry-app:latest
-          docker tag quay.io/quarkus/registry-app:latest quay.io/quarkus/registry-app:v${{ steps.buildnumber.outputs.build_number }}
+          docker tag quay.io/quarkus/registry-app:latest quay.io/quarkus/registry-app:${IMAGE_TAG}
           docker push quay.io/quarkus/registry-app:latest
-          docker push quay.io/quarkus/registry-app:v${{ steps.buildnumber.outputs.build_number }}
+          docker push quay.io/quarkus/registry-app:${IMAGE_TAG}

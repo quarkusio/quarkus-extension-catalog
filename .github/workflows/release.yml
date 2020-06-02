@@ -57,18 +57,19 @@ jobs:
           asset_path: ./app/registry.json.gz
           asset_name: registry.json.gz
           asset_content_type: application/gzip
-      - name: Build and push Docker images
-        uses: docker/build-push-action@v1.1.0
+      - name: Docker Login
+        uses: Azure/docker-login@v1
         with:
-          # Username used to log in to a Docker registry. If not set then no login will occur
+          # Container registry username
           username: ${{ secrets.DOCKER_USERNAME }}
-          # Password or personal access token used to log in to a Docker registry. If not set then no login will occur
+          # Container registry password
           password: ${{ secrets.DOCKER_PASSWORD }} 
-          # Server address of Docker registry. If not set then will default to Docker Hub
-          registry: quay.io
-          # Docker repository to tag the image with
-          repository: quarkus/registry-app
-          # Path to the build context
-          path: app
-          # Automatically tags the built image with the git reference as per the readme
-          tag_with_ref: true
+          # Container registry server url
+          login-server: quay.io
+      - name: Build and push Docker images
+        run: |
+          cd app
+          docker build . -t quarkus/registry-app:latest
+          docker tag quarkus/registry-app:latest quarkus/registry-app:v${{ steps.buildnumber.outputs.build_number }}
+          docker push quay.io/quarkus/registry-app:latest
+          docker push quay.io/quarkus/registry-app:v${{ steps.buildnumber.outputs.build_number }}

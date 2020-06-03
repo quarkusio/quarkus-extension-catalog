@@ -4,6 +4,9 @@
     "artifact-id": "quarkus-universe-bom",
     "releases": [
       {
+        "version": "1.5.0.Final"
+      },      
+      {
         "version": "1.4.2.Final"
       },      
       {

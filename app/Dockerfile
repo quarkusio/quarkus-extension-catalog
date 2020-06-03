@@ -1,8 +1,13 @@
 FROM quay.io/app-sre/nginx:stable-alpine
-
-LABEL author "Quarkus Team <quarkus-dev@googlegroups.com>"
-LABEL maintainer "Quarkus Team <quarkus-dev@googlegroups.com>"
 ARG REGISTRY_VERSION
+
+LABEL name="quarkus-registry" \
+      vendor="Red Hat" \
+      summary="Nginx container to host the Quarkus Extension Registry" \
+      description="Nginx container to host the Quarkus Extension Registry" \
+      author="Quarkus Team <quarkus-dev@googlegroups.com>" \
+      maintainer="Quarkus Team <quarkus-dev@googlegroups.com>"
+
 ENV LANG=en_US.utf8
 
 RUN rm /etc/nginx/nginx.conf /etc/nginx/conf.d/default.conf

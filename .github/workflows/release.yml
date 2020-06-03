@@ -7,6 +7,7 @@ on:
     paths:
       - 'extensions/*'
       - 'platforms.json'
+      - 'app/*'
 jobs:
   build:
     name: Perform release

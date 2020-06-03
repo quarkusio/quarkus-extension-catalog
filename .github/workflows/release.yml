@@ -71,7 +71,7 @@ jobs:
           cd app
           # IMAGE_TAG=$(git rev-parse --short=7 HEAD)
           IMAGE_TAG=v${{ steps.buildnumber.outputs.build_number }}
-          docker build . -t quay.io/quarkus/registry-app:latest
+          docker build --build-arg REGISTRY_VERSION=$IMAGE_TAG . -t quay.io/quarkus/registry-app:latest
           docker tag quay.io/quarkus/registry-app:latest quay.io/quarkus/registry-app:${IMAGE_TAG}
           docker push quay.io/quarkus/registry-app:latest
           docker push quay.io/quarkus/registry-app:${IMAGE_TAG}

@@ -16,10 +16,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Index Catalog
-        uses: jbangdev/jbang-action@v0.28.0
+        uses: jbangdev/jbang-action@v0.25.0
         with:
           script: https://github.com/quarkusio/quarkus-registry-descriptor/blob/master/index.java
-          args: --trust=https://github.com/quarkusio/quarkus-registry-descriptor/ . ./app/registry.json
+          args: . ./app/registry.json
       - name: gzip registry.json
         run: cd app && gzip -k registry.json 
 

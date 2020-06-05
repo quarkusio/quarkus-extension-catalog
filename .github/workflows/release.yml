@@ -4,10 +4,10 @@ on:
   push:
     branches:
       - 'master'
-    paths:
-      - 'extensions/*'
-      - 'platforms.json'
-      - 'app/*'
+#     paths:
+#       - 'extensions/*'
+#       - 'platforms.json'
+#       - 'app/*'
 jobs:
   build:
     name: Perform release
@@ -18,7 +18,7 @@ jobs:
       - name: Index Catalog
         uses: jbangdev/jbang-action@v0.25.0
         with:
-          script: https://github.com/quarkusio/quarkus-extension-catalog-service/blob/master/jbang/src/main/java/index.java
+          script: https://github.com/quarkusio/quarkus-registry-descriptor/blob/master/index.java
           args: . ./app/registry.json
       - name: gzip registry.json
         run: cd app && gzip -k registry.json 

@@ -19,7 +19,7 @@ jobs:
         uses: jbangdev/jbang-action@v0.28.0
         with:
           script: https://github.com/quarkusio/quarkus-registry-descriptor/blob/master/index.java
-          args: . ./app/registry.json
+          args: --trust=https://github.com/quarkusio/quarkus-registry-descriptor/ . ./app/registry.json
       - name: gzip registry.json
         run: cd app && gzip -k registry.json 
 

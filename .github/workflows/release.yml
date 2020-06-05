@@ -18,7 +18,7 @@ jobs:
       - name: Index Catalog
         uses: jbangdev/jbang-action@v0.28.0
         with:
-          script: --trust=https://github.com/quarkusio/quarkus-registry-descriptor/ https://github.com/quarkusio/quarkus-registry-descriptor/blob/master/index.java
+          script: --trust="https://github.com/quarkusio/quarkus-registry-descriptor/" https://github.com/quarkusio/quarkus-registry-descriptor/blob/master/index.java
           args: . ./app/registry.json
       - name: gzip registry.json
         run: cd app && gzip -k registry.json 

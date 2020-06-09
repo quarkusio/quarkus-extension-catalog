@@ -57,3 +57,6 @@ Platforms are a set of extensions and MUST exist as a BOM. Since the order is im
 ]
 ```
 
+## App
+
+Generates a Docker image to serve the produced `registry.json`

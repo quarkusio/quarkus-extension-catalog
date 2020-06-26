@@ -16,11 +16,17 @@ For maintenance purposes, each extension is declared in its own file and has the
 ```json
 {
   "group-id": "org.apache.myfaces.core.extensions.quarkus",
-  "artifact-id": "myfaces-quarkus"
+  "artifact-id": "myfaces-quarkus",
+  "releases": [
+    {
+      "version": "2.3-next-M2",
+      "quarkus-core":  "1.3.1.Final"
+    }
+  ]  
 }
 ``` 
 
-The Quarkus extension MUST be released to a Maven repository. The descriptor states the GAV - the versions are always resolved to the latest version using the Maven Resolver API.
+The Quarkus extension MUST be released to a Maven repository. The descriptor states the Maven coordinates and the supported quarkus core version for each release.
 
 ## Platforms 
 

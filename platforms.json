@@ -20,6 +20,9 @@
     "artifact-id-json": "quarkus-bom-descriptor-json",
     "releases": [
       {
+        "version": "1.6.0.CR1"
+      },
+      {
         "version": "1.5.2.Final"
       },
       {

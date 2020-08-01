@@ -18,7 +18,7 @@ jobs:
       - name: Index Catalog
         uses: jbangdev/jbang-action@v0.36.0
         with:
-          script: indexcatalog@quarkusio
+          script: "indexcatalog@quarkusio"
           args: . ./app/registry.json
 
       - name: gzip registry.json

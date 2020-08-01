@@ -15,12 +15,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
       - name: Index Catalog
         uses: jbangdev/jbang-action@v0.36.0
         with:
           script: indexcatalog@quarkusio
           args: . ./app/registry.json
-          jbangargs: --trust https://github.com/quarkusio/jbang-catalog/
+          jbangargs: --trust=https://github.com/quarkusio/jbang-catalog/
+
       - name: gzip registry.json
         run: cd app && gzip -k registry.json 
 

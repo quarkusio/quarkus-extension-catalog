@@ -19,8 +19,9 @@ jobs:
       - name: Index Catalog
         uses: gastaldi/jbang-action@patch-1
         with:
-          script: indexcatalog@quarkusio
-          args: . ./app/registry.json
+          jbangargs: indexcatalog@quarkusio
+          script: .
+          args: ./app/registry.json
 
       - name: gzip registry.json
         run: cd app && gzip -k registry.json 

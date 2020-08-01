@@ -17,9 +17,9 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Index Catalog
-        uses: gastaldi/jbang-action@patch-1
+        uses: jbangdev/jbang-action@v0.25.0
         with:
-          script: indexcatalog@quarkusio
+          script: https://github.com/quarkusio/jbang-catalog/blob/master/quarkusindexcatalog.java
           args: . ./app/registry.json
 
       - name: gzip registry.json

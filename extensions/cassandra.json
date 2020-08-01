@@ -3,7 +3,7 @@
     "artifact-id": "cassandra-quarkus-client",
     "releases": [
         {
-          "version": "1.0.0-alpha1",
+          "version": "1.0.0-alpha3",
           "quarkus-core":  "1.5.0.Final"
         }
       ]

@@ -17,11 +17,11 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Index Catalog
-        uses: gastaldi/jbang-action@patch-1
+        uses: jbangdev/jbang-action@0.35.0
         with:
-          jbangargs: indexcatalog@quarkusio
-          script: .
-          args: ./app/registry.json
+          jbangargs: -Dfoo=bar
+          script: indexcatalog@quarkusio
+          args: . ./app/registry.json
 
       - name: gzip registry.json
         run: cd app && gzip -k registry.json 

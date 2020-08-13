@@ -20,7 +20,7 @@ jobs:
         uses: gastaldi/jbang-action@master
         with:
           script: indexcatalog@quarkusio
-          args: --verbose --repository-path=. --output-file=./app/registry.json
+          args: --repository-path=. --output-file=./app/registry.json
           trust: https://github.com/quarkusio/jbang-catalog
 
       - name: gzip registry.json

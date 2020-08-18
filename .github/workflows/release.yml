@@ -19,8 +19,7 @@ jobs:
       - name: Index Catalog
         uses: jbangdev/jbang-action@v0.37.0
         with:
-          args: indexcatalog@quarkusio --repository-path=. --output-file=app/registry.json
-          trust: https://github.com/quarkusio/jbang-catalog
+          args: .github/workflows/quarkusindexcatalog.java --repository-path=. --output-file=app/registry.json
 
       - name: gzip registry.json
         run: cd app && gzip -k registry.json 

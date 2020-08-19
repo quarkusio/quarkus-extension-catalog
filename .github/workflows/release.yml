@@ -23,8 +23,8 @@ jobs:
           scriptargs: --repository-path=. --output-file=app/registry.json
           trust: https://github.com/quarkusio/jbang-catalog
 
-      - name: gzip registry.json
-        run: cd app && gzip -k registry.json
+      - name: gzip all produced JSON files
+        run: cd app && find . -type f -name \*.json -exec gzip -k {} +
 
       - name: Generate build number
         id: buildnumber

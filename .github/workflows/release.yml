@@ -24,7 +24,11 @@ jobs:
           trust: https://github.com/quarkusio/jbang-catalog
 
       - name: gzip all produced JSON files
-        run: cd app/json && find . -type f -name \*.json -exec gzip -k {} +
+        uses: stefh/ghaction-CompressFiles@v1
+        with:
+          path: ./app/json
+          extensions: '.json'
+          tools: 'gzip'
 
       - name: Generate build number
         id: buildnumber

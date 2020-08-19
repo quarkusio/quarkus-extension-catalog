@@ -17,5 +17,4 @@ RUN envsubst '$REGISTRY_VERSION' < /etc/nginx/nginx.conf.tmp > /etc/nginx/nginx.
     && chmod -R 777 /var/log/nginx /var/cache/nginx/ /var/run/ \
     && chmod 644 /etc/nginx/*
 
-ADD registry.json /usr/share/nginx/html/
-ADD registry.json.gz /usr/share/nginx/html/
+COPY ./json/ /usr/share/nginx/html/

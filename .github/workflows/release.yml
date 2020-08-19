@@ -20,11 +20,11 @@ jobs:
         uses: gastaldi/jbang-action@master
         with:
           script: indexcatalog@quarkusio
-          scriptargs: --repository-path=. --output-file=app/registry.json
+          scriptargs: --repository-path=. --output-path=app/json/ --split
           trust: https://github.com/quarkusio/jbang-catalog
 
       - name: gzip all produced JSON files
-        run: cd app && find . -type f -name \*.json -exec gzip -k {} +
+        run: cd app/json && find . -type f -name \*.json -exec gzip -k {} +
 
       - name: Generate build number
         id: buildnumber
@@ -48,7 +48,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-          asset_path: ./app/registry.json
+          asset_path: ./app/json/registry.json
           asset_name: registry.json
           asset_content_type: application/json
       - name: Upload registry.json.gz
@@ -58,7 +58,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-          asset_path: ./app/registry.json.gz
+          asset_path: ./app/json/registry.json.gz
           asset_name: registry.json.gz
           asset_content_type: application/gzip
       - name: Docker Login

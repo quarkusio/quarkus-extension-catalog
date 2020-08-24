@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v2.3.2
 
       - name: Index Catalog
-        uses: gastaldi/jbang-action@master
+        uses: jbangdev/jbang-action@v0.39.0
         with:
           script: indexcatalog@quarkusio
           scriptargs: --repository-path=. --output-path=app/json/ --split

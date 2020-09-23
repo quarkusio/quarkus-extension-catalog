@@ -1,6 +1,6 @@
 //usr/bin/env jbang "$0" "$@" ; exit $?
 //DEPS info.picocli:picocli:4.5.0
-//DEPS io.quarkus:quarkus-platform-descriptor-resolver-json:1.7.0.Final
+//DEPS io.quarkus:quarkus-platform-descriptor-resolver-json:1.8.1.Final
 //DEPS com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.11.1
 
 import java.io.FileNotFoundException;

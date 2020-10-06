@@ -1,0 +1,10 @@
+{
+    "group-id": "io.quarkiverse.loggingjson",
+    "artifact-id": "quarkiverse-logging-json",
+    "releases": [
+        {
+          "version": "0.1.4",
+          "quarkus-core":  "1.8.1.Final"
+        }
+      ]
+  }

@@ -16,5 +16,7 @@ RUN envsubst '$REGISTRY_VERSION' < /etc/nginx/nginx.conf.tmp > /etc/nginx/nginx.
     && rm /etc/nginx/nginx.conf.tmp \
     && chmod -R 777 /var/log/nginx /var/cache/nginx/ /var/run/ \
     && chmod 644 /etc/nginx/*
-PORT 8080
+
+EXPOSE 8080/tcp
+
 COPY ./json/ /usr/share/nginx/html/

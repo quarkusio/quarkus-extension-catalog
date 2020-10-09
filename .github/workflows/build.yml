@@ -1,0 +1,20 @@
+name: Build
+
+on:
+  pull_request:
+    branches:
+      - 'master'
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2.3.2
+
+      - name: Index Catalog
+        uses: jbangdev/jbang-action@v0.50.1
+        with:
+          script: .github/quarkusindexcatalog.java
+          scriptargs: --repository-path=. --output-path=app/json/ --split
+          trust: https://github.com/quarkusio/jbang-catalog

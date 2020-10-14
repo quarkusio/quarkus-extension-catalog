@@ -16,6 +16,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2.3.2
 
+      - name: Cache local Maven repository
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('.github/quarkusindexcatalog.java') }}
+          restore-keys: |
+            ${{ runner.os }}-maven
+
       - name: Index Catalog
         uses: jbangdev/jbang-action@v0.51.1
         with:

@@ -1,0 +1,10 @@
+{
+    "group-id": "io.quarkiverse.mybatis",
+    "artifact-id": "quarkus-mybatis",
+    "releases": [
+        {
+          "version": "0.0.1",
+          "quarkus-core":  "1.9.0.Final"
+        }
+      ]
+  }

@@ -8,9 +8,6 @@ on:
 #       - 'extensions/*'
 #       - 'platforms.json'
 #       - 'app/*'
-env:
-  VERSION: ${{ env.GITHUB_RUN_NUMBER}} 
-  TAG_NAME: 'v${{env.GITHUB_RUN_NUMBER}}' 
 
 jobs:
   build:
@@ -48,8 +45,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ env.TAG_NAME}}
-          release_name: Release ${{ env.VERSION }}
+          tag_name: 'v${{ github.run_number }}'
+          release_name: Release ${{ github.run_number }}
 
       - name: Upload registry.json
         uses: actions/upload-release-asset@v1.0.2
@@ -84,7 +81,7 @@ jobs:
         run: |
           cd app
           # IMAGE_TAG=$(git rev-parse --short=7 HEAD)
-          IMAGE_TAG=${TAG_NAME}
+          IMAGE_TAG=v${{ github.run_number }}
           docker build --build-arg REGISTRY_VERSION=$IMAGE_TAG . -t quay.io/quarkus/registry-app:latest
           docker tag quay.io/quarkus/registry-app:latest quay.io/quarkus/registry-app:${IMAGE_TAG}
           docker push quay.io/quarkus/registry-app:latest

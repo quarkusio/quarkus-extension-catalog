@@ -12,6 +12,9 @@ jobs:
   build:
     name: Perform release
     runs-on: ubuntu-latest
+    env:
+      VERSION: ${{ env.GITHUB_RUN_NUMBER}} 
+      TAG_NAME: 'v${{env.GITHUB_RUN_NUMBER}}' 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2.3.2
@@ -43,8 +46,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: 'v${{ env.GITHUB_RUN_NUMBER }}'
-          release_name: Release ${{ env.GITHUB_RUN_NUMBER }}
+          tag_name: ${{ env.TAG_NAME}}
+          release_name: Release ${{ env.VERSION }}
 
       - name: Upload registry.json
         uses: actions/upload-release-asset@v1.0.2
@@ -79,7 +82,7 @@ jobs:
         run: |
           cd app
           # IMAGE_TAG=$(git rev-parse --short=7 HEAD)
-          IMAGE_TAG=v${{ env.GITHUB_RUN_NUMBER }}
+          IMAGE_TAG=${TAG_NAME}
           docker build --build-arg REGISTRY_VERSION=$IMAGE_TAG . -t quay.io/quarkus/registry-app:latest
           docker tag quay.io/quarkus/registry-app:latest quay.io/quarkus/registry-app:${IMAGE_TAG}
           docker push quay.io/quarkus/registry-app:latest

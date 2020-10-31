@@ -1,0 +1,10 @@
+{
+    "group-id": "io.quarkiverse.cxf",
+    "artifact-id": "quarkus-cxf",
+    "releases": [
+        {
+          "version": "0.1.0",
+          "quarkus-core":  "1.9.0.Final"
+        }
+      ]
+  }

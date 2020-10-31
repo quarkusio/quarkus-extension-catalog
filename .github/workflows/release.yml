@@ -8,13 +8,15 @@ on:
 #       - 'extensions/*'
 #       - 'platforms.json'
 #       - 'app/*'
+env:
+  VERSION: ${{ env.GITHUB_RUN_NUMBER}} 
+  TAG_NAME: 'v${{env.GITHUB_RUN_NUMBER}}' 
+
 jobs:
   build:
     name: Perform release
     runs-on: ubuntu-latest
-    env:
-      VERSION: ${{ env.GITHUB_RUN_NUMBER}} 
-      TAG_NAME: 'v${{env.GITHUB_RUN_NUMBER}}' 
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2.3.2

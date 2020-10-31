@@ -37,20 +37,14 @@ jobs:
           extensions: '.json'
           tools: 'gzip'
 
-      - name: Generate build number
-        id: buildnumber
-        uses: einaregilsson/build-number@v2 
-        with:
-          token: ${{secrets.github_token}}
-
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: 'v${{ steps.buildnumber.outputs.build_number }}'
-          release_name: Release ${{ steps.buildnumber.outputs.build_number }}
+          tag_name: 'v${{ GITHUB_RUN_NUMBER }}'
+          release_name: Release ${{ GITHUB_RUN_NUMBER }}
 
       - name: Upload registry.json
         uses: actions/upload-release-asset@v1.0.2
@@ -85,7 +79,7 @@ jobs:
         run: |
           cd app
           # IMAGE_TAG=$(git rev-parse --short=7 HEAD)
-          IMAGE_TAG=v${{ steps.buildnumber.outputs.build_number }}
+          IMAGE_TAG=v${{ GITHUB_RUN_NUMBER }}
           docker build --build-arg REGISTRY_VERSION=$IMAGE_TAG . -t quay.io/quarkus/registry-app:latest
           docker tag quay.io/quarkus/registry-app:latest quay.io/quarkus/registry-app:${IMAGE_TAG}
           docker push quay.io/quarkus/registry-app:latest

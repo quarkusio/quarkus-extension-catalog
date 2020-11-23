@@ -1,0 +1,10 @@
+{
+    "group-id": "io.quarkiverse.loggingui",
+    "artifact-id": "quarkus-logging-ui",
+    "releases": [
+        {
+          "version": "0.0.4",
+          "quarkus-core":  "1.9.0.Final"
+        }
+      ]
+  }

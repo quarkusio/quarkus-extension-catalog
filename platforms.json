@@ -1,8 +1,7 @@
 [
   {
     "group-id": "io.quarkus",
-    "artifact-id": "quarkus-universe-bom",
-    "artifact-id-json": "quarkus-universe-bom-quarkus-platform-descriptor",
+    "artifact-id": "quarkus-universe-bom-quarkus-platform-descriptor",
     "releases": [
       {
         "version": "1.10.5.Final"

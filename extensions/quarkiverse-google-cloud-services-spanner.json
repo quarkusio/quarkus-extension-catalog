@@ -1,10 +1,4 @@
 {
     "group-id": "io.quarkiverse.googlecloudservices",
-    "artifact-id": "quarkus-google-cloud-spanner",
-    "releases": [
-        {
-          "version": "0.1.2",
-          "quarkus-core":  "1.8.0.Final"
-        }
-      ]
-  }
+    "artifact-id": "quarkus-google-cloud-spanner"
+}

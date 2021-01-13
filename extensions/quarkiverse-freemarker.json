@@ -1,10 +1,4 @@
 {
     "group-id": "io.quarkiverse.freemarker",
-    "artifact-id": "quarkus-freemarker",
-    "releases": [
-        {
-          "version": "0.0.5",
-          "quarkus-core":  "1.9.0.CR1"
-        }
-      ]
-  }
+    "artifact-id": "quarkus-freemarker"
+}

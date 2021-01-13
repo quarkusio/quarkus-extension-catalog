@@ -1,10 +1,4 @@
 {
     "group-id": "io.quarkiverse.minio",
-    "artifact-id": "minio-client",
-    "releases": [
-        {
-          "version": "0.0.1",
-          "quarkus-core":  "1.9.2.Final"
-        }
-      ]
-  }
+    "artifact-id": "quarkiverse-minio-client"
+}

@@ -16,53 +16,26 @@ For maintenance purposes, each extension is declared in its own file and has the
 ```json
 {
   "group-id": "org.apache.myfaces.core.extensions.quarkus",
-  "artifact-id": "myfaces-quarkus",
-  "releases": [
-    {
-      "version": "2.3-next-M2",
-      "quarkus-core":  "1.3.1.Final"
-    }
-  ]  
+  "artifact-id": "myfaces-quarkus"
 }
 ``` 
 
-The Quarkus extension MUST be released to a Maven repository. The descriptor states the Maven coordinates and the supported quarkus core version for each release.
+The Quarkus extension MUST be released to a Maven repository. The descriptor states the Maven coordinates and the repository URL (if available).
 
 ## Platforms 
 
-Platforms are a set of extensions and MUST exist as a BOM. Since the order is important, it is declared as a single JSON (ordered by priority - the preferred BOMs in the top)
+Platforms are a set of extensions and MUST exist as a BOM.
 
 ```json
 [
   {
     "group-id": "io.quarkus",
-    "artifact-id": "quarkus-universe-bom",
-    "releases": [
-      {
-        "version": "1.4.2.Final"
-      },      
-      {
-        "version": "1.3.2.Final"
-      }
-    ]    
+    "artifact-id": "quarkus-universe-bom"
   },
   {
     "group-id": "io.quarkus",
     "artifact-id": "quarkus-bom",
-    "artifact-id-json": "quarkus-bom-descriptor-json",
-    "releases": [
-      {
-        "version": "1.5.0.Final"
-      },      
-      {
-        "version": "1.4.2.Final"
-      }
-    ]
-    
+    "artifact-id-json": "quarkus-bom-descriptor-json"
   }
 ]
 ```
-
-## App
-
-Generates a Docker image to serve the produced `registry.json`

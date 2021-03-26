@@ -1,0 +1,6 @@
+{
+    "group-id": "io.quarkus",
+    "artifact-id": "quarkus-bom-quarkus-platform-descriptor",
+    "classifier-as-version": true
+}
+

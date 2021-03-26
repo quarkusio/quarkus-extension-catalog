@@ -2,6 +2,7 @@
 //DEPS info.picocli:picocli:4.6.1
 //DEPS io.quarkus:quarkus-devtools-registry-client:1.13.0.Final
 //DEPS org.eclipse.jgit:org.eclipse.jgit:5.11.0.202103091610-r
+//JAVA_OPTIONS -Djava.util.logging.manager=org.jboss.logmanager.LogManager
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -110,6 +111,7 @@ class publishcatalog implements Callable<Integer> {
             // Publish
             log.infof("Publishing %s:%s:%s", groupId, artifactId, latestVersion);
             publishExtension(jsonExtension);
+            log.info("Extension published");
             // Write version
             yamlMapper.writeValue(extensionJson.toFile(), tree);
             // Git commit
@@ -146,7 +148,6 @@ class publishcatalog implements Callable<Integer> {
         URL extensionJarURL = getExtensionJarURL(repository, groupId, artifactId, version);
         try (InputStream is = extensionJarURL.openStream()) {
             return is.readAllBytes();
-//                              JsonCatalogMapperHelper.deserialize(yamlMapper, is, JsonExtension.class);
         }
     }
 
@@ -185,7 +186,6 @@ class publishcatalog implements Callable<Integer> {
         if (response.statusCode() != HttpURLConnection.HTTP_ACCEPTED) {
             throw new IOException(response.statusCode() + " -> " + response.body());
         }
-        log.info("Created");
     }
 
     public void gitCommit(Path file, String message) throws IOException {

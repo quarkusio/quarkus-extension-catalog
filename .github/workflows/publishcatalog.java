@@ -115,7 +115,7 @@ class publishcatalog implements Callable<Integer> {
             // Write version
             yamlMapper.writeValue(extensionJson.toFile(), tree);
             // Git commit
-            gitCommit(extensionJson, "Add " + latestVersion + " to " + groupId + ":" + artifactId);
+            gitCommit(extensionJson, "Add " + latestVersion + " to " + workingDirectory.resolve(extensionJson).normalize());
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }

@@ -168,6 +168,7 @@ class publishcatalog implements Callable<Integer> {
                 .uri(adminEndpoint.resolve("/admin/v1/extension"))
                 .timeout(Duration.ofMinutes(2))
                 .header("Content-Type", "application/yaml")
+                .header("Token", password)
                 .POST(HttpRequest.BodyPublishers.ofByteArray(extension))
                 .build();
 

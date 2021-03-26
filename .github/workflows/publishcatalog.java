@@ -1,10 +1,12 @@
 ///usr/bin/env jbang "$0" "$@" ; exit $?
 //DEPS info.picocli:picocli:4.6.1
 //DEPS io.quarkus:quarkus-devtools-registry-client:1.13.0.Final
+//DEPS org.eclipse.jgit:org.eclipse.jgit:5.11.0.202103091610-r
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UncheckedIOException;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
@@ -28,6 +30,8 @@ import io.quarkus.registry.catalog.json.JsonCatalogMapperHelper;
 import org.apache.maven.artifact.repository.metadata.Metadata;
 import org.apache.maven.artifact.repository.metadata.io.xpp3.MetadataXpp3Reader;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
+import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.errors.GitAPIException;
 import org.jboss.logging.Logger;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
@@ -41,6 +45,10 @@ class publishcatalog implements Callable<Integer> {
 
     private static final Logger log = Logger.getLogger(publishcatalog.class);
 
+    private static final HttpClient httpClient = HttpClient.newBuilder()
+            .connectTimeout(Duration.ofSeconds(20))
+            .build();
+
     @Parameters(index = "0", description = "The working directory")
     private Path workingDirectory;
 
@@ -52,9 +60,7 @@ class publishcatalog implements Callable<Integer> {
 
     private final ObjectMapper yamlMapper;
 
-    private final HttpClient httpClient = HttpClient.newBuilder()
-            .connectTimeout(Duration.ofSeconds(20))
-            .build();
+    private Git git;
 
     public static void main(String... args) {
         int exitCode = new CommandLine(new publishcatalog()).execute(args);
@@ -68,6 +74,7 @@ class publishcatalog implements Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {
+        git = Git.open(workingDirectory.toFile());
         processExtensions(workingDirectory.resolve("extensions"));
         //processPlatforms(workingDirectory.resolve("platforms"));
         return 0;
@@ -106,6 +113,7 @@ class publishcatalog implements Callable<Integer> {
             // Write version
             yamlMapper.writeValue(extensionJson.toFile(), tree);
             // Git commit
+            gitCommit(extensionJson, "Add " + latestVersion + " to " + groupId + ":" + artifactId);
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
@@ -169,13 +177,22 @@ class publishcatalog implements Callable<Integer> {
         } catch (InterruptedException e) {
             throw new IOException("Interrupted", e);
         }
-        if (response.statusCode() == 409) {
+        if (response.statusCode() == HttpURLConnection.HTTP_CONFLICT) {
             log.info("Conflict, version already exists. Ignoring");
             return;
         }
-        if (response.statusCode() != 200) {
+        if (response.statusCode() != HttpURLConnection.HTTP_ACCEPTED) {
             throw new IOException(response.statusCode() + " -> " + response.body());
         }
-        log.info("OK");
+        log.info("Created");
+    }
+
+    public void gitCommit(Path file, String message) throws IOException {
+        try {
+            git.add().addFilepattern(workingDirectory.resolve(file).normalize().toString()).call();
+            git.commit().setSign(false).setMessage(message).call();
+        } catch (GitAPIException e) {
+            throw new IOException(e);
+        }
     }
 }

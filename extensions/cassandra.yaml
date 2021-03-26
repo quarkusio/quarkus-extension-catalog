@@ -1,0 +1,2 @@
+group-id: com.datastax.oss.quarkus
+artifact-id: cassandra-quarkus-client

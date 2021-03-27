@@ -112,7 +112,6 @@ class publishcatalog implements Callable<Integer> {
             // Publish
             log.infof("Publishing %s:%s:%s", groupId, artifactId, latestVersion);
             publishExtension(jsonExtension);
-            log.info("Extension published");
             // Write version
             yamlMapper.writeValue(extensionJson.toFile(), tree);
             // Git commit
@@ -186,6 +185,8 @@ class publishcatalog implements Callable<Integer> {
         }
         if (response.statusCode() != HttpURLConnection.HTTP_ACCEPTED) {
             throw new IOException(response.statusCode() + " -> " + response.body());
+        } else {
+            log.info("Extension published");
         }
     }
 

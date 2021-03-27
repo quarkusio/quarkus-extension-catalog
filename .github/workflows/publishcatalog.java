@@ -34,6 +34,7 @@ import org.eclipse.jgit.api.errors.GitAPIException;
 import org.jboss.logging.Logger;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
+import picocli.CommandLine.Option;
 
 @Command(name = "publishcatalog", mixinStandardHelpOptions = true, version = "publishcatalog 0.1",
         description = "publishcatalog made with jbang")

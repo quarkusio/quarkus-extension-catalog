@@ -90,6 +90,7 @@ class publishcatalog implements Callable<Integer> {
 
     private void processExtension(Path extensionJson) {
         try {
+            log.info("---------------------------------------------------------------");
             // Read
             ObjectNode tree = (ObjectNode) yamlMapper.readTree(extensionJson.toFile());
             JsonNode repositoryNode = tree.get("repository");
@@ -119,6 +120,7 @@ class publishcatalog implements Callable<Integer> {
         } catch (IOException e) {
             log.error("Error while processing extension ", e);
         }
+        log.info("---------------------------------------------------------------");
     }
 
     private boolean containsValue(ArrayNode versionsNode, String latestVersion) {

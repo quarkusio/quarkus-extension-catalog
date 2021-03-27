@@ -57,6 +57,9 @@ class publishcatalog implements Callable<Integer> {
     @Option(names = {"-t", "--token"}, description = "The token to use when authenticating to the admin endpoint", required = true, defaultValue = "${REGISTRY_TOKEN}")
     private String token;
 
+    @Option(names = {"-sv", "--skip-version-check"}, description = "Skip Version Check?", defaultValue = "${SKIP_VERSION_CHECK}")
+    private boolean skipVersionCheck;
+
     @Option(names = {"-d", "--dry-run"}, description = "Dry Run? If true, does not change the YAML file and does not publish to the registry", defaultValue = "${DRY_RUN}")
     private boolean dryRun;
 
@@ -108,7 +111,7 @@ class publishcatalog implements Callable<Integer> {
             // Get Latest Version
             String latestVersion = getLatestVersion(repository, groupId, artifactId);
             // Compare if not already in descriptor
-            if (!dryRun) {
+            if (!skipVersionCheck) {
                 if (containsValue(versionsNode, latestVersion)) {
                     log.warnf("%s:%s version %s was read previously. Skipping", groupId, artifactId, latestVersion);
                     return;

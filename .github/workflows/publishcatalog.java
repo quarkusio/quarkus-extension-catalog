@@ -2,7 +2,6 @@
 //DEPS info.picocli:picocli:4.6.1
 //DEPS io.quarkus:quarkus-devtools-registry-client:1.13.0.Final
 //DEPS org.eclipse.jgit:org.eclipse.jgit:5.11.0.202103091610-r
-//JAVA_OPTIONS -Djava.util.logging.manager=org.jboss.logmanager.LogManager
 
 import java.io.IOException;
 import java.io.InputStream;

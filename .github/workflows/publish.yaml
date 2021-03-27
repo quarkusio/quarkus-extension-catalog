@@ -29,8 +29,8 @@ jobs:
           REGISTRY_URL: ${{ secrets.REGISTRY_URL }}
           REGISTRY_TOKEN: ${{ secrets.REGISTRY_TOKEN }}
 
-      - name: Push changes to ${{github.base_ref}}
+      - name: Push changes to main
         uses: ad-m/github-push-action@v0.6.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{github.base_ref}}
+          branch: main

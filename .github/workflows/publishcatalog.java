@@ -118,7 +118,7 @@ class publishcatalog implements Callable<Integer> {
             // Git commit
             gitCommit(extensionJson, "Add " + latestVersion + " to " + workingDirectory.resolve(extensionJson).normalize());
         } catch (IOException e) {
-            throw new UncheckedIOException(e);
+            log.error("Error while processing extension ", e);
         }
     }
 

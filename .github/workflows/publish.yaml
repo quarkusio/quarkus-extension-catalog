@@ -1,0 +1,34 @@
+name: "Publish to the Extension Registry"
+on:
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    name: release
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Configure Git author
+        run: |
+          git config --local user.name "GitHub Action"
+          git config --local user.email "action@github.com"
+
+      - uses: actions/cache@v1
+        name: Cache JBang environment
+        with:
+          path: /root/.jbang
+          key: ${{ runner.os }}-jbang-${{ hashFiles('*.java') }}
+          restore-keys: |
+            ${{ runner.os }}-jbang-
+      - name: Run Publish Catalog script
+        uses: jbangdev/jbang-action@v0.69.2
+        with:
+          script: publishcatalog.java
+          scriptargs: --working-directory=. --registry-url=${{ secrets.REGISTRY_URL }} --token= ${{ secrets.REGISTRY_TOKEN }}
+
+      - name: Push changes to ${{github.base_ref}}
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{github.base_ref}}

@@ -5,7 +5,6 @@
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UncheckedIOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -35,7 +34,6 @@ import org.eclipse.jgit.api.errors.GitAPIException;
 import org.jboss.logging.Logger;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
-import picocli.CommandLine.Parameters;
 
 @Command(name = "publishcatalog", mixinStandardHelpOptions = true, version = "publishcatalog 0.1",
         description = "publishcatalog made with jbang")
@@ -49,14 +47,14 @@ class publishcatalog implements Callable<Integer> {
             .connectTimeout(Duration.ofSeconds(20))
             .build();
 
-    @Parameters(index = "0", description = "The working directory")
+    @Option(names = {"-w", "--working-directory"}, description = "The working directory", required = true)
     private Path workingDirectory;
 
-    @Parameters(index = "1", description = "The admin endpoint URL", defaultValue = "https://registry.quarkus.io")
-    private URI adminEndpoint;
+    @Option(names = {"-u", "--registry-url"}, description = "The Extension Registry URL", required = true, defaultValue = "https://registry.quarkus.io")
+    private URI registryURL;
 
-    @Parameters(index = "2", description = "The password to use")
-    private String password;
+    @Option(names = {"-t", "--token"}, description = "The token to use when authenticating to the admin endpoint", required = true)
+    private String token;
 
     private final ObjectMapper yamlMapper;
 
@@ -74,7 +72,7 @@ class publishcatalog implements Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {
-        try (Git gitHandle = Git.open(workingDirectory.toFile())){
+        try (Git gitHandle = Git.open(workingDirectory.toFile())) {
             this.git = gitHandle;
             processExtensions(workingDirectory.resolve("extensions"));
             //processPlatforms(workingDirectory.resolve("platforms"));
@@ -168,10 +166,10 @@ class publishcatalog implements Callable<Integer> {
 
     private void publishExtension(byte[] extension) throws IOException {
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(adminEndpoint.resolve("/admin/v1/extension"))
+                .uri(registryURL.resolve("/admin/v1/extension"))
                 .timeout(Duration.ofMinutes(2))
                 .header("Content-Type", "application/yaml")
-                .header("Token", password)
+                .header("Token", token)
                 .POST(HttpRequest.BodyPublishers.ofByteArray(extension))
                 .build();
 

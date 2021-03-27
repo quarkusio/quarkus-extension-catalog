@@ -106,7 +106,7 @@ class publishcatalog implements Callable<Integer> {
                 log.infof("%s:%s version %s was read previously. Skipping", groupId, artifactId, latestVersion);
                 return;
             }
-            versionsNode.add(latestVersion);
+            versionsNode.insert(0, latestVersion);
             // Get Extension YAML
             byte[] jsonExtension = readExtension(repository, groupId, artifactId, latestVersion);
             // Publish

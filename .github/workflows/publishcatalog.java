@@ -57,6 +57,9 @@ class publishcatalog implements Callable<Integer> {
     @Option(names = {"-t", "--token"}, description = "The token to use when authenticating to the admin endpoint", required = true, defaultValue = "${REGISTRY_TOKEN}")
     private String token;
 
+    @Option(names = {"-d", "--dry-run"}, description = "Dry Run? If true, does not change the YAML file and does not publish to the registry", defaultValue = "${DRY_RUN}")
+    private boolean dryRun;
+
     private final ObjectMapper yamlMapper;
 
     private Git git;
@@ -73,6 +76,9 @@ class publishcatalog implements Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {
+        if (dryRun) {
+            log.warn("Running in dry-run mode. No files will be changed or posted to the registry");
+        }
         try (Git gitHandle = Git.open(workingDirectory.toFile())) {
             this.git = gitHandle;
             processExtensions(workingDirectory.resolve("extensions"));
@@ -102,22 +108,27 @@ class publishcatalog implements Callable<Integer> {
             // Get Latest Version
             String latestVersion = getLatestVersion(repository, groupId, artifactId);
             // Compare if not already in descriptor
-            if (containsValue(versionsNode, latestVersion)) {
-                log.infof("%s:%s version %s was read previously. Skipping", groupId, artifactId, latestVersion);
-                return;
+            if (!dryRun) {
+                if (containsValue(versionsNode, latestVersion)) {
+                    log.warnf("%s:%s version %s was read previously. Skipping", groupId, artifactId, latestVersion);
+                    return;
+                } else {
+                    versionsNode.insert(0, latestVersion);
+                }
             }
-            versionsNode.insert(0, latestVersion);
             // Get Extension YAML
             byte[] jsonExtension = readExtension(repository, groupId, artifactId, latestVersion);
             // Publish
             log.infof("Publishing %s:%s:%s", groupId, artifactId, latestVersion);
-            publishExtension(jsonExtension);
-            // Write version
-            yamlMapper.writeValue(extensionJson.toFile(), tree);
-            // Git commit
-            gitCommit(extensionJson, "Add " + latestVersion + " to " + workingDirectory.resolve(extensionJson).normalize());
+            if (!dryRun) {
+                publishExtension(jsonExtension);
+                // Write version
+                yamlMapper.writeValue(extensionJson.toFile(), tree);
+                // Git commit
+                gitCommit(extensionJson, "Add " + latestVersion + " to " + workingDirectory.resolve(extensionJson).normalize());
+            }
         } catch (IOException e) {
-            log.error("Error while processing extension ", e);
+            log.error("Error while processing extension", e);
         }
         log.info("---------------------------------------------------------------");
     }

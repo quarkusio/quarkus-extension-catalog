@@ -51,10 +51,10 @@ class publishcatalog implements Callable<Integer> {
     @Option(names = {"-w", "--working-directory"}, description = "The working directory", required = true)
     private Path workingDirectory;
 
-    @Option(names = {"-u", "--registry-url"}, description = "The Extension Registry URL", required = true, defaultValue = "https://registry.quarkus.io")
+    @Option(names = {"-u", "--registry-url"}, description = "The Extension Registry URL", required = true, defaultValue = "${REGISTRY_URL}")
     private URI registryURL;
 
-    @Option(names = {"-t", "--token"}, description = "The token to use when authenticating to the admin endpoint", required = true)
+    @Option(names = {"-t", "--token"}, description = "The token to use when authenticating to the admin endpoint", required = true, defaultValue = "${REGISTRY_TOKEN}")
     private String token;
 
     private final ObjectMapper yamlMapper;

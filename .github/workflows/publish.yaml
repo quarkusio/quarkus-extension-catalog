@@ -24,7 +24,10 @@ jobs:
         uses: jbangdev/jbang-action@v0.69.2
         with:
           script: .github/workflows/publishcatalog.java
-          scriptargs: --working-directory=. --registry-url=${{ secrets.REGISTRY_URL }} --token= ${{ secrets.REGISTRY_TOKEN }}
+          scriptargs: --working-directory=.
+        env:
+          REGISTRY_URL: ${{ secrets.REGISTRY_URL }}
+          REGISTRY_TOKEN: ${{ secrets.REGISTRY_TOKEN }}
 
       - name: Push changes to ${{github.base_ref}}
         uses: ad-m/github-push-action@v0.6.0

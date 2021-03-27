@@ -74,9 +74,11 @@ class publishcatalog implements Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {
-        git = Git.open(workingDirectory.toFile());
-        processExtensions(workingDirectory.resolve("extensions"));
-        //processPlatforms(workingDirectory.resolve("platforms"));
+        try (Git gitHandle = Git.open(workingDirectory.toFile())){
+            this.git = gitHandle;
+            processExtensions(workingDirectory.resolve("extensions"));
+            //processPlatforms(workingDirectory.resolve("platforms"));
+        }
         return 0;
     }
 

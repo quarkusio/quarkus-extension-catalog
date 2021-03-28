@@ -1,2 +1,5 @@
-group-id: io.quarkiverse.loggingjson
-artifact-id: quarkiverse-logging-json
+---
+group-id: "io.quarkiverse.loggingjson"
+artifact-id: "quarkiverse-logging-json"
+versions:
+- "0.2.3"

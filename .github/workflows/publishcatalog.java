@@ -6,7 +6,6 @@
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.net.http.HttpClient;
@@ -18,6 +17,7 @@ import java.text.MessageFormat;
 import java.time.Duration;
 import java.util.Objects;
 import java.util.concurrent.Callable;
+import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -84,26 +84,68 @@ class publishcatalog implements Callable<Integer> {
         }
         try (Git gitHandle = Git.open(workingDirectory.toFile())) {
             this.git = gitHandle;
-            processExtensions(workingDirectory.resolve("extensions"));
-            //processPlatforms(workingDirectory.resolve("platforms"));
+            list(workingDirectory.resolve("platforms"), this::processCatalog);
+            list(workingDirectory.resolve("extensions"), this::processExtension);
         }
         return 0;
     }
 
-    private void processExtensions(Path path) throws IOException {
+
+    private void list(Path path, Consumer<Path> consumer) throws IOException {
         try (Stream<Path> files = Files.list(path)) {
-            files.forEach(this::processExtension);
+            files.forEach(consumer);
         }
     }
 
-    private void processExtension(Path extensionJson) {
+    private void processCatalog(Path platformYaml) {
+        try {
+            log.info("---------------------------------------------------------------");
+            ObjectNode tree = (ObjectNode) yamlMapper.readTree(platformYaml.toFile());
+            String repository = tree.path("maven-repository").asText(MAVEN_CENTRAL);
+            String groupId = tree.get("group-id").asText();
+            String artifactId = tree.get("artifact-id").asText();
+            log.infof("Fetching latest version for %s:%s", groupId, artifactId);
+            ArrayNode versionsNode = tree.withArray("versions");
+            // Get Latest Version
+            String latestVersion = getLatestVersion(repository, groupId, artifactId);
+            if (!skipVersionCheck) {
+                if (containsValue(versionsNode, latestVersion)) {
+                    log.warnf("%s:%s version %s was read previously. Skipping", groupId, artifactId, latestVersion);
+                    return;
+                } else {
+                    versionsNode.insert(0, latestVersion);
+                }
+            }
+            String classifier = tree.path("classifier").asText();
+            if (tree.get("classifier-as-version").asBoolean()) {
+                classifier = latestVersion;
+            }
+            // Get Extension YAML
+            byte[] jsonPlatform = readCatalog(repository, groupId, artifactId, latestVersion, classifier);
+
+            // Publish
+            log.infof("Publishing %s:%s:%s", groupId, artifactId, latestVersion);
+            if (!dryRun) {
+                publishCatalog(jsonPlatform);
+                if (!skipVersionCheck) {
+                    // Write version
+                    yamlMapper.writeValue(platformYaml.toFile(), tree);
+                    // Git commit
+                    gitCommit(platformYaml, "Add " + latestVersion + " to " + workingDirectory.resolve(platformYaml).normalize());
+                }
+            }
+        } catch (IOException e) {
+            log.info("---------------------------------------------------------------");
+        }
+
+    }
+
+    private void processExtension(Path extensionYaml) {
         try {
             log.info("---------------------------------------------------------------");
             // Read
-            ObjectNode tree = (ObjectNode) yamlMapper.readTree(extensionJson.toFile());
-            JsonNode repositoryNode = tree.get("repository");
-            String repository = (repositoryNode == null) ? MAVEN_CENTRAL :
-                    repositoryNode.asText();
+            ObjectNode tree = (ObjectNode) yamlMapper.readTree(extensionYaml.toFile());
+            String repository = tree.path("maven-repository").asText(MAVEN_CENTRAL);
             String groupId = tree.get("group-id").asText();
             String artifactId = tree.get("artifact-id").asText();
             log.infof("Fetching latest version for %s:%s", groupId, artifactId);
@@ -125,10 +167,12 @@ class publishcatalog implements Callable<Integer> {
             log.infof("Publishing %s:%s:%s", groupId, artifactId, latestVersion);
             if (!dryRun) {
                 publishExtension(jsonExtension);
-                // Write version
-                yamlMapper.writeValue(extensionJson.toFile(), tree);
-                // Git commit
-                gitCommit(extensionJson, "Add " + latestVersion + " to " + workingDirectory.resolve(extensionJson).normalize());
+                if (!skipVersionCheck) {
+                    // Write version
+                    yamlMapper.writeValue(extensionYaml.toFile(), tree);
+                    // Git commit
+                    gitCommit(extensionYaml, "Add " + latestVersion + " to " + workingDirectory.resolve(extensionYaml).normalize());
+                }
             }
         } catch (IOException e) {
             log.error("Error while processing extension", e);
@@ -159,25 +203,38 @@ class publishcatalog implements Callable<Integer> {
         }
     }
 
-    private byte[] readExtension(String repository, String groupId, String artifactId, String version) throws IOException {
-        URL extensionJarURL = getExtensionJarURL(repository, groupId, artifactId, version);
-        try (InputStream is = extensionJarURL.openStream()) {
+    private byte[] readCatalog(String repository, String groupId, String artifactId, String version, String classifier) throws IOException {
+        URL platformJson;
+        if (classifier == null) {
+            platformJson = new URL(MessageFormat.format("{0}{1}/{2}/{3}/{2}-{3}.json",
+                                                        Objects.toString(repository, MAVEN_CENTRAL),
+                                                        groupId.replace('.', '/'),
+                                                        artifactId,
+                                                        version));
+        } else {
+//            https://repo1.maven.org/maven2/io/quarkus/quarkus-bom-quarkus-platform-descriptor/1.13.0.Final/quarkus-bom-quarkus-platform-descriptor-1.13.0.Final-1.13.0.Final.json
+            platformJson = new URL(MessageFormat.format("{0}{1}/{2}/{3}/{2}-{4}-{3}.json",
+                                                        Objects.toString(repository, MAVEN_CENTRAL),
+                                                        groupId.replace('.', '/'),
+                                                        artifactId,
+                                                        version,
+                                                        classifier));
+        }
+        try (InputStream is = platformJson.openStream()) {
             return is.readAllBytes();
         }
     }
 
-    private URL getExtensionJarURL(String repository, String groupId, String artifactId, String version) {
-        try {
-            return new URL(MessageFormat.format("jar:{0}{1}/{2}/{3}/{2}-{3}.jar!/META-INF/quarkus-extension.yaml",
-                                                Objects.toString(repository, MAVEN_CENTRAL),
-                                                groupId.replace('.', '/'),
-                                                artifactId,
-                                                version));
-        } catch (MalformedURLException e) {
-            throw new IllegalArgumentException("Error while building JSON URL", e);
+    private byte[] readExtension(String repository, String groupId, String artifactId, String version) throws IOException {
+        URL extensionJarURL = new URL(MessageFormat.format("jar:{0}{1}/{2}/{3}/{2}-{3}.jar!/META-INF/quarkus-extension.yaml",
+                                                           Objects.toString(repository, MAVEN_CENTRAL),
+                                                           groupId.replace('.', '/'),
+                                                           artifactId,
+                                                           version));
+        try (InputStream is = extensionJarURL.openStream()) {
+            return is.readAllBytes();
         }
     }
-
 
     private void publishExtension(byte[] extension) throws IOException {
         HttpRequest request = HttpRequest.newBuilder()
@@ -202,6 +259,33 @@ class publishcatalog implements Callable<Integer> {
             throw new IOException(response.statusCode() + " -> " + response.body());
         } else {
             log.info("Extension published");
+        }
+    }
+
+
+    private void publishCatalog(byte[] jsonPlatform) throws IOException {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(registryURL.resolve("/admin/v1/extension/catalog"))
+                .timeout(Duration.ofMinutes(2))
+                .header("Content-Type", "application/json")
+                .header("Token", token)
+                .POST(HttpRequest.BodyPublishers.ofByteArray(jsonPlatform))
+                .build();
+
+        HttpResponse<String> response = null;
+        try {
+            response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (InterruptedException e) {
+            throw new IOException("Interrupted", e);
+        }
+        if (response.statusCode() == HttpURLConnection.HTTP_CONFLICT) {
+            log.info("Conflict, version already exists. Ignoring");
+            return;
+        }
+        if (response.statusCode() != HttpURLConnection.HTTP_ACCEPTED) {
+            throw new IOException(response.statusCode() + " -> " + response.body());
+        } else {
+            log.info("Platform published");
         }
     }
 

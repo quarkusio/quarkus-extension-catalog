@@ -99,6 +99,7 @@ class publishcatalog implements Callable<Integer> {
 
     private void processCatalog(Path platformYaml) {
         try {
+            log.infof("Processing platform %s", platformYaml);
             log.info("---------------------------------------------------------------");
             ObjectNode tree = (ObjectNode) yamlMapper.readTree(platformYaml.toFile());
             String repository = tree.path("maven-repository").asText(MAVEN_CENTRAL);
@@ -135,13 +136,15 @@ class publishcatalog implements Callable<Integer> {
                 }
             }
         } catch (IOException e) {
-            log.info("---------------------------------------------------------------");
+            log.error("Error while processing platform", e);
         }
+        log.info("---------------------------------------------------------------");
 
     }
 
     private void processExtension(Path extensionYaml) {
         try {
+            log.infof("Processing extension %s", extensionYaml);
             log.info("---------------------------------------------------------------");
             // Read
             ObjectNode tree = (ObjectNode) yamlMapper.readTree(extensionYaml.toFile());

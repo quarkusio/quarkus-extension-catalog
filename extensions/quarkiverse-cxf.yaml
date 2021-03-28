@@ -1,2 +1,5 @@
-group-id: io.quarkiverse.cxf
-artifact-id: quarkus-cxf
+---
+group-id: "io.quarkiverse.cxf"
+artifact-id: "quarkus-cxf"
+versions:
+- "0.5"

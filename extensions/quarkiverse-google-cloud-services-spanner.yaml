@@ -1,2 +1,5 @@
-group-id: io.quarkiverse.googlecloudservices
-artifact-id: quarkus-google-cloud-spanner
+---
+group-id: "io.quarkiverse.googlecloudservices"
+artifact-id: "quarkus-google-cloud-spanner"
+versions:
+- "0.5.0"

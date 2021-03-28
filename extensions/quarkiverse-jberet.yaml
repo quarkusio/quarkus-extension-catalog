@@ -1,2 +1,5 @@
-group-id: io.quarkiverse.jberet
-artifact-id: quarkus-jberet
+---
+group-id: "io.quarkiverse.jberet"
+artifact-id: "quarkus-jberet"
+versions:
+- "0.0.4"

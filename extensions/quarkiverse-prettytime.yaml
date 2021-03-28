@@ -1,2 +1,5 @@
-group-id: io.quarkiverse.prettytime
-artifact-id: quarkus-prettytime
+---
+group-id: "io.quarkiverse.prettytime"
+artifact-id: "quarkus-prettytime"
+versions:
+- "0.0.2"

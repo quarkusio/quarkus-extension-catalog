@@ -1,2 +1,5 @@
-group-id: io.quarkiverse.googlecloudservices
-artifact-id: quarkus-google-cloud-storage
+---
+group-id: "io.quarkiverse.googlecloudservices"
+artifact-id: "quarkus-google-cloud-storage"
+versions:
+- "0.5.0"

@@ -1,2 +1,5 @@
-group-id: io.quarkiverse.googlecloudservices
-artifact-id: quarkus-google-cloud-bigquery
+---
+group-id: "io.quarkiverse.googlecloudservices"
+artifact-id: "quarkus-google-cloud-bigquery"
+versions:
+- "0.5.0"

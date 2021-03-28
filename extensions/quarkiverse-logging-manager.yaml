@@ -1,2 +1,5 @@
-group-id: io.quarkiverse.loggingmanager
-artifact-id: quarkus-logging-manager
+---
+group-id: "io.quarkiverse.loggingmanager"
+artifact-id: "quarkus-logging-manager"
+versions:
+- "1.1.2"

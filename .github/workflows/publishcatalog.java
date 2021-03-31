@@ -8,13 +8,9 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.MessageFormat;
-import java.time.Duration;
 import java.util.Objects;
 import java.util.concurrent.Callable;
 import java.util.function.Consumer;
@@ -26,6 +22,12 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import io.quarkus.registry.catalog.json.JsonCatalogMapperHelper;
+import org.apache.http.StatusLine;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ByteArrayEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.apache.maven.artifact.repository.metadata.Metadata;
 import org.apache.maven.artifact.repository.metadata.io.xpp3.MetadataXpp3Reader;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
@@ -43,10 +45,6 @@ class publishcatalog implements Callable<Integer> {
     private static final String MAVEN_CENTRAL = "https://repo1.maven.org/maven2/";
 
     private static final Logger log = Logger.getLogger(publishcatalog.class);
-
-    private static final HttpClient httpClient = HttpClient.newBuilder()
-            .connectTimeout(Duration.ofSeconds(20))
-            .build();
 
     @Option(names = {"-w", "--working-directory"}, description = "The working directory", required = true)
     private Path workingDirectory;
@@ -240,55 +238,45 @@ class publishcatalog implements Callable<Integer> {
     }
 
     private void publishExtension(byte[] extension) throws IOException {
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(registryURL.resolve("/admin/v1/extension"))
-                .timeout(Duration.ofMinutes(2))
-                .header("Content-Type", "application/yaml")
-                .header("Token", token)
-                .POST(HttpRequest.BodyPublishers.ofByteArray(extension))
-                .build();
-
-        HttpResponse<String> response = null;
-        try {
-            response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-        } catch (InterruptedException e) {
-            throw new IOException("Interrupted", e);
-        }
-        if (response.statusCode() == HttpURLConnection.HTTP_CONFLICT) {
-            log.info("Conflict, version already exists. Ignoring");
-            return;
-        }
-        if (response.statusCode() != HttpURLConnection.HTTP_ACCEPTED) {
-            throw new IOException(response.statusCode() + " -> " + response.body());
-        } else {
-            log.info("Extension published");
+        try (final CloseableHttpClient httpClient = HttpClients.createDefault()) {
+            HttpPost post = new HttpPost(registryURL.resolve("/admin/v1/extension"));
+            post.setHeader("Content-Type", "application/yaml");
+            post.setHeader("Token", token);
+            post.setEntity(new ByteArrayEntity(extension));
+            try (CloseableHttpResponse response = httpClient.execute(post)) {
+                StatusLine statusLine = response.getStatusLine();
+                if (statusLine.getStatusCode() == HttpURLConnection.HTTP_CONFLICT) {
+                    log.info("Conflict, version already exists. Ignoring");
+                    return;
+                }
+                if (statusLine.getStatusCode() != HttpURLConnection.HTTP_ACCEPTED) {
+                    throw new IOException(statusLine.getStatusCode() + " -> " + statusLine.getReasonPhrase());
+                } else {
+                    log.info("Extension published");
+                }
+            }
         }
     }
 
 
     private void publishCatalog(byte[] jsonPlatform) throws IOException {
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(registryURL.resolve("/admin/v1/extension/catalog"))
-                .timeout(Duration.ofMinutes(2))
-                .header("Content-Type", "application/json")
-                .header("Token", token)
-                .POST(HttpRequest.BodyPublishers.ofByteArray(jsonPlatform))
-                .build();
-
-        HttpResponse<String> response = null;
-        try {
-            response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-        } catch (InterruptedException e) {
-            throw new IOException("Interrupted", e);
-        }
-        if (response.statusCode() == HttpURLConnection.HTTP_CONFLICT) {
-            log.info("Conflict, version already exists. Ignoring");
-            return;
-        }
-        if (response.statusCode() != HttpURLConnection.HTTP_ACCEPTED) {
-            throw new IOException(response.statusCode() + " -> " + response.body());
-        } else {
-            log.info("Platform published");
+        try (final CloseableHttpClient httpClient = HttpClients.createDefault()) {
+            HttpPost post = new HttpPost(registryURL.resolve("/admin/v1/extension/catalog"));
+            post.setHeader("Content-Type", "application/json");
+            post.setHeader("Token", token);
+            post.setEntity(new ByteArrayEntity(jsonPlatform));
+            try (CloseableHttpResponse response = httpClient.execute(post)) {
+                StatusLine statusLine = response.getStatusLine();
+                if (statusLine.getStatusCode() == HttpURLConnection.HTTP_CONFLICT) {
+                    log.info("Conflict, version already exists. Ignoring");
+                    return;
+                }
+                if (statusLine.getStatusCode() != HttpURLConnection.HTTP_ACCEPTED) {
+                    throw new IOException(statusLine.getStatusCode() + " -> " + statusLine.getReasonPhrase());
+                } else {
+                    log.info("Platform published");
+                }
+            }
         }
     }
 

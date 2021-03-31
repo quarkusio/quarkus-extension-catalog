@@ -2,4 +2,5 @@
 group-id: "io.quarkiverse.jberet"
 artifact-id: "quarkus-jberet"
 versions:
+- "0.0.5"
 - "0.0.4"

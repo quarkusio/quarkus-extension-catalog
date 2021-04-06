@@ -1,2 +1,5 @@
-group-id: io.quarkiverse.unleash
-artifact-id: quarkus-unleash
+---
+group-id: "io.quarkiverse.unleash"
+artifact-id: "quarkus-unleash"
+versions:
+- "0.1.0"

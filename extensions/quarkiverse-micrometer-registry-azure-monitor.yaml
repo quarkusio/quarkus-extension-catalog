@@ -1,2 +1,5 @@
-group-id: io.quarkiverse.micrometer.registry
-artifact-id: quarkus-micrometer-registry-azure-monitor
+---
+group-id: "io.quarkiverse.micrometer.registry"
+artifact-id: "quarkus-micrometer-registry-azure-monitor"
+versions:
+- "0.4.0"

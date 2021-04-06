@@ -1,2 +1,5 @@
-group-id: io.quarkiverse.jooq
-artifact-id: quarkus-jooq
+---
+group-id: "io.quarkiverse.jooq"
+artifact-id: "quarkus-jooq"
+versions:
+- "0.0.1"

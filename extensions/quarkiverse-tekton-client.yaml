@@ -1,2 +1,5 @@
-group-id: io.quarkiverse.tektonclient
-artifact-id: quarkus-tekton-client
+---
+group-id: "io.quarkiverse.tektonclient"
+artifact-id: "quarkus-tekton-client"
+versions:
+- "0.3.0"

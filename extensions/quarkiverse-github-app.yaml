@@ -1,2 +1,5 @@
-group-id: io.quarkiverse.githubapp
-artifact-id: quarkus-github-app
+---
+group-id: "io.quarkiverse.githubapp"
+artifact-id: "quarkus-github-app"
+versions:
+- "1.0.0"

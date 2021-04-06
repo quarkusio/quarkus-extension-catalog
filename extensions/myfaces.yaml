@@ -1,2 +1,5 @@
-group-id: org.apache.myfaces.core.extensions.quarkus
-artifact-id: myfaces-quarkus
+---
+group-id: "org.apache.myfaces.core.extensions.quarkus"
+artifact-id: "myfaces-quarkus"
+versions:
+- "2.3-next-M5"

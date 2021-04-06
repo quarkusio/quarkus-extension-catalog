@@ -1,2 +1,5 @@
-group-id: io.quarkiverse.rsocket
-artifact-id: quarkus-rsocket
+---
+group-id: "io.quarkiverse.rsocket"
+artifact-id: "quarkus-rsocket"
+versions:
+- "0"

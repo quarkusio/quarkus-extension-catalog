@@ -1,2 +1,5 @@
-group-id: io.quarkiverse.lucene
-artifact-id: quarkus-lucene
+---
+group-id: "io.quarkiverse.lucene"
+artifact-id: "quarkus-lucene"
+versions:
+- "0.2"

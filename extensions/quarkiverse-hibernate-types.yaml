@@ -1,2 +1,5 @@
-group-id: io.quarkiverse.hibernatetypes
-artifact-id: quarkus-hibernate-types
+---
+group-id: "io.quarkiverse.hibernatetypes"
+artifact-id: "quarkus-hibernate-types"
+versions:
+- "0.1.0"

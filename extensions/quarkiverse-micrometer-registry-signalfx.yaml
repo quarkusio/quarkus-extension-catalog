@@ -1,2 +1,5 @@
-group-id: io.quarkiverse.micrometer.registry
-artifact-id: quarkus-micrometer-registry-signalfx
+---
+group-id: "io.quarkiverse.micrometer.registry"
+artifact-id: "quarkus-micrometer-registry-signalfx"
+versions:
+- "0.4.0"

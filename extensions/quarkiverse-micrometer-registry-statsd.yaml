@@ -1,2 +1,5 @@
-group-id: io.quarkiverse.micrometer.registry
-artifact-id: quarkus-micrometer-registry-statsd
+---
+group-id: "io.quarkiverse.micrometer.registry"
+artifact-id: "quarkus-micrometer-registry-statsd"
+versions:
+- "0.4.0"

@@ -1,2 +1,5 @@
-group-id: io.quarkiverse.opencv
-artifact-id: quarkus-opencv
+---
+group-id: "io.quarkiverse.opencv"
+artifact-id: "quarkus-opencv"
+versions:
+- "1.0.1"

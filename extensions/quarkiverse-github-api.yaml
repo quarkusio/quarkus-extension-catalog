@@ -1,2 +1,5 @@
-group-id: io.quarkiverse.githubapi
-artifact-id: quarkus-github-api
+---
+group-id: "io.quarkiverse.githubapi"
+artifact-id: "quarkus-github-api"
+versions:
+- "1.125.0"

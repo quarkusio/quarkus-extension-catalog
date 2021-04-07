@@ -8,7 +8,7 @@ A catalog is a local directory (which can be cloned from a Git repository) with 
 ├── extensions
 │   └── <any_extension>.yaml
 └── platforms
-│   └── <any_platform,>.yaml
+│   └── <any_platform>.yaml
 ```
 
 ## Extensions

@@ -2,4 +2,5 @@
 group-id: "io.quarkiverse.rabbitmqclient"
 artifact-id: "quarkus-rabbitmq-client"
 versions:
+- "0.2.1"
 - "0.2.0"

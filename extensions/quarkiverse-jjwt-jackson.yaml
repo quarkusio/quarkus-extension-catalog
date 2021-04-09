@@ -2,4 +2,5 @@
 group-id: "io.quarkiverse.jjwtjackson"
 artifact-id: "quarkus-jjwt-jackson"
 versions:
+- "0.0.4"
 - "0.0.3"

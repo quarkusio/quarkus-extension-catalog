@@ -2,4 +2,5 @@
 group-id: "io.quarkiverse.freemarker"
 artifact-id: "quarkus-freemarker"
 versions:
+- "0.2.7"
 - "0.2.2"

@@ -2,5 +2,6 @@
 group-id: "io.quarkiverse.githubapp"
 artifact-id: "quarkus-github-app"
 versions:
+- "1.0.3"
 - "1.0.2"
 - "1.0.0"

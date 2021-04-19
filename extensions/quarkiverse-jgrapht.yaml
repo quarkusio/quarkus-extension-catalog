@@ -1,2 +1,5 @@
-group-id: io.quarkiverse.jgrapht
-artifact-id: quarkus-jgrapht
+---
+group-id: "io.quarkiverse.jgrapht"
+artifact-id: "quarkus-jgrapht"
+versions:
+- "1.0.0"

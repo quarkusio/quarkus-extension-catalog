@@ -3,6 +3,7 @@ group-id: "io.quarkus"
 artifact-id: "quarkus-bom-quarkus-platform-descriptor"
 classifier-as-version: true
 versions:
+- "2.0.0.Alpha1"
 - "1.13.2.Final"
 - "1.13.1.Final"
 - "1.13.0.Final"

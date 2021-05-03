@@ -2,4 +2,5 @@
 group-id: "io.quarkiverse.minio"
 artifact-id: "quarkus-minio"
 versions:
+- "0.2.3"
 - "0.2.2"

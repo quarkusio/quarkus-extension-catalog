@@ -2,5 +2,6 @@
 group-id: "io.quarkiverse.cxf"
 artifact-id: "quarkus-cxf"
 versions:
+- "0.7"
 - "0.6"
 - "0.5"

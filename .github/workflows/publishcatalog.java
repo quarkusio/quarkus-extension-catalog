@@ -27,6 +27,7 @@ import io.quarkus.registry.catalog.json.JsonCatalogMapperHelper;
 import org.apache.http.StatusLine;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -240,7 +241,9 @@ class publishcatalog implements Callable<Integer> {
     }
 
     private void publishExtension(byte[] extension) throws IOException {
-        try (final CloseableHttpClient httpClient = HttpClients.createDefault()) {
+        try (final CloseableHttpClient httpClient = HttpClients.custom()
+                .setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE)
+                .build()) {
             HttpPost post = new HttpPost(registryURL.resolve("/admin/v1/extension"));
             post.setHeader("Content-Type", "application/yaml");
             post.setHeader("Token", token);
@@ -262,7 +265,9 @@ class publishcatalog implements Callable<Integer> {
 
 
     private void publishCatalog(byte[] jsonPlatform) throws IOException {
-        try (final CloseableHttpClient httpClient = HttpClients.createDefault()) {
+        try (final CloseableHttpClient httpClient = HttpClients.custom()
+                .setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE)
+                .build()) {
             HttpPost post = new HttpPost(registryURL.resolve("/admin/v1/extension/catalog"));
             post.setHeader("Content-Type", "application/json");
             post.setHeader("Token", token);

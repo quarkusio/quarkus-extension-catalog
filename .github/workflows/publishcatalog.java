@@ -2,7 +2,7 @@
 //DEPS info.picocli:picocli:4.6.1
 //DEPS io.quarkus:quarkus-devtools-registry-client:2.0.0.CR3
 //DEPS org.eclipse.jgit:org.eclipse.jgit:5.11.0.202103091610-r
-//JAVA_OPTIONS "-Djava.util.logging.SimpleFormatter.format=%1$s [%4$s] %5$s%6$s%n" -Dhttps.protocols=TLSv1,TLSv1.1,TLSv1.2
+//JAVA_OPTIONS "-Djava.util.logging.SimpleFormatter.format=%1$s [%4$s] %5$s%6$s%n"
 //JAVA 11
 
 import java.io.IOException;
@@ -26,6 +26,7 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import io.quarkus.registry.catalog.json.JsonCatalogMapperHelper;
 import org.apache.http.StatusLine;
 import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.entity.ByteArrayEntity;
@@ -46,7 +47,7 @@ import picocli.CommandLine.Option;
 class publishcatalog implements Callable<Integer> {
 
     private static final String MAVEN_CENTRAL = "https://repo1.maven.org/maven2/";
-
+    
     private static final Logger log = Logger.getLogger(publishcatalog.class);
 
     @Option(names = {"-w", "--working-directory"}, description = "The working directory", required = true)
@@ -194,11 +195,12 @@ class publishcatalog implements Callable<Integer> {
     }
 
     private String getLatestVersion(String repository, String groupId, String artifactId) throws IOException {
-        URL metadataURL = new URL(MessageFormat.format("{0}{1}/{2}/maven-metadata.xml",
-                                                       Objects.toString(repository, MAVEN_CENTRAL),
-                                                       groupId.replace('.', '/'),
-                                                       artifactId));
-        try (InputStream is = metadataURL.openStream()) {
+        URI metadataURL = URI.create(MessageFormat.format("{0}{1}/{2}/maven-metadata.xml",
+                                                          Objects.toString(repository, MAVEN_CENTRAL),
+                                                          groupId.replace('.', '/'),
+                                                          artifactId));
+        try (CloseableHttpClient httpClient = createHttpClient();
+             InputStream is = httpClient.execute(new HttpGet(metadataURL)).getEntity().getContent()) {
             MetadataXpp3Reader metadataReader = new MetadataXpp3Reader();
             Metadata metadata = metadataReader.read(is);
             return metadata.getVersioning().getLatest();
@@ -208,23 +210,24 @@ class publishcatalog implements Callable<Integer> {
     }
 
     private byte[] readCatalog(String repository, String groupId, String artifactId, String version, String classifier) throws IOException {
-        URL platformJson;
+        URI platformJson;
         if (classifier == null) {
-            platformJson = new URL(MessageFormat.format("{0}{1}/{2}/{3}/{2}-{3}.json",
-                                                        Objects.toString(repository, MAVEN_CENTRAL),
-                                                        groupId.replace('.', '/'),
-                                                        artifactId,
-                                                        version));
+            platformJson = URI.create(MessageFormat.format("{0}{1}/{2}/{3}/{2}-{3}.json",
+                                                           Objects.toString(repository, MAVEN_CENTRAL),
+                                                           groupId.replace('.', '/'),
+                                                           artifactId,
+                                                           version));
         } else {
 //            https://repo1.maven.org/maven2/io/quarkus/quarkus-bom-quarkus-platform-descriptor/1.13.0.Final/quarkus-bom-quarkus-platform-descriptor-1.13.0.Final-1.13.0.Final.json
-            platformJson = new URL(MessageFormat.format("{0}{1}/{2}/{3}/{2}-{4}-{3}.json",
-                                                        Objects.toString(repository, MAVEN_CENTRAL),
-                                                        groupId.replace('.', '/'),
-                                                        artifactId,
-                                                        version,
-                                                        classifier));
+            platformJson = URI.create(MessageFormat.format("{0}{1}/{2}/{3}/{2}-{4}-{3}.json",
+                                                           Objects.toString(repository, MAVEN_CENTRAL),
+                                                           groupId.replace('.', '/'),
+                                                           artifactId,
+                                                           version,
+                                                           classifier));
         }
-        try (InputStream is = platformJson.openStream()) {
+        try (CloseableHttpClient httpClient = createHttpClient();
+             InputStream is = httpClient.execute(new HttpGet(platformJson)).getEntity().getContent()) {
             return is.readAllBytes();
         }
     }
@@ -241,9 +244,7 @@ class publishcatalog implements Callable<Integer> {
     }
 
     private void publishExtension(byte[] extension) throws IOException {
-        try (final CloseableHttpClient httpClient = HttpClients.custom()
-                .setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE)
-                .build()) {
+        try (final CloseableHttpClient httpClient = createHttpClient()) {
             HttpPost post = new HttpPost(registryURL.resolve("/admin/v1/extension"));
             post.setHeader("Content-Type", "application/yaml");
             if (token != null) {
@@ -267,9 +268,7 @@ class publishcatalog implements Callable<Integer> {
 
 
     private void publishCatalog(byte[] jsonPlatform) throws IOException {
-        try (final CloseableHttpClient httpClient = HttpClients.custom()
-                .setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE)
-                .build()) {
+        try (final CloseableHttpClient httpClient = createHttpClient()) {
             HttpPost post = new HttpPost(registryURL.resolve("/admin/v1/extension/catalog"));
             post.setHeader("Content-Type", "application/json");
             if (token != null) {
@@ -298,5 +297,11 @@ class publishcatalog implements Callable<Integer> {
         } catch (GitAPIException e) {
             throw new IOException(e);
         }
+    }
+
+    private CloseableHttpClient createHttpClient() {
+        return HttpClients.custom()
+                .setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE)
+                .build();
     }
 }

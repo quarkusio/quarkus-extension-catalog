@@ -1,6 +1,6 @@
 ///usr/bin/env jbang "$0" "$@" ; exit $?
 //DEPS info.picocli:picocli:4.6.1
-//DEPS io.quarkus:quarkus-devtools-registry-client:2.0.0.Alpha2
+//DEPS io.quarkus:quarkus-devtools-registry-client:2.0.0.CR3
 //DEPS org.eclipse.jgit:org.eclipse.jgit:5.11.0.202103091610-r
 //JAVA_OPTIONS "-Djava.util.logging.SimpleFormatter.format=%1$s [%4$s] %5$s%6$s%n" -Dhttps.protocols=TLSv1.1,TLSv1.2
 //JAVA 11
@@ -55,7 +55,7 @@ class publishcatalog implements Callable<Integer> {
     @Option(names = {"-u", "--registry-url"}, description = "The Extension Registry URL", required = true, defaultValue = "${REGISTRY_URL}")
     private URI registryURL;
 
-    @Option(names = {"-t", "--token"}, description = "The token to use when authenticating to the admin endpoint", required = true, defaultValue = "${REGISTRY_TOKEN}")
+    @Option(names = {"-t", "--token"}, description = "The token to use when authenticating to the admin endpoint", defaultValue = "${REGISTRY_TOKEN}")
     private String token;
 
     @Option(names = {"-sv", "--skip-version-check"}, description = "Skip Version Check?", defaultValue = "${SKIP_VERSION_CHECK}")
@@ -246,7 +246,9 @@ class publishcatalog implements Callable<Integer> {
                 .build()) {
             HttpPost post = new HttpPost(registryURL.resolve("/admin/v1/extension"));
             post.setHeader("Content-Type", "application/yaml");
-            post.setHeader("Token", token);
+            if (token != null) {
+                post.setHeader("Token", token);
+            }
             post.setEntity(new ByteArrayEntity(extension));
             try (CloseableHttpResponse response = httpClient.execute(post)) {
                 StatusLine statusLine = response.getStatusLine();
@@ -270,7 +272,9 @@ class publishcatalog implements Callable<Integer> {
                 .build()) {
             HttpPost post = new HttpPost(registryURL.resolve("/admin/v1/extension/catalog"));
             post.setHeader("Content-Type", "application/json");
-            post.setHeader("Token", token);
+            if (token != null) {
+                post.setHeader("Token", token);
+            }
             post.setEntity(new ByteArrayEntity(jsonPlatform));
             try (CloseableHttpResponse response = httpClient.execute(post)) {
                 StatusLine statusLine = response.getStatusLine();

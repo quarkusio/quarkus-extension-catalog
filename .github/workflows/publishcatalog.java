@@ -47,7 +47,7 @@ import picocli.CommandLine.Option;
 class publishcatalog implements Callable<Integer> {
 
     private static final String MAVEN_CENTRAL = "https://repo1.maven.org/maven2/";
-    
+
     private static final Logger log = Logger.getLogger(publishcatalog.class);
 
     @Option(names = {"-w", "--working-directory"}, description = "The working directory", required = true)
@@ -107,6 +107,7 @@ class publishcatalog implements Callable<Integer> {
             String repository = tree.path("maven-repository").asText(MAVEN_CENTRAL);
             String groupId = tree.get("group-id").asText();
             String artifactId = tree.get("artifact-id").asText();
+            String platformKey = tree.get("platform-key").asText();
             log.infof("Fetching latest version for %s:%s", groupId, artifactId);
             ArrayNode versionsNode = tree.withArray("versions");
             // Get Latest Version
@@ -129,7 +130,7 @@ class publishcatalog implements Callable<Integer> {
             // Publish
             log.infof("Publishing %s:%s:%s", groupId, artifactId, latestVersion);
             if (!dryRun) {
-                publishCatalog(jsonPlatform);
+                publishCatalog(platformKey, jsonPlatform);
                 if (!skipVersionCheck) {
                     // Write version
                     yamlMapper.writeValue(platformYaml.toFile(), tree);
@@ -267,9 +268,10 @@ class publishcatalog implements Callable<Integer> {
     }
 
 
-    private void publishCatalog(byte[] jsonPlatform) throws IOException {
+    private void publishCatalog(String platformKey, byte[] jsonPlatform) throws IOException {
         try (final CloseableHttpClient httpClient = createHttpClient()) {
             HttpPost post = new HttpPost(registryURL.resolve("/admin/v1/extension/catalog"));
+            post.setHeader("X-Platform", platformKey);
             post.setHeader("Content-Type", "application/json");
             if (token != null) {
                 post.setHeader("Token", token);

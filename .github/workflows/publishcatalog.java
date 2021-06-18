@@ -104,6 +104,10 @@ class publishcatalog implements Callable<Integer> {
             log.infof("Processing platform %s", platformYaml);
             log.info("---------------------------------------------------------------");
             ObjectNode tree = (ObjectNode) yamlMapper.readTree(platformYaml.toFile());
+            if (!tree.path("enabled").asBoolean(true)) {
+                log.info("Platform is disabled. Skipping");
+                return;
+            }
             String repository = tree.path("maven-repository").asText(MAVEN_CENTRAL);
             String groupId = tree.get("group-id").asText();
             String artifactId = tree.get("artifact-id").asText();
@@ -121,7 +125,7 @@ class publishcatalog implements Callable<Integer> {
                 }
             }
             String classifier = tree.path("classifier").asText();
-            if (tree.get("classifier-as-version").asBoolean()) {
+            if (tree.path("classifier-as-version").asBoolean()) {
                 classifier = latestVersion;
             }
             // Get Extension YAML
@@ -151,6 +155,10 @@ class publishcatalog implements Callable<Integer> {
             log.info("---------------------------------------------------------------");
             // Read
             ObjectNode tree = (ObjectNode) yamlMapper.readTree(extensionYaml.toFile());
+            if (!tree.path("enabled").asBoolean(true)) {
+                log.info("Extension is disabled. Skipping");
+                return;
+            }
             String repository = tree.path("maven-repository").asText(MAVEN_CENTRAL);
             String groupId = tree.get("group-id").asText();
             String artifactId = tree.get("artifact-id").asText();

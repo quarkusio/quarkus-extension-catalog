@@ -95,7 +95,9 @@ class publishcatalog implements Callable<Integer> {
 
     private void list(Path path, Consumer<Path> consumer) throws IOException {
         try (Stream<Path> files = Files.list(path)) {
-            files.forEach(consumer);
+            files
+                    .filter(file -> file.getFileName().toString().endsWith(".yaml"))
+                    .forEach(consumer);
         }
     }
 

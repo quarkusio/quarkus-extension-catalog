@@ -23,7 +23,7 @@ jobs:
 #          restore-keys: |
 #            ${{ runner.os }}-jbang-
       - name: Run Publish Catalog script
-        uses: gastaldi/jbang-action@main
+        uses: jbangdev/jbang-action@v0.72.0
         with:
           script: .github/workflows/publishcatalog.java
           scriptargs: --working-directory=.

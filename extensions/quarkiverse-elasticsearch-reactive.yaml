@@ -1,2 +1,5 @@
+---
 group-id: "io.quarkiverse.quarkus-elasticsearch-reactive"
 artifact-id: "quarkus-elasticsearch-reactive"
+versions:
+- "0.1.0"

@@ -1,6 +1,6 @@
 ///usr/bin/env jbang "$0" "$@" ; exit $?
 //DEPS info.picocli:picocli:4.6.1
-//DEPS io.quarkus:quarkus-devtools-registry-client:2.0.2.Final
+//DEPS io.quarkus:quarkus-devtools-registry-client:2.0.3.Final
 //DEPS org.eclipse.jgit:org.eclipse.jgit:5.11.0.202103091610-r
 //JAVA_OPTIONS "-Djava.util.logging.SimpleFormatter.format=%1$s [%4$s] %5$s%6$s%n"
 //JAVA 11
@@ -13,6 +13,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.MessageFormat;
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Callable;
 import java.util.function.Consumer;
@@ -33,6 +34,7 @@ import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.maven.artifact.repository.metadata.Metadata;
+import org.apache.maven.artifact.repository.metadata.Versioning;
 import org.apache.maven.artifact.repository.metadata.io.xpp3.MetadataXpp3Reader;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.eclipse.jgit.api.Git;
@@ -117,7 +119,11 @@ class publishcatalog implements Callable<Integer> {
             log.infof("Fetching latest version for %s:%s", groupId, artifactId);
             ArrayNode versionsNode = tree.withArray("versions");
             // Get Latest Version
-            String latestVersion = getLatestVersion(repository, groupId, artifactId);
+            String latestVersion = getLatestVersion(repository, groupId, artifactId, versionsNode);
+            if (latestVersion == null) {
+                log.warnf("%s:%s latest version was read previously (or could not find it). Skipping", groupId, artifactId);
+                return;
+            }
             if (!skipVersionCheck) {
                 if (containsValue(versionsNode, latestVersion)) {
                     log.warnf("%s:%s version %s was read previously. Skipping", groupId, artifactId, latestVersion);
@@ -167,7 +173,11 @@ class publishcatalog implements Callable<Integer> {
             log.infof("Fetching latest version for %s:%s", groupId, artifactId);
             ArrayNode versionsNode = tree.withArray("versions");
             // Get Latest Version
-            String latestVersion = getLatestVersion(repository, groupId, artifactId);
+            String latestVersion = getLatestVersion(repository, groupId, artifactId, versionsNode);
+            if (latestVersion == null) {
+                log.warnf("%s:%s latest version was read previously (or could not find it). Skipping", groupId, artifactId);
+                return;
+            }
             // Compare if not already in descriptor
             if (!skipVersionCheck) {
                 if (containsValue(versionsNode, latestVersion)) {
@@ -205,7 +215,7 @@ class publishcatalog implements Callable<Integer> {
         return false;
     }
 
-    private String getLatestVersion(String repository, String groupId, String artifactId) throws IOException {
+    private String getLatestVersion(String repository, String groupId, String artifactId, ArrayNode versionsRead) throws IOException {
         URI metadataURL = URI.create(MessageFormat.format("{0}{1}/{2}/maven-metadata.xml",
                                                           Objects.toString(repository, MAVEN_CENTRAL),
                                                           groupId.replace('.', '/'),
@@ -214,10 +224,23 @@ class publishcatalog implements Callable<Integer> {
              InputStream is = httpClient.execute(new HttpGet(metadataURL)).getEntity().getContent()) {
             MetadataXpp3Reader metadataReader = new MetadataXpp3Reader();
             Metadata metadata = metadataReader.read(is);
-            return metadata.getVersioning().getLatest();
+            Versioning versioning = metadata.getVersioning();
+            String candidateVersion = versioning.getLatest();
+            if (!containsValue(versionsRead, candidateVersion)) {
+                return candidateVersion;
+            }
+            // Try the previous released version
+            List<String> versions = versioning.getVersions();
+            if (versions.size() > 1) {
+                candidateVersion = versions.get(versions.size() - 2);
+                if (!containsValue(versionsRead, candidateVersion)) {
+                    return candidateVersion;
+                }
+            }
         } catch (XmlPullParserException e) {
-            throw new IOException("Invalid Metadata", e);
+            log.debug("Invalid metadata", e);
         }
+        return null;
     }
 
     private byte[] readCatalog(String repository, String groupId, String artifactId, String version, String classifier) throws IOException {

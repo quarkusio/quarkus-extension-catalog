@@ -2,4 +2,5 @@
 group-id: "io.quarkiverse.loggingjson"
 artifact-id: "quarkiverse-logging-json"
 versions:
+- "0.2.2"
 - "0.2.3"

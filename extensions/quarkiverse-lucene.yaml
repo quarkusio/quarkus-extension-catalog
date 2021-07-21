@@ -2,4 +2,5 @@
 group-id: "io.quarkiverse.lucene"
 artifact-id: "quarkus-lucene"
 versions:
+- "0.1"
 - "0.2"

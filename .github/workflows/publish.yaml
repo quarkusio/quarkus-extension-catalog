@@ -14,18 +14,10 @@ jobs:
         run: |
           git config --local user.name "GitHub Action"
           git config --local user.email "action@github.com"
-
-#      - uses: actions/cache@v1
-#        name: Cache JBang environment
-#        with:
-#          path: /root/.jbang
-#          key: ${{ runner.os }}-jbang-${{ hashFiles('*.java') }}
-#          restore-keys: |
-#            ${{ runner.os }}-jbang-
       - name: Run Publish Catalog script
         uses: jbangdev/jbang-action@v0.77.0
         with:
-          script: .github/workflows/publishcatalog.java
+          script: publishcatalog@quarkusio
           scriptargs: --working-directory=.
         env:
           REGISTRY_URL: ${{ secrets.REGISTRY_URL }}
@@ -36,8 +28,3 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: main
-#      - name: Create Release
-#        id: create_release
-#        uses: zendesk/action-create-release@v1
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

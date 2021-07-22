@@ -2,6 +2,7 @@
 group-id: "io.quarkiverse.googlecloudservices"
 artifact-id: "quarkus-google-cloud-spanner"
 versions:
+- "0.9.0"
 - "0.8.0"
 - "0.8.0.CR3"
 - "0.8.0.CR1"

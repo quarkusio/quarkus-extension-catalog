@@ -15,7 +15,7 @@ jobs:
           git config --local user.name "GitHub Action"
           git config --local user.email "action@github.com"
       - name: Run Publish Catalog script
-        uses: jbangdev/jbang-action@v0.77.0
+        uses: jbangdev/jbang-action@v0.78.0
         with:
           script: publishcatalog@quarkusio
           scriptargs: --working-directory=.

@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Callable;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,6 +34,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.maven.artifact.repository.metadata.Metadata;
 import org.apache.maven.artifact.repository.metadata.Versioning;
 import org.apache.maven.artifact.repository.metadata.io.xpp3.MetadataXpp3Reader;
+import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
@@ -150,6 +153,9 @@ class check_updates implements Callable<Integer> {
     private List<String> populateVersions(String repository, String groupId, String artifactId, ArrayNode versionsNode)
             throws IOException {
         List<String> newVersions = new ArrayList<>();
+        List<String> versionsAlreadyRead = StreamSupport.stream(versionsNode.spliterator(), false)
+                .map(JsonNode::asText)
+                .collect(Collectors.toList());
         URI metadataURL = URI.create(MessageFormat.format("{0}{1}/{2}/maven-metadata.xml",
                 Objects.toString(repository, MAVEN_CENTRAL),
                 groupId.replace('.', '/'),
@@ -161,25 +167,31 @@ class check_updates implements Callable<Integer> {
             Versioning versioning = metadata.getVersioning();
             List<String> versions = versioning.getVersions();
             Collections.reverse(versions);
+            versions = keepLatest(versions);
+            versionsNode.removeAll();
             for (String version : versions) {
-                if (!containsValue(versionsNode, version)) {
-                    versionsNode.insert(0, version);
-                    newVersions.add(version);
-                }
+                versionsNode.add(version);
+                newVersions.add(version);
             }
         } catch (XmlPullParserException e) {
             log.debug("Invalid metadata", e);
         }
+        newVersions.removeAll(versionsAlreadyRead);
         return newVersions;
     }
 
-    private boolean containsValue(ArrayNode versionsNode, String latestVersion) {
-        for (JsonNode node : versionsNode) {
-            if (latestVersion.equals(node.asText())) {
-                return true;
+    private List<String> keepLatest(List<String> versions) {
+        int major = -1, minor = -1;
+        List<String> latest = new ArrayList<>();
+        for (String version : versions) {
+            DefaultArtifactVersion dav = new DefaultArtifactVersion(version);
+            if (dav.getMajorVersion() != major || dav.getMinorVersion() != minor) {
+                major = dav.getMajorVersion();
+                minor = dav.getMinorVersion();
+                latest.add(version);
             }
         }
-        return false;
+        return latest;
     }
 
     public void gitCommit(Path file, String message) throws IOException {

@@ -45,18 +45,18 @@ class publish implements Callable<Integer> {
     private static final Logger log = Logger.getLogger(publish.class);
 
     @Option(names = { "-w", "--working-directory" }, description = "The working directory", required = true)
-    private Path workingDirectory;
+    Path workingDirectory;
 
     @Option(names = { "-u",
             "--registry-url" }, description = "The Extension Registry URL", required = true, defaultValue = "${REGISTRY_URL}")
-    private URI registryURL;
+    URI registryURL;
 
     @Option(names = { "-t",
             "--token" }, description = "The token to use when authenticating to the admin endpoint", defaultValue = "${REGISTRY_TOKEN}")
-    private String token;
+    String token;
 
-    @Option(names = {"-a", "--all"}, description = "Publish all versions? Default is just first version", defaultValue = "false")
-    private boolean all;
+    @Option(names = {"-a", "--all"}, description = "Publish all versions? If false, just the latest is published")
+    boolean all;
 
     private final ObjectMapper yamlMapper;
 
@@ -162,7 +162,7 @@ class publish implements Callable<Integer> {
                     artifactId,
                     version));
         } else {
-            //            https://repo1.maven.org/maven2/io/quarkus/quarkus-bom-quarkus-platform-descriptor/1.13.0.Final/quarkus-bom-quarkus-platform-descriptor-1.13.0.Final-1.13.0.Final.json
+            // https://repo1.maven.org/maven2/io/quarkus/quarkus-bom-quarkus-platform-descriptor/1.13.0.Final/quarkus-bom-quarkus-platform-descriptor-1.13.0.Final-1.13.0.Final.json
             platformJson = URI.create(MessageFormat.format("{0}{1}/{2}/{3}/{2}-{4}-{3}.json",
                     Objects.toString(repository, MAVEN_CENTRAL),
                     groupId.replace('.', '/'),

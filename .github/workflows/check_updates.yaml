@@ -1,0 +1,29 @@
+name: "Check for newer platform/extension versions"
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */6 * * *'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Configure Git author
+        run: |
+          git config --local user.name "GitHub Action"
+          git config --local user.email "action@github.com"
+
+      - name: Run Check Updates script
+        uses: jbangdev/jbang-action@v0.78.0
+        with:
+          script: .github/workflows/check_updates.java
+          scriptargs: --working-directory=.
+
+      - name: Push changes to main
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main

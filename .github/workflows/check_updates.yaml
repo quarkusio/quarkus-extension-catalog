@@ -19,7 +19,7 @@ jobs:
       - name: Run Check Updates script
         uses: jbangdev/jbang-action@v0.78.0
         with:
-          script: .github/workflows/check_updates.java
+          script: catalog_check_updates@quarkusio
           scriptargs: --working-directory=.
 
       - name: Push changes to main

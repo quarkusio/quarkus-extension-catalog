@@ -16,7 +16,7 @@ jobs:
       - name: Run Publish Catalog script
         uses: jbangdev/jbang-action@v0.78.0
         with:
-          script: .github/workflows/publish.java
+          script: catalog_publish@quarkusio
           scriptargs: --working-directory=. --all
         env:
           REGISTRY_URL: ${{ secrets.REGISTRY_URL }}

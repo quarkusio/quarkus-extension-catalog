@@ -17,7 +17,7 @@ jobs:
         uses: jbangdev/jbang-action@v0.78.0
         with:
           script: .github/workflows/publish.java
-          scriptargs: --working-directory=.
+          scriptargs: --working-directory=. --all
         env:
           REGISTRY_URL: ${{ secrets.REGISTRY_URL }}
           REGISTRY_TOKEN: ${{ secrets.REGISTRY_TOKEN }}

@@ -9,12 +9,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out repo
-        uses: actions/checkout@v2
-        with:
-          token: ${{ secrets.QUARKIVERSE_BOT_TOKEN }}
-          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token
-          fetch-depth: 0 # otherwise, you will get failed to push refs to dest repo errors
+      - uses: actions/checkout@v2
+
+      - name: Configure Git author
+        run: |
+          git config --local user.name "GitHub Action"
+          git config --local user.email "action@github.com"
 
       - name: Run Check Updates script
         uses: jbangdev/jbang-action@v0.78.0
@@ -25,5 +25,5 @@ jobs:
       - name: Push changes to main
         uses: ad-m/github-push-action@v0.6.0
         with:
-          github_token: ${{ secrets.QUARKIVERSE_BOT_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: main

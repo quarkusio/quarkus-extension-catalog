@@ -7,4 +7,3 @@ versions:
 - "2.2.0.CR1"
 - "2.1.2.Final"
 - "2.0.3.Final"
-exclude-versions: []

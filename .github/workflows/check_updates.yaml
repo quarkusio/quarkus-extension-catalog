@@ -13,6 +13,11 @@ jobs:
         with:
           token: ${{ secrets.REGISTRY_QUARKUS_BOT_PAT }}
 
+      - name: Configure Git author
+        run: |
+          git config --local user.name "quarkusbot"
+          git config --local user.email "quarkusbot@users.noreply.github.com"
+
       - name: Run Check Updates script
         uses: jbangdev/jbang-action@v0.78.0
         with:

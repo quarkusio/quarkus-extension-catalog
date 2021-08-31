@@ -6,5 +6,5 @@ platform-key: "io.quarkus.platform"
 versions:
 - "2.2.1.Final"
 - "2.1.4.Final"
+exclude-versions:
 - "2.0.3.Final"
-exclude-versions: []

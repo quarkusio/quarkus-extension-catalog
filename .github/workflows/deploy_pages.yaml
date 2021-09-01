@@ -45,7 +45,6 @@ jobs:
       - name: Commit and push changes
         run: |
           cd catalog
-          TAG = $(git rev-parse --short=7 HEAD)
+          export TAG=$(git rev-parse --short=7 HEAD)
           cd ../pages
-          git add . && git commit -m "Repository generated from ${TAG}"
-          git push
+          git add . && git commit -m "Repository generated from ${TAG}" && git push

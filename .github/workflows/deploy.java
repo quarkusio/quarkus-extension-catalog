@@ -1,6 +1,6 @@
 ///usr/bin/env jbang "$0" "$@" ; exit $?
 //DEPS info.picocli:picocli:4.6.1
-//DEPS io.quarkus.registry:quarkus-registry-generator:1.0-SNAPSHOT
+//DEPS https://github.com/gastaldi/quarkus-registry-generator/tree/1.0.0.Alpha1
 //JAVA_OPTIONS "-Djava.util.logging.SimpleFormatter.format=%1$s [%4$s] %5$s%6$s%n"
 //JAVA 11
 

@@ -36,7 +36,7 @@ jobs:
       - name: Generate Static Maven Repository
         uses: jbangdev/jbang-action@v0.78.0
         with:
-          script: .github/workflows/deploy.java
+          script: catalog/.github/workflows/deploy.java
           scriptargs: --working-directory=catalog -o pages
         env:
           REGISTRY_URL: ${{ secrets.REGISTRY_URL }}

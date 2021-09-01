@@ -1,0 +1,51 @@
+name: "Deploy GitHub Pages static website"
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "main"
+    paths:
+      - "platforms/**"
+      - "extensions/**"
+jobs:
+  deploy:
+    name: Deploy GitHub Pages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configure Git author
+        run: |
+          git config --local user.name "quarkusbot"
+          git config --local user.email "quarkusbot@users.noreply.github.com"
+
+      - uses: actions/checkout@v2
+        name: Checkout main branch
+        with:
+          path: catalog
+          ref: main
+
+      - uses: actions/checkout@v2
+        name: Checkout pages branch
+        with:
+          path: pages
+          ref: pages
+          token: ${{ secrets.REGISTRY_QUARKUS_BOT_PAT }}
+
+      - name: Remove Maven Directory
+        run: rm -rf pages/maven
+
+      - name: Generate Static Maven Repository
+        uses: jbangdev/jbang-action@v0.78.0
+        with:
+          script: .github/workflows/deploy.java
+          scriptargs: --working-directory=catalog -o pages
+        env:
+          REGISTRY_URL: ${{ secrets.REGISTRY_URL }}
+          REGISTRY_TOKEN: ${{ secrets.REGISTRY_TOKEN }}
+
+      - name: Commit and push changes
+        run: |
+          cd catalog
+          TAG = $(git rev-parse --short=7 HEAD)
+          cd ../pages
+          git add . && git commit -m "Repository generated from ${TAG}"
+          git push

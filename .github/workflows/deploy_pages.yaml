@@ -31,13 +31,13 @@ jobs:
           token: ${{ secrets.REGISTRY_QUARKUS_BOT_PAT }}
 
       - name: Remove Maven Directory
-        run: rm -rfv pages/io && rm -rfv pages/.meta
+        run: rm -rfv pages/maven
 
       - name: Generate Static Maven Repository
         uses: jbangdev/jbang-action@v0.78.0
         with:
           script: catalog/.github/workflows/deploy.java
-          scriptargs: --working-directory=catalog -o pages
+          scriptargs: --working-directory=catalog -o pages/maven
         env:
           REGISTRY_URL: ${{ secrets.REGISTRY_URL }}
           REGISTRY_TOKEN: ${{ secrets.REGISTRY_TOKEN }}

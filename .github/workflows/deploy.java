@@ -12,6 +12,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.MessageFormat;
 import java.util.Objects;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.concurrent.Callable;
 import java.util.function.BiConsumer;
 import java.util.stream.Stream;
@@ -91,10 +93,11 @@ class deploy implements Callable<Integer> {
             String groupId = tree.get("group-id").asText();
             String artifactId = tree.get("artifact-id").asText();
             // Process all platforms
-            for (JsonNode node : tree.withArray("versions")) {
-                String version = node.asText();
-                String classifier = tree.path("classifier").asText();
-                if (tree.path("classifier-as-version").asBoolean()) {
+            String classifier = tree.path("classifier").asText();
+            boolean classifierAsVersion = tree.path("classifier-as-version").asBoolean();
+            Set<String> versions = collectVersions(tree);
+            for (String version : versions) {
+                if (classifierAsVersion) {
                     classifier = version;
                 }
                 // Get Extension YAML
@@ -106,6 +109,23 @@ class deploy implements Callable<Integer> {
         }
         log.info("---------------------------------------------------------------");
 
+    }
+
+    private Set<String> collectVersions(ObjectNode tree) {
+        Set<String> versions = new TreeSet<>();
+        // Add current versions
+        for (JsonNode versionNode : tree.withArray("versions")) {
+            versions.add(versionNode.asText());
+        }
+        // Remove excluded versions
+        for (JsonNode versionNode : tree.withArray("exclude-versions")) {
+            versions.remove(versionNode.asText());
+        }
+        // Add pinned versions
+        for (JsonNode versionNode : tree.withArray("pinned-versions")) {
+            versions.add(versionNode.asText());
+        }
+        return versions;
     }
 
     private void processExtension(Path extensionYaml, RegistryGenerator registryGenerator) {

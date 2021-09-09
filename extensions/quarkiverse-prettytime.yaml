@@ -2,5 +2,6 @@
 group-id: "io.quarkiverse.prettytime"
 artifact-id: "quarkus-prettytime"
 versions:
-- "0.1.1"
+- "0.1.2"
 - "0.0.4"
+exclude-versions: []

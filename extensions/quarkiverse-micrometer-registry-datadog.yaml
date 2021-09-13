@@ -2,6 +2,7 @@
 group-id: "io.quarkiverse.micrometer.registry"
 artifact-id: "quarkus-micrometer-registry-datadog"
 versions:
+- "2.2.2"
 - "2.1.0"
 - "2.0.2"
 - "1.0.2"
@@ -9,3 +10,4 @@ versions:
 - "0.4.0"
 - "0.3.0"
 - "0.2.0"
+exclude-versions: []

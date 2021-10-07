@@ -1,2 +1,8 @@
+---
 group-id: "io.quarkiverse.kerberos"
 artifact-id: "quarkus-kerberos"
+versions:
+- "0.4.2"
+- "0.3.0"
+- "0.2.0"
+exclude-versions: []

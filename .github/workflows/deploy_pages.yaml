@@ -38,9 +38,6 @@ jobs:
         with:
           script: catalog/.github/workflows/deploy.java
           scriptargs: --working-directory=catalog -o pages/maven
-        env:
-          REGISTRY_URL: ${{ secrets.REGISTRY_URL }}
-          REGISTRY_TOKEN: ${{ secrets.REGISTRY_TOKEN }}
 
       - name: Commit and push changes
         run: |

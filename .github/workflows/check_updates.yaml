@@ -19,7 +19,7 @@ jobs:
           git config --local user.email "quarkusbot@users.noreply.github.com"
 
       - name: Run Check Updates script
-        uses: jbangdev/jbang-action@v0.78.0
+        uses: jbangdev/jbang-action@v0.81.2
         with:
           script: catalog_check_updates@quarkusio
           scriptargs: --working-directory=.

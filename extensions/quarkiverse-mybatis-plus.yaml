@@ -1,2 +1,6 @@
+---
 group-id: "io.quarkiverse.mybatis"
 artifact-id: "quarkus-mybatis-plus"
+versions:
+- "0.0.10"
+exclude-versions: []

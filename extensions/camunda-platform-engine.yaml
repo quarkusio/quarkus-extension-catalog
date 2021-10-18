@@ -1,0 +1,5 @@
+---
+group-id: "org.camunda.bpm.quarkus"
+artifact-id: "camunda-bpm-quarkus-engine"
+versions:
+- "7.16.0"

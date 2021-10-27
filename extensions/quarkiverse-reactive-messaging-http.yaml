@@ -1,2 +1,2 @@
-group-id: "io.quarkiverse.reactive.messaging"
+group-id: "io.quarkiverse.reactivemessaging.http"
 artifact-id: "quarkus-reactive-messaging-http"

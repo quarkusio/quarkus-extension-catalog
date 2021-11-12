@@ -2,5 +2,6 @@
 group-id: "io.quarkiverse.microprofile"
 artifact-id: "quarkus-microprofile"
 versions:
+- "2.4.1.Final"
 - "2.2.3.Final"
 exclude-versions: []

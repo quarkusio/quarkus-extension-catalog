@@ -2,6 +2,6 @@
 group-id: "io.quarkiverse.opentracing.datadog"
 artifact-id: "quarkus-datadog-opentracing"
 versions:
-- "1.1.1"
+- "1.1.2"
 - "1.0.2"
 exclude-versions: []

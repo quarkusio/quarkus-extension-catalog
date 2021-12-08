@@ -1,2 +1,6 @@
-group-id: io.quarkiverse.loggingsentry
-artifact-id: quarkus-logging-sentry
+---
+group-id: "io.quarkiverse.loggingsentry"
+artifact-id: "quarkus-logging-sentry"
+versions:
+- "1.0.0"
+exclude-versions: []

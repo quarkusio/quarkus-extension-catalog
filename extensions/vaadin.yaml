@@ -1,2 +1,6 @@
-group-id: com.vaadin
-artifact-id: vaadin-quarkus
+---
+group-id: "com.vaadin"
+artifact-id: "vaadin-quarkus"
+versions:
+- "1.0.0"
+exclude-versions: []

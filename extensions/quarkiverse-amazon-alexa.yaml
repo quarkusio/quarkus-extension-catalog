@@ -1,2 +1,6 @@
-group-id: io.quarkiverse.amazonalexa
-artifact-id: quarkus-amazon-alexa
+---
+group-id: "io.quarkiverse.amazonalexa"
+artifact-id: "quarkus-amazon-alexa"
+versions:
+- "1.0.0"
+exclude-versions: []

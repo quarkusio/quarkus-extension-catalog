@@ -1,0 +1,4 @@
+group-id: io.quarkiverse.jgit
+artifact-id: quarkus-jgit
+exclude-versions:
+  - 1.0.0

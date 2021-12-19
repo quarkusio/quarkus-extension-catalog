@@ -2,5 +2,5 @@
 group-id: "io.quarkiverse.loggingsentry"
 artifact-id: "quarkus-logging-sentry"
 versions:
-- "1.0.0"
+- "1.0.1"
 exclude-versions: []

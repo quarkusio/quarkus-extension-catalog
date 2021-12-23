@@ -9,8 +9,8 @@ versions:
 - "2.4.2.Final"
 - "2.3.1.Final"
 - "2.2.5.Final"
-- "2.1.4.Final"
 pinned-versions:
 - "2.2.2.Final"
 exclude-versions:
 - "2.0.3.Final"
+- "2.1.4.Final"

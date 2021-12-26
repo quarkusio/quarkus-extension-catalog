@@ -34,11 +34,11 @@ jobs:
         run: rm -rfv pages/maven
 
       - name: Generate Static Maven Repository
-        uses: jbangdev/jbang-action@v0.81.2
+        uses: jbangdev/jbang-action@v0.85.0
         with:
           script: catalog/.github/workflows/deploy.java
           scriptargs: --working-directory=catalog -o pages/maven
-
+          trust: https://github.com/quarkusio/
       - name: Commit and push changes
         run: |
           cd catalog

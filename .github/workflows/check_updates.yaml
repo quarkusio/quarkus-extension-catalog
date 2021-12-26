@@ -23,6 +23,7 @@ jobs:
         with:
           script: catalog_check_updates@quarkusio
           scriptargs: --working-directory=.
+          trust: https://github.com/quarkusio/
 
       - name: Push changes to main
         uses: ad-m/github-push-action@v0.6.0

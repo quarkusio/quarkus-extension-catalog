@@ -2,5 +2,5 @@
 group-id: "io.quarkiverse.artemis"
 artifact-id: "quarkus-artemis-jms"
 versions:
-- "1.0.3"
+- "1.0.4"
 exclude-versions: []

@@ -2,7 +2,7 @@
 //DEPS info.picocli:picocli:4.6.1
 //DEPS https://github.com/gastaldi/quarkus-registry-generator/tree/1.0.0.Alpha2
 //JAVA_OPTIONS "-Djava.util.logging.SimpleFormatter.format=%1$s [%4$s] %5$s%6$s%n"
-//JAVA 11
+//JAVA 17
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -115,7 +115,13 @@ class deploy implements Callable<Integer> {
         Set<String> versions = new TreeSet<>();
         // Add current versions
         for (JsonNode versionNode : tree.withArray("versions")) {
-            versions.add(versionNode.asText());
+            String version;
+            if (versionNode.isObject()) {
+                version = versionNode.fieldNames().next();
+            } else {
+                version = versionNode.asText();
+            }
+            versions.add(version);
         }
         // Remove excluded versions
         for (JsonNode versionNode : tree.withArray("exclude-versions")) {

@@ -2,5 +2,5 @@
 group-id: "io.quarkiverse.neo4j"
 artifact-id: "quarkus-neo4j"
 versions:
-- "1.0.3"
+- "1.0.4"
 exclude-versions: []

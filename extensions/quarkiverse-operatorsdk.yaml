@@ -2,6 +2,7 @@
 group-id: "io.quarkiverse.operatorsdk"
 artifact-id: "quarkus-operator-sdk"
 versions:
+- "4.0.0.Beta1"
 - "3.0.7"
 - "2.0.3"
 - "1.9.7"

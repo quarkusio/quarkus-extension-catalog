@@ -1,3 +1,6 @@
 ---
 group-id: "io.quarkiverse.arthas"
-artifact-id: "quarkus-arthas" 
+artifact-id: "quarkus-arthas"
+versions:
+- "0.1"
+exclude-versions: []

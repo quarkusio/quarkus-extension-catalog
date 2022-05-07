@@ -2,5 +2,5 @@
 group-id: "io.quarkiverse.githubapp"
 artifact-id: "quarkus-github-app-command-airline"
 versions:
-- "1.8.1"
+- "1.8.2"
 exclude-versions: []

@@ -2,7 +2,5 @@
 group-id: "io.quarkiverse.ngrok"
 artifact-id: "quarkus-ngrok"
 versions:
-  - "0.1":
-    compatible-with-quarkus-core:
-      - "2.8.3.Final"
-exclude-versions: [ ]
+- "0.1.2"
+exclude-versions: []

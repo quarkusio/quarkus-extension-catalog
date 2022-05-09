@@ -3,6 +3,6 @@ group-id: "io.quarkiverse.arthas"
 artifact-id: "quarkus-arthas"
 versions:
   - "0.1":
-    compatible-with-quarkus-core:
-      - "2.8.3.Final"
+      compatible-with-quarkus-core:
+        - "2.8.3.Final"
 exclude-versions: []

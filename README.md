@@ -23,6 +23,20 @@ The Quarkus extension MUST be released to a Maven repository. The descriptor sta
 
 IMPORTANT: The extension must be released using at least Quarkus 1.13.0.Final, otherwise the produced metadata won't be understood by the Registry application
 
+### Compatibility with older Quarkus Core versions
+
+Having an extension built against Quarkus Core version `X`, it is assumed that the extension release is compatible with any requested Quarkus version `>= X`. If you want to mark an extension release compatible with an older Quarkus core version, add a `compatible-with-quarkus-core` attribute inside the version, as in the following example:
+
+```yaml
+group-id: "io.quarkiverse.arthas"
+artifact-id: "quarkus-arthas"
+versions:
+  - "0.1":
+      compatible-with-quarkus-core:
+        - "2.8.3.Final"
+
+```
+
 ## Platforms 
 
 Platforms are a set of extensions and MUST exist as a BOM.

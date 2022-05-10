@@ -1,3 +1,8 @@
 ---
 group-id: "io.quarkiverse.loggingjson"
 artifact-id: "quarkus-logging-json"
+versions:
+- "1.1.1"
+- "1.0.1"
+- "0.3.1"
+exclude-versions: []

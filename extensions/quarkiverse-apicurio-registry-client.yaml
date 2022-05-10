@@ -1,5 +1,0 @@
----
-group-id: "io.quarkiverse.apicurio"
-artifact-id: "quarkiverse-apicurio-registry-client"
-versions:
-- "0.0.2"

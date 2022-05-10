@@ -1,2 +1,6 @@
-group-id: io.quarkiverse.quinoa
-artifact-id: quarkus-quinoa
+---
+group-id: "io.quarkiverse.quinoa"
+artifact-id: "quarkus-quinoa"
+versions:
+- "1.0.0-CR1"
+exclude-versions: []

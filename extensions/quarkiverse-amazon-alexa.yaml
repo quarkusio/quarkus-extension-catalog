@@ -2,5 +2,5 @@
 group-id: "io.quarkiverse.amazonalexa"
 artifact-id: "quarkus-amazon-alexa"
 versions:
-- "1.0.2"
+- "1.0.3"
 exclude-versions: []

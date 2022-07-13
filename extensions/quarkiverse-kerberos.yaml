@@ -2,7 +2,7 @@
 group-id: "io.quarkiverse.kerberos"
 artifact-id: "quarkus-kerberos"
 versions:
-- "0.6.0"
+- "0.6.1"
 - "0.5.0"
 - "0.4.2"
 - "0.3.0"

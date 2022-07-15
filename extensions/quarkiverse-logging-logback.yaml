@@ -2,6 +2,7 @@
 group-id: "io.quarkiverse.logging.logback"
 artifact-id: "quarkus-logging-logback"
 versions:
+- "0.13.0"
 - "0.12.1"
 - "0.11.0"
 - "0.10.0"

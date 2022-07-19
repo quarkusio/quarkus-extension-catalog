@@ -2,6 +2,7 @@
 group-id: "io.quarkiverse.logging.splunk"
 artifact-id: "quarkus-logging-splunk"
 versions:
+- "2.4.0"
 - "2.3.0"
 - "2.2.1"
 - "2.1.0"

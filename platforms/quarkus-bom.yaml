@@ -5,7 +5,7 @@ classifier-as-version: true
 platform-key: "io.quarkus.platform"
 versions:
 - "2.11.0.CR1"
-- "2.10.3.Final"
+- "2.10.4.Final"
 - "2.9.2.Final"
 - "2.8.3.Final"
 - "2.7.6.Final"

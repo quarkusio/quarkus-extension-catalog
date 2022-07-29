@@ -1,0 +1,6 @@
+---
+group-id: "io.quarkiverse.apistax"
+artifact-id: "quarkus-apistax"
+versions:
+- "0.1.1"
+exclude-versions: []

@@ -2,5 +2,5 @@
 group-id: "io.quarkiverse.helm"
 artifact-id: "quarkus-helm"
 versions:
-- "0.0.4"
+- "0.0.5"
 exclude-versions: []

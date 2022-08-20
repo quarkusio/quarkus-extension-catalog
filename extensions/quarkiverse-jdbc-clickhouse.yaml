@@ -1,3 +1,6 @@
 ---
 group-id: "io.quarkiverse.jdbc"
 artifact-id: "quarkus-jdbc-clickhouse"
+versions:
+- "0.0.1"
+exclude-versions: []

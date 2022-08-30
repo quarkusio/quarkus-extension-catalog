@@ -2,6 +2,6 @@
 group-id: "io.quarkiverse.hibernatesearchextras"
 artifact-id: "quarkus-hibernate-search-orm-elasticsearch-aws"
 versions:
-- "1.1.0.CR1"
+- "1.1.0"
 - "1.0.1"
 exclude-versions: []

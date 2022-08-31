@@ -2,6 +2,6 @@
 group-id: "io.quarkiverse.opencv"
 artifact-id: "quarkus-opencv"
 versions:
-- "1.1.0"
+- "1.1.1"
 - "1.0.4"
 exclude-versions: []

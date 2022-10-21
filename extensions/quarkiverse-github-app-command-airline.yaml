@@ -2,6 +2,7 @@
 group-id: "io.quarkiverse.githubapp"
 artifact-id: "quarkus-github-app-command-airline"
 versions:
+- "1.15.0"
 - "1.14.0"
 - "1.13.2"
 - "1.12.0"

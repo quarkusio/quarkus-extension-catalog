@@ -25,7 +25,8 @@ IMPORTANT: The extension must be released using at least Quarkus 1.13.0.Final, o
 
 ### Compatibility with older Quarkus Core versions
 
-Having an extension built against Quarkus Core version `X`, it is assumed that the extension release is compatible with any requested Quarkus version `>= X`. If you want to mark an extension release compatible with an older Quarkus core version, add a `compatible-with-quarkus-core` attribute inside the version, as in the following example:
+Having an extension built against Quarkus Core version X.Y, it is assumed that the extension release is compatible with any requested Quarkus version >= X.Y and less than (X+1).0. That is, minor Quarkus releases are assumed to be backwards compatible for extensions, but major ones are not.
+If you want to mark an extension release compatible with an older Quarkus core version, or across major version boundaries, add a `compatible-with-quarkus-core` attribute inside the version, as in the following example:
 
 ```yaml
 group-id: "io.quarkiverse.arthas"

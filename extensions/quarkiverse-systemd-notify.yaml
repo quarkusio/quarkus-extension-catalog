@@ -2,6 +2,7 @@
 group-id: "io.quarkiverse.systemd.notify"
 artifact-id: "quarkus-systemd-notify"
 versions:
-- "0.2.0"
-- "0.1.0"
+  - "0.2.0":
+      compatible-with-quarkus-core:
+        - "2.10.0.Final"
 exclude-versions: []

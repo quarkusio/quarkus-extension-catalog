@@ -5,4 +5,5 @@ versions:
 - "0.2.0"
     compatible-with-quarkus-core:
         - "2.14.3.Final"
-exclude-versions: ["0.1.0"]
+exclude-versions:
+- "0.1.0"

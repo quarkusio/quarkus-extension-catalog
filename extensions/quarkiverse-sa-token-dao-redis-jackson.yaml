@@ -1,3 +1,6 @@
 ---
 group-id: "io.quarkiverse.satoken"
 artifact-id: "quarkus-sa-token-dao-redis-jackson"
+versions:
+- "1.31.1"
+exclude-versions: []

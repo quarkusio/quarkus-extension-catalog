@@ -2,5 +2,6 @@
 group-id: "io.quarkiverse.operatorsdk"
 artifact-id: "quarkus-operator-sdk-bundle-generator"
 versions:
+- "5.0.0"
 - "4.0.5"
 exclude-versions: []

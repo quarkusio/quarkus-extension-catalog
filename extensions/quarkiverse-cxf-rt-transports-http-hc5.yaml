@@ -2,7 +2,7 @@
 group-id: "io.quarkiverse.cxf"
 artifact-id: "quarkus-cxf-rt-transports-http-hc5"
 versions:
-- "1.7.1"
+- "1.7.2"
 - "1.6.0"
 - "1.5.9"
 - "1.4.0"

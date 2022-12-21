@@ -14,9 +14,6 @@ versions:
 - "2.9.2.Final"
 - "2.8.3.Final"
 - "2.7.6.Final"
-pinned-versions:
-- "2.13.6.Final"
-- "2.7.6.Final"
 exclude-versions:
 - "2.6.3.Final"
 - "2.5.4.Final"
@@ -27,4 +24,3 @@ exclude-versions:
 - "2.0.3.Final"
 pinned-streams:
 - "2.13"
-- "2.7"

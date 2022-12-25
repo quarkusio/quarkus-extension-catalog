@@ -2,6 +2,7 @@
 group-id: "io.quarkiverse.hibernatetypes"
 artifact-id: "quarkus-hibernate-types"
 versions:
+- "1.0.0"
 - "0.2.0"
 - "0.1.0"
 exclude-versions: []

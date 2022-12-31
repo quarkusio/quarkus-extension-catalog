@@ -4,5 +4,5 @@ artifact-id: "quarkus-cxf-rt-ws-rm"
 versions:
 - "1.7.2"
 - "1.6.0"
-- "1.5.9"
+- "1.5.10"
 exclude-versions: []

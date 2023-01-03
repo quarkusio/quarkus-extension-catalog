@@ -2,5 +2,5 @@
 group-id: "io.quarkiverse.asyncapi"
 artifact-id: "quarkus-asyncapi"
 versions:
-- "0.0.1.jandex2a"
+- "0.0.2"
 exclude-versions: []

@@ -26,7 +26,4 @@ jobs:
           trust: https://github.com/quarkusio/
 
       - name: Push changes to main
-        uses: ad-m/github-push-action@v0.6.0
-        with:
-          github_token: ${{ secrets.REGISTRY_QUARKUS_BOT_PAT }}
-          branch: main
+        run: git push

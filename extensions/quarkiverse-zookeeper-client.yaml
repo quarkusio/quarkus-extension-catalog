@@ -2,5 +2,5 @@
 group-id: "io.quarkiverse.quarkus-zookeeper"
 artifact-id: "quarkus-zookeeper"
 versions:
-- "1.0.2"
+- "1.0.3"
 exclude-versions: []

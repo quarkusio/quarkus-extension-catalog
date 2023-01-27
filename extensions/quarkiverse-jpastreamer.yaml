@@ -2,5 +2,6 @@
 group-id: "io.quarkiverse.jpastreamer"
 artifact-id: "quarkus-jpastreamer"
 versions:
-- "1.0.0"
-exclude-versions: ["0"]
+- "1.0.1"
+exclude-versions:
+- "0"

@@ -1,0 +1,5 @@
+---
+group-id: "io.quarkiverse.dashbuilder"
+artifact-id: "quarkus-dashbuilder"
+versions:
+- "0.26.1"

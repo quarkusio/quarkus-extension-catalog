@@ -2,5 +2,6 @@
 group-id: "io.quarkiverse.tika"
 artifact-id: "quarkus-tika"
 versions:
+- "1.1.0"
 - "1.0.3"
 exclude-versions: []

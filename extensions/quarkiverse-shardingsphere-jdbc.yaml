@@ -2,5 +2,6 @@
 group-id: "io.quarkiverse.shardingsphere"
 artifact-id: "quarkus-shardingsphere-jdbc"
 versions:
+- "1.0.1"
 - "0.0.4"
 exclude-versions: []

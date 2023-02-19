@@ -2,5 +2,5 @@
 group-id: "io.quarkiverse.omnifaces"
 artifact-id: "quarkus-omnifaces"
 versions:
-- "3.0.3"
+- "3.0.4"
 exclude-versions: []

@@ -2,6 +2,7 @@
 group-id: "io.quarkiverse.jackson-jq"
 artifact-id: "quarkus-jackson-jq"
 versions:
-- "1.1.0"
+- "2.0.0.Alpha"
+- "1.1.1"
 - "1.0.1"
 exclude-versions: []

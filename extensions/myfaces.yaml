@@ -2,6 +2,6 @@
 group-id: "org.apache.myfaces.core.extensions.quarkus"
 artifact-id: "myfaces-quarkus"
 versions:
-- "4.0.0-RC5"
+- "4.0.0"
 - "2.3-next-M7"
 exclude-versions: []

@@ -1,2 +1,7 @@
-group-id: io.quarkiverse.config
-artifact-id: quarkus-config-hocon
+---
+group-id: "io.quarkiverse.config"
+artifact-id: "quarkus-config-hocon"
+versions:
+- "2.0.0"
+- "1.2.1"
+exclude-versions: []

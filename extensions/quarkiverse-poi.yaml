@@ -2,6 +2,6 @@
 group-id: "io.quarkiverse.poi"
 artifact-id: "quarkus-poi"
 versions:
-- "2.0.0.Alpha1"
+- "2.0.0.Alpha2"
 - "1.0.4"
 exclude-versions: []

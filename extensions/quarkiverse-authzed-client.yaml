@@ -1,0 +1,6 @@
+---
+group-id: "io.quarkiverse.authzed"
+artifact-id: "quarkus-authzed-client"
+versions:
+- "0.2.1"
+exclude-versions: []

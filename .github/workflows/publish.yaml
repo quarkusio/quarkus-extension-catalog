@@ -22,3 +22,9 @@ jobs:
         env:
           REGISTRY_URL: ${{ secrets.REGISTRY_URL }}
           REGISTRY_TOKEN: ${{ secrets.REGISTRY_TOKEN }}
+
+      - name: Patch the registry
+        run: ./patch.sh
+        env:
+          REGISTRY_URL: ${{ secrets.REGISTRY_URL }}
+          REGISTRY_TOKEN: ${{ secrets.REGISTRY_TOKEN }}

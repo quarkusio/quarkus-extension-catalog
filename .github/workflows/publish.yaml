@@ -8,6 +8,11 @@ on:
       - "platforms/**"
       - "extensions/**"
       - "patch.sh"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+  
 jobs:
   publish:
     runs-on: ubuntu-latest

@@ -4,5 +4,5 @@ artifact-id: "quarkus-operator-sdk-bundle-generator"
 versions:
 - "5.1.1"
 - "5.0.5"
-- "4.0.7"
+- "4.0.8"
 exclude-versions: []

@@ -1,0 +1,6 @@
+---
+group-id: "io.quarkiverse.itext"
+artifact-id: "quarkus-itext"
+versions:
+- "3.0.0"
+exclude-versions: []

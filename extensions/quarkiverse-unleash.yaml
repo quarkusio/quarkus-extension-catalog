@@ -2,6 +2,8 @@
 group-id: "io.quarkiverse.unleash"
 artifact-id: "quarkus-unleash"
 versions:
+- "0.6.0"
+- "0.5.1"
 - "0.4.0"
 - "0.3.0"
 - "0.2.0"

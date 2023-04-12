@@ -2,6 +2,7 @@
 group-id: "io.quarkiverse.file-vault"
 artifact-id: "quarkus-file-vault"
 versions:
+- "2.0.0"
 - "1.0.0"
 - "0.8.0"
 - "0.7.1"

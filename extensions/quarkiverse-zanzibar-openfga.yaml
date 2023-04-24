@@ -1,2 +1,7 @@
-group-id: io.quarkiverse.zanzibar
-artifact-id: quarkus-zanzibar-openfga
+---
+group-id: "io.quarkiverse.zanzibar"
+artifact-id: "quarkus-zanzibar-openfga"
+versions:
+- "1.0.0"
+- "0.0.5"
+exclude-versions: []

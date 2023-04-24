@@ -2,18 +2,16 @@
 group-id: "io.quarkiverse.kerberos"
 artifact-id: "quarkus-kerberos"
 versions:
+- "2.0.0"
 - "1.0.0":
     compatible-with-quarkus-core:
-        - "2.10.0.Final" 
+    - "2.10.0.Final"
 - "0.6.1":
     compatible-with-quarkus-core:
-        - "2.6.0.Final"
-- "0.6.0":
-    compatible-with-quarkus-core:
-        - "2.6.0.Final"
+    - "2.6.0.Final"
 - "0.5.0":
     compatible-with-quarkus-core:
-        - "2.2.3.Final"
+    - "2.2.3.Final"
 - "0.4.2"
 - "0.3.0"
 - "0.2.0"

@@ -3,5 +3,5 @@ group-id: "io.quarkiverse.primefaces"
 artifact-id: "quarkus-primefaces"
 versions:
 - "3.12.4"
-- "2.12.2"
+- "2.12.3"
 exclude-versions: []

@@ -2,6 +2,8 @@
 group-id: "io.quarkiverse.zeebe"
 artifact-id: "quarkus-zeebe"
 versions:
+- "1.0.1"
+- "0.9.0"
 - "0.8.0"
 - "0.7.2"
 - "0.6.1"

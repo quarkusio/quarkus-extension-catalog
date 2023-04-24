@@ -2,7 +2,7 @@
 group-id: "io.quarkiverse.jooq"
 artifact-id: "quarkus-jooq"
 versions:
-- "2.0.0.Alpha1"
+- "2.0.0"
 - "1.0.0"
 - "0.4.1"
 - "0.3.0"

@@ -2,6 +2,6 @@
 group-id: "io.quarkiverse.openfga"
 artifact-id: "quarkus-openfga-client"
 versions:
-- "1.0.0"
+- "1.0.1"
 - "0.0.7"
 exclude-versions: []

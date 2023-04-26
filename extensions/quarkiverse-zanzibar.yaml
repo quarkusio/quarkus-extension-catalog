@@ -2,6 +2,6 @@
 group-id: "io.quarkiverse.zanzibar"
 artifact-id: "quarkus-zanzibar"
 versions:
-- "1.0.0"
+- "1.0.1"
 - "0.0.5"
 exclude-versions: []

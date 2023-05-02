@@ -1,0 +1,6 @@
+---
+group-id: "ai.timefold.solver"
+artifact-id: "timefold-solver-quarkus"
+versions:
+- "0.9.38"
+exclude-versions: []

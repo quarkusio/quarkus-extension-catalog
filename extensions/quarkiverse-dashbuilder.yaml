@@ -2,6 +2,6 @@
 group-id: "io.quarkiverse.dashbuilder"
 artifact-id: "quarkus-dashbuilder"
 versions:
-- "0.27.2"
+- "0.27.3"
 - "0.26.1"
 exclude-versions: []

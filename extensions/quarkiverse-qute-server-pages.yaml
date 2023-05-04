@@ -1,2 +1,7 @@
+---
 group-id: "io.quarkiverse.quteserverpages"
 artifact-id: "quarkus-qute-server-pages"
+versions:
+- "2.0.0.Final"
+- "1.0.0.Beta1"
+exclude-versions: []

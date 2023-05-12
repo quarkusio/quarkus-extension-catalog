@@ -1,2 +1,6 @@
-group-id: io.quarkiverse.asyncapi
-artifact-id: quarkus-asyncapi-scanner
+---
+group-id: "io.quarkiverse.asyncapi"
+artifact-id: "quarkus-asyncapi-scanner"
+versions:
+- "0.1.5"
+exclude-versions: []

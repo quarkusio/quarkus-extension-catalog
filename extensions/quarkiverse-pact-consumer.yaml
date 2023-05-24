@@ -2,6 +2,6 @@
 group-id: "io.quarkiverse.pact"
 artifact-id: "quarkus-pact-consumer"
 versions:
-- "1.0.0.Final"
+- "1.0.1.Final"
 - "0.2.1"
 exclude-versions: []

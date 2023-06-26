@@ -2,5 +2,5 @@
 group-id: "io.quarkiverse.jnosql"
 artifact-id: "quarkus-jnosql-document-mongodb"
 versions:
-- "1.0.1"
+- "1.0.2"
 exclude-versions: []

@@ -2,7 +2,7 @@
 group-id: "io.quarkiverse.groovy"
 artifact-id: "quarkus-groovy-junit5"
 versions:
-- "3.2.0"
+- "3.2.1"
 - "3.1.0"
 - "3.0.0"
 exclude-versions: []

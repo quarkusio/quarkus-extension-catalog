@@ -5,7 +5,8 @@ versions:
 - "24.1.1"
 - "24.0.8"
 - "23.3.15"
+exclude-versions:
 - "23.2.17"
 - "23.1.17"
 - "23.0.16"
-exclude-versions: []
+

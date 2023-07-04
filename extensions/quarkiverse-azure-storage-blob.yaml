@@ -1,2 +1,6 @@
-group-id: io.quarkiverse.azureservices
-artifact-id: quarkus-azure-storage-blob
+---
+group-id: "io.quarkiverse.azureservices"
+artifact-id: "quarkus-azure-storage-blob"
+versions:
+- "1.0.0"
+exclude-versions: []

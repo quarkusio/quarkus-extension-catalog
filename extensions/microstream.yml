@@ -1,0 +1,7 @@
+---
+group-id: "one.microstream"
+artifact-id: "microstream-quarkus-extension"
+versions:
+  - "08.00.00-MS-GA"
+      compatible-with-quarkus-core:
+        - "2.11.1.Final"

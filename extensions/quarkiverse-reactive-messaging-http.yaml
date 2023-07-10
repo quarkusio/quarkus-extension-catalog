@@ -2,7 +2,7 @@
 group-id: "io.quarkiverse.reactivemessaging.http"
 artifact-id: "quarkus-reactive-messaging-http"
 versions:
-- "2.0.1"
-- "1.1.1"
+- "2.0.2"
+- "1.1.4"
 - "1.0.8"
 exclude-versions: []

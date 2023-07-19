@@ -36,7 +36,6 @@ jobs:
 
       - name: Trust quarkusio
         run: |
-          mkdir ~/.jbang/
           echo '[ "https://github.com/quarkusio/" ]' > ~/.jbang/trusted-sources.json
 
       - name: Run Check Updates script

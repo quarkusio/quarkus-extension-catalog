@@ -21,6 +21,11 @@ jobs:
         with:
           token: ${{ secrets.REGISTRY_QUARKUS_BOT_PAT }}
 
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
       - name: Configure Git author
         run: |
           git config --local user.name "quarkusbot"

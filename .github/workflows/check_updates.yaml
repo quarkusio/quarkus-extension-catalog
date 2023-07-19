@@ -21,18 +21,22 @@ jobs:
         with:
           token: ${{ secrets.REGISTRY_QUARKUS_BOT_PAT }}
 
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
       - name: Configure Git author
         run: |
           git config --local user.name "quarkusbot"
           git config --local user.email "quarkusbot@users.noreply.github.com"
 
+      - name: Set up JBang
+        uses: jbangdev/setup-jbang@main
+
       - name: Run Check Updates script
-        uses: jbangdev/jbang-action@v0.109.0
-        with:
-          jbangargs: --verbose
-          script: catalog_check_updates@quarkusio
-          scriptargs: --working-directory=.
-          trust: https://github.com/quarkusio/
+        run: |
+          jbang catalog_check_updates@quarkusio --working-directory=. 
 
       - name: Push changes to main
         run: git push

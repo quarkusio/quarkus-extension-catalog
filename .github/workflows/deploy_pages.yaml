@@ -33,12 +33,17 @@ jobs:
       - name: Remove Maven Directory
         run: rm -rfv pages/maven
 
+      - name: Set up JBang
+        uses: jbangdev/setup-jbang@main
+
+      - name: Trust quarkusio
+        run: |
+          echo '[ "https://github.com/quarkusio/" ]' > ~/.jbang/trusted-sources.json
+
       - name: Generate Static Maven Repository
-        uses: jbangdev/jbang-action@v0.100.1
-        with:
-          script: catalog/.github/workflows/deploy.java
-          scriptargs: --working-directory=catalog -o pages/maven
-          trust: https://github.com/quarkusio/
+        run: |
+          jbang catalog/.github/workflows/deploy.java --working-directory=catalog -o pages/maven
+
       - name: Commit and push changes
         run: |
           cd catalog

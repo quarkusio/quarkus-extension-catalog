@@ -34,12 +34,9 @@ jobs:
       - name: Set up JBang
         uses: jbangdev/setup-jbang@main
 
-      - name: Trust quarkusio
-        run: |
-          echo '[ "https://github.com/quarkusio/" ]' > ~/.jbang/trusted-sources.json
-
       - name: Run Check Updates script
         run: |
+          jbang trust add https://github.com/quarkusio/
           jbang catalog_check_updates@quarkusio --working-directory=.
 
       - name: Push changes to main

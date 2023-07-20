@@ -26,12 +26,9 @@ jobs:
       - name: Set up JBang
         uses: jbangdev/setup-jbang@main
 
-      - name: Trust quarkusio
-        run: |
-          echo '[ "https://github.com/quarkusio/" ]' > ~/.jbang/trusted-sources.json
-
       - name: Run Publish Catalog script
         run: |
+          jbang trust add https://github.com/quarkusio/
           jbang catalog_publish@quarkusio --working-directory=. --all
         env:
           REGISTRY_URL: ${{ secrets.REGISTRY_URL }}

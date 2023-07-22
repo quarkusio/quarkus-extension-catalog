@@ -4,7 +4,7 @@ artifact-id: "quarkus-bom-quarkus-platform-descriptor"
 classifier-as-version: true
 platform-key: "io.quarkus.platform"
 versions:
-- "3.2.1.Final"
+- "3.2.2.Final"
 - "3.1.3.Final"
 - "3.0.4.Final"
 - "2.16.8.Final"

@@ -2,6 +2,7 @@
 group-id: "io.quarkiverse.asyncapi"
 artifact-id: "quarkus-asyncapi"
 versions:
+- "0.2.0"
 - "0.1.7"
 - "0.0.6"
 exclude-versions: []

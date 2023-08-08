@@ -2,5 +2,6 @@
 group-id: "io.quarkiverse.asyncapi"
 artifact-id: "quarkus-asyncapi-scanner"
 versions:
+- "0.2.0"
 - "0.1.7"
 exclude-versions: []

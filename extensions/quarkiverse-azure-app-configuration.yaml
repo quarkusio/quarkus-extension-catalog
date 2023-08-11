@@ -2,5 +2,5 @@
 group-id: "io.quarkiverse.azureservices"
 artifact-id: "quarkus-azure-app-configuration"
 versions:
-- "1.0.0"
+- "1.0.1"
 exclude-versions: []

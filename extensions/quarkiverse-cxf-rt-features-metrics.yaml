@@ -2,7 +2,7 @@
 group-id: "io.quarkiverse.cxf"
 artifact-id: "quarkus-cxf-rt-features-metrics"
 versions:
-- "2.2.0"
+- "2.2.1"
 - "2.1.0"
 - "2.0.4"
 - "1.7.3"

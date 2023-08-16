@@ -2,6 +2,7 @@
 group-id: "io.quarkiverse.quinoa"
 artifact-id: "quarkus-quinoa"
 versions:
+- "2.1.0"
 - "2.0.8"
 - "1.2.9"
 - "1.1.3"

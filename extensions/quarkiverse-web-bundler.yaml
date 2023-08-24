@@ -1,0 +1,5 @@
+---
+group-id: "io.quarkiverse.web-bundler"
+artifact-id: "quarkus-web-bundler"
+versions:
+- "1.1.1"

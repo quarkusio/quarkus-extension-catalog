@@ -2,6 +2,6 @@
 group-id: "io.quarkiverse.jdbc"
 artifact-id: "quarkus-jdbc-sqlite"
 versions:
-- "3.0.5"
+- "3.0.6"
 - "1.0.3"
 exclude-versions: []

@@ -2,7 +2,7 @@
 group-id: "io.quarkiverse.jpastreamer"
 artifact-id: "quarkus-jpastreamer"
 versions:
-- "3.0.2.Final"
+- "3.0.3.Final"
 - "1.0.1"
 exclude-versions:
 - "0"

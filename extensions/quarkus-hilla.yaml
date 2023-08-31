@@ -1,2 +1,7 @@
-group-id: com.github.mcollovati
-artifact-id: quarkus-hilla
+---
+group-id: "com.github.mcollovati"
+artifact-id: "quarkus-hilla"
+versions:
+- "2.0.0"
+- "1.0.0"
+exclude-versions: []

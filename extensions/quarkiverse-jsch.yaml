@@ -2,7 +2,7 @@
 group-id: "io.quarkiverse.jsch"
 artifact-id: "quarkus-jsch"
 versions:
-- "3.0.3"
+- "3.0.4"
 - "2.0.4"
 - "1.0.0"
 exclude-versions: []

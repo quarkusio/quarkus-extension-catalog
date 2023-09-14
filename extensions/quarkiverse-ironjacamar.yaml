@@ -3,5 +3,6 @@ group-id: "io.quarkiverse.ironjacamar"
 artifact-id: "quarkus-ironjacamar"
 versions:
 - "1.0.0"
+exclude-versions: 
 - "0.0.1.Alpha1"
-exclude-versions: []
+

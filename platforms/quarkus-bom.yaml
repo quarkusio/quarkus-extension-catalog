@@ -30,3 +30,5 @@ exclude-versions:
 pinned-streams:
 - "2.13"
 - "3.2"
+lts-streams:
+- "3.2"

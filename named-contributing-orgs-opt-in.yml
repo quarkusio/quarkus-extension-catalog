@@ -5,3 +5,8 @@
 named-sponsors:
   - Red Hat
   - Microsoft
+
+# Any organisation that opts in as a sponsor will also be shown on charts of contributors
+# To be shown in the charts, but *not* ever listed as a sponsor, an organisation should add its name to this list
+named-contributing-orgs:
+  - Made Up Example Company

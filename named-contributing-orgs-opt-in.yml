@@ -1,7 +1,19 @@
 # This file is to record opt-ins for companies and organisations to be listed as sponsors and contributors on extension pages
 # See https://quarkus.io/extensions/io.quarkus/quarkus-resteasy-reactive for an example of what is shown
 
-# Including a company in this list should be done (or approved) by someone from that company
+# Including a company in these list should be done (or approved) by someone from that company
+
+# What's a sponsor? A sponsor is an organisation or group of organisations that make a big enough contribution to an extension that they're sponsoring it.
+# A sponsor can be listed in an individual extension's `quarkus-extension.yml`, but if there isn't one there, we try to guess.
+# We won't show a guess without an opt-in, which is the function of this list.
 named-sponsors:
   - Red Hat
   - Microsoft
+
+# Most extensions have contributions from *many* organisations, which is the beauty of open source communities.
+# Not every contributing company is a sponsor, but we also want to list every contributing organisation.
+# We won't list an organisation without an opt-in.
+# Any organisation that opts in as a sponsor will also be shown on charts of contributors
+# To be shown in the charts, but *not* ever listed as a sponsor, an organisation should add its name to this list
+named-contributing-orgs:
+  - Made Up Example Company

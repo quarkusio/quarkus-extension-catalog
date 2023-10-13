@@ -1,6 +1,0 @@
----
-group-id: "io.quarkiverse.playwright"
-artifact-id: "quarkus-playwright"
-versions:
-- "0.0.1"
-exclude-versions: []

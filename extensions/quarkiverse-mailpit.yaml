@@ -2,5 +2,5 @@
 group-id: "io.quarkiverse.mailpit"
 artifact-id: "quarkus-mailpit"
 versions:
-- "0.0.1"
+- "0.0.3"
 exclude-versions: []

@@ -2,6 +2,7 @@
 group-id: "io.quarkiverse.helm"
 artifact-id: "quarkus-helm"
 versions:
+- "1.2.0"
 - "1.1.0"
 - "1.0.9"
 - "0.2.10"

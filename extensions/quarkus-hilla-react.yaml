@@ -1,2 +1,6 @@
-group-id: com.github.mcollovati
-artifact-id: quarkus-hilla-react
+---
+group-id: "com.github.mcollovati"
+artifact-id: "quarkus-hilla-react"
+versions:
+- "2.4.1"
+exclude-versions: []

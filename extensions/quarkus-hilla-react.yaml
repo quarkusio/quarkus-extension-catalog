@@ -2,5 +2,5 @@
 group-id: "com.github.mcollovati"
 artifact-id: "quarkus-hilla-react"
 versions:
-- "2.4.1"
+- "2.4.2"
 exclude-versions: []

@@ -2,6 +2,7 @@
 group-id: "io.quarkiverse.githubaction"
 artifact-id: "quarkus-github-action"
 versions:
+- "2.1.0"
 - "2.0.5"
 - "1.0.3"
 exclude-versions:

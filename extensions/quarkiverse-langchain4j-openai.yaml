@@ -2,6 +2,7 @@
 group-id: "io.quarkiverse.langchain4j"
 artifact-id: "quarkus-langchain4j-openai"
 versions:
+- "0.6.1"
 - "0.5.1"
 - "0.4.2"
 - "0.3.0"

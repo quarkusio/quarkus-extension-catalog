@@ -1,3 +1,7 @@
 ---
 group-id: "io.quarkiverse.langchain4j"
 artifact-id: "quarkus-langchain4j-milvus"
+versions:
+- "0.6.1"
+- "0.5.1"
+exclude-versions: []

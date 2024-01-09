@@ -30,7 +30,6 @@ exclude-versions:
 - "2.1.4.Final"
 - "2.0.3.Final"
 pinned-streams:
-- "2.13"
 - "3.2"
 lts-streams:
 - "3.2"

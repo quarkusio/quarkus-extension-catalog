@@ -1,2 +1,4 @@
 group-id: io.quarkiverse.pdfbox
 artifact-id: quarkus-pdfbox
+versions:
+- 1.0.0.Alpha1

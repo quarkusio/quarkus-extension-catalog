@@ -3,4 +3,5 @@ group-id: "org.citrusframework"
 artifact-id: "citrus-quarkus"
 versions:
 - "4.1.0"
+- "4.0.2"
 exclude-versions: []

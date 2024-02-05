@@ -2,6 +2,7 @@
 group-id: "io.quarkiverse.bonjova"
 artifact-id: "quarkus-bon-jova"
 versions:
+- "0.6.0"
 - "0.4.0"
 - "0.3.0"
 exclude-versions: []

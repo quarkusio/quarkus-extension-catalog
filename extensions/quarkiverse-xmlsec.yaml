@@ -1,8 +1,0 @@
----
-group-id: "io.quarkiverse.xmlsec"
-artifact-id: "quarkus-xmlsec"
-versions:
-- "1.1.1"
-- "1.0.0"
-- "0.0.1"
-exclude-versions: []

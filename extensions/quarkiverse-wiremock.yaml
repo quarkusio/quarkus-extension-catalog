@@ -2,6 +2,7 @@
 group-id: "io.quarkiverse.wiremock"
 artifact-id: "quarkus-wiremock"
 versions:
+- "1.2.0"
 - "1.1.1"
 - "1.0.0"
 - "0.1.2"

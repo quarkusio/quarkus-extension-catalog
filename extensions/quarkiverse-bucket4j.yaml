@@ -2,5 +2,5 @@
 group-id: "io.quarkiverse.bucket4j"
 artifact-id: "quarkus-bucket4j"
 versions:
-- "1.0.2"
+- "1.0.3"
 exclude-versions: []

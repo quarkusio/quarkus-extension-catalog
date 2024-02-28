@@ -2,5 +2,5 @@
 group-id: "one.microstream"
 artifact-id: "microstream-quarkus-extension"
 versions:
-- "08.01.01-MS-GA"
+- "08.01.02-MS-GA"
 exclude-versions: []

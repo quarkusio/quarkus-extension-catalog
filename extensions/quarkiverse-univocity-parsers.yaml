@@ -1,5 +1,0 @@
----
-group-id: "io.quarkiverse.univocityparsers"
-artifact-id: "quarkus-univocity-parsers"
-versions:
-- "0.0.1"

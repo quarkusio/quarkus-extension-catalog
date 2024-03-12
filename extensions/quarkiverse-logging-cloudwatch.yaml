@@ -2,6 +2,7 @@
 group-id: "io.quarkiverse.logging.cloudwatch"
 artifact-id: "quarkus-logging-cloudwatch"
 versions:
+- "6.7.1"
 - "6.6.0"
 - "6.3.0"
 - "6.2.0"

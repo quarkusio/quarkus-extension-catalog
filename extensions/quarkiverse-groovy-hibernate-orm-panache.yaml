@@ -2,6 +2,7 @@
 group-id: "io.quarkiverse.groovy"
 artifact-id: "quarkus-groovy-hibernate-orm-panache"
 versions:
+- "3.9.0"
 - "3.8.1"
 - "3.7.1"
 - "3.6.4"

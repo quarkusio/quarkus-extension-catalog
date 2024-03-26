@@ -2,5 +2,6 @@
 group-id: "io.quarkiverse.oidc-proxy"
 artifact-id: "quarkus-oidc-proxy"
 versions:
+- "0.1.0"
 - "0.1.1"
 exclude-versions: []

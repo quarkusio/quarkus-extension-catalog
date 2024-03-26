@@ -2,6 +2,7 @@
 group-id: "io.quarkiverse.langchain4j"
 artifact-id: "quarkus-langchain4j-pinecone"
 versions:
+- "0.10.1"
 - "0.9.1"
 - "0.8.3"
 - "0.7.1"

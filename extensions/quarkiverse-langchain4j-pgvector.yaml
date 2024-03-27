@@ -3,7 +3,7 @@ group-id: "io.quarkiverse.langchain4j"
 artifact-id: "quarkus-langchain4j-pgvector"
 versions:
 - "0.10.1"
-- "0.9.1"
+- "0.9.2"
 - "0.8.3"
 - "0.7.1"
 - "0.6.3"

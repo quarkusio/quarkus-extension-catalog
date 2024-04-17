@@ -2,5 +2,6 @@
 group-id: "io.quarkiverse.moneta"
 artifact-id: "quarkus-moneta"
 versions:
+- "1.0.0"
 - "0.1.1"
 exclude-versions: []

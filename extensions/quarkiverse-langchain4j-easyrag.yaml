@@ -2,6 +2,6 @@
 group-id: "io.quarkiverse.langchain4j"
 artifact-id: "quarkus-langchain4j-easy-rag"
 versions:
-- "0.11.0"
+- "0.11.1"
 - "0.10.4"
 exclude-versions: []

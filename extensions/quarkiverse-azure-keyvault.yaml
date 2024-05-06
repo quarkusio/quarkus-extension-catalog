@@ -1,2 +1,6 @@
-group-id: io.quarkiverse.azureservices
-artifact-id: quarkus-azure-keyvault
+---
+group-id: "io.quarkiverse.azureservices"
+artifact-id: "quarkus-azure-keyvault"
+versions:
+- "1.0.3"
+exclude-versions: []

@@ -2,9 +2,10 @@
 group-id: "io.quarkiverse.messaginghub"
 artifact-id: "quarkus-pooled-jms"
 versions:
-- "2.3.1"
+- "2.4.0"
+- "2.3.2"
 - "2.2.0"
-- "2.1.1"
+- "2.1.2"
 - "2.0.2"
 - "1.1.2"
 - "1.0.9"

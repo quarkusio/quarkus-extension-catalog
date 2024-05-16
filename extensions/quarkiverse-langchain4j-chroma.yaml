@@ -2,6 +2,7 @@
 group-id: "io.quarkiverse.langchain4j"
 artifact-id: "quarkus-langchain4j-chroma"
 versions:
+- "0.14.0"
 - "0.13.1"
 - "0.12.1"
 - "0.11.1"

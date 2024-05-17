@@ -2,5 +2,5 @@
 group-id: "io.quarkiverse.kiota"
 artifact-id: "quarkus-kiota"
 versions:
-- "0.0.3"
+- "0.0.5"
 exclude-versions: []

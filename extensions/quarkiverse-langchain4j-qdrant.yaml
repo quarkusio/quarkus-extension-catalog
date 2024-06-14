@@ -1,2 +1,11 @@
+---
 group-id: "io.quarkiverse.langchain4j"
 artifact-id: "quarkus-langchain4j-qdrant"
+versions:
+- "0.15.1"
+- "0.14.2"
+- "0.13.1"
+- "0.12.1"
+- "0.11.1"
+- "0.10.4"
+exclude-versions: []

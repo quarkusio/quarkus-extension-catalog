@@ -2,5 +2,5 @@
 group-id: "io.quarkiverse.qute.web"
 artifact-id: "quarkus-qute-web"
 versions:
-- "3.0.1"
+- "3.0.2"
 exclude-versions: []

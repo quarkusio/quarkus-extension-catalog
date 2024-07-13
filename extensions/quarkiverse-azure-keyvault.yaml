@@ -2,5 +2,5 @@
 group-id: "io.quarkiverse.azureservices"
 artifact-id: "quarkus-azure-keyvault"
 versions:
-- "1.0.4"
+- "1.0.5"
 exclude-versions: []

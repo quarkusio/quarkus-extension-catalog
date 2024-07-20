@@ -1,0 +1,6 @@
+---
+group-id: "org.jobrunr"
+artifact-id: "quarkus-jobrunr"
+versions:
+- "7.2.2"
+exclude-versions: []

@@ -2,7 +2,7 @@
 group-id: "com.vaadin"
 artifact-id: "vaadin-quarkus-extension"
 versions:
-- "24.4.6"
+- "24.4.7"
 - "24.3.15"
 - "24.2.12"
 - "24.1.16"

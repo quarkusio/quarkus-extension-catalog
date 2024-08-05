@@ -2,6 +2,8 @@
 group-id: "io.quarkiverse.pact"
 artifact-id: "quarkus-pact-provider"
 versions:
+- "1.5.0"
+- "1.4.2"
 - "1.3.0"
 - "1.2.0"
 - "1.1.0"

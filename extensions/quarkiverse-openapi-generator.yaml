@@ -2,7 +2,7 @@
 group-id: "io.quarkiverse.openapi.generator"
 artifact-id: "quarkus-openapi-generator"
 versions:
-- "2.4.6"
+- "2.4.7"
 - "2.3.0"
 - "2.2.16"
 - "2.1.1"

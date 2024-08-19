@@ -2,7 +2,7 @@
 group-id: "io.quarkiverse.apistax"
 artifact-id: "quarkus-apistax"
 versions:
-- "3.0.4"
+- "3.0.5"
 - "2.2.4"
 - "2.1.0"
 - "2.0.0"

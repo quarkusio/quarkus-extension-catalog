@@ -2,6 +2,7 @@
 group-id: "io.quarkiverse.cxf"
 artifact-id: "quarkus-cxf-rt-ws-rm"
 versions:
+- "3.14.0"
 - "3.13.1"
 - "3.12.0"
 - "3.11.1"

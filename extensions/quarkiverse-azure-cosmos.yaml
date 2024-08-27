@@ -1,2 +1,6 @@
-group-id: io.quarkiverse.azureservices
-artifact-id: quarkus-azure-cosmos
+---
+group-id: "io.quarkiverse.azureservices"
+artifact-id: "quarkus-azure-cosmos"
+versions:
+- "1.0.7"
+exclude-versions: []

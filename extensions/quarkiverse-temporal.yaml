@@ -2,5 +2,5 @@
 group-id: "io.quarkiverse.temporal"
 artifact-id: "quarkus-temporal"
 versions:
-- "0.0.7"
+- "0.0.8"
 exclude-versions: []

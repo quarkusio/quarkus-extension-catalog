@@ -2,6 +2,6 @@
 group-id: "io.quarkiverse.mdns"
 artifact-id: "quarkus-mdns"
 versions:
-- "1.0.0"
+- "1.0.1"
 - "0.0.3"
 exclude-versions: []

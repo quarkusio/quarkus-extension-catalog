@@ -43,4 +43,5 @@ pinned-streams:
 - "3.2"
 lts-streams:
 - "3.2"
+- "3.8"
 - "3.15"

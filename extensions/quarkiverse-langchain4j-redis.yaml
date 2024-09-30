@@ -2,6 +2,8 @@
 group-id: "io.quarkiverse.langchain4j"
 artifact-id: "quarkus-langchain4j-redis"
 versions:
+- "0.20.0.CR1"
+- "0.19.0"
 - "0.18.0"
 - "0.17.2"
 - "0.16.4"

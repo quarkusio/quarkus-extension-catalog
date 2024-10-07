@@ -1,5 +1,8 @@
 # Quarkus Extension Catalog
 
+This repository is the backing catalog for the [Quarkus community extension registry](https://quarkus.io/guides/extension-registry-user#registry.quarkus.io). 
+Extensions added here will be included in registry.quarkus.io.
+
 ## Catalog
 A catalog is a local directory (which can be cloned from a Git repository) with the following structure: 
 

@@ -2,3 +2,6 @@
 group-id: "io.quarkiverse.jdiameter"
 artifact-id: "quarkus-jdiameter"
 exclude-versions: []
+versions:
+- "2.1.0"
+- "2.0.5"

@@ -1,0 +1,4 @@
+---
+group-id: "io.quarkiverse.jdiameter"
+artifact-id: "quarkus-jdiameter"
+exclude-versions: []

@@ -1,0 +1,6 @@
+---
+group-id: "io.quarkiverse.langchain4j"
+artifact-id: "quarkus-langchain4j-jlama"
+versions:
+- "0.20.3"
+exclude-versions: []

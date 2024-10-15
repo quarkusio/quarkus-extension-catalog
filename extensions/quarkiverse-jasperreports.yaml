@@ -4,4 +4,4 @@ artifact-id: "quarkus-jasperreports"
 exclude-versions:
 - "schmalnau"
 versions:
-- "0.0.2"
+- "0.0.3"

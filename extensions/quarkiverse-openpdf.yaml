@@ -2,5 +2,5 @@
 group-id: "io.quarkiverse.openpdf"
 artifact-id: "quarkus-openpdf"
 versions:
-- "3.1.0"
+- "3.1.1"
 exclude-versions: []

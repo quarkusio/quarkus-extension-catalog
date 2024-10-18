@@ -1,0 +1,5 @@
+---
+group-id: "io.quarkiverse.roq"
+artifact-id: "quarkus-roq"
+versions:
+- "1.0.0.CR2"

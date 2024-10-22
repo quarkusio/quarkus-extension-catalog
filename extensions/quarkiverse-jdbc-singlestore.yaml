@@ -2,5 +2,5 @@
 group-id: "io.quarkiverse.jdbc"
 artifact-id: "quarkus-jdbc-singlestore"
 versions:
-- "3.0.11"
+- "0.0.0"
 exclude-versions: []

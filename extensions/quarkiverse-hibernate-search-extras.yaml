@@ -2,6 +2,7 @@
 group-id: "io.quarkiverse.hibernatesearchextras"
 artifact-id: "quarkus-hibernate-search-orm-elasticsearch-aws"
 versions:
+- "5.0.0"
 - "4.1.0"
 - "4.0.0"
 - "3.3.0"

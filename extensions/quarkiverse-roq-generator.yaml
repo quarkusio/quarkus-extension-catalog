@@ -2,6 +2,6 @@
 group-id: "io.quarkiverse.roq"
 artifact-id: "quarkus-roq-generator"
 versions:
-- "1.0.0"
+- "1.0.1"
 - "0.0.9"
 exclude-versions: []

@@ -2,6 +2,6 @@
 group-id: "io.quarkiverse.roq"
 artifact-id: "quarkus-roq-data"
 versions:
-- "1.0.0.CR2"
+- "1.0.0"
 - "0.0.9"
 exclude-versions: []

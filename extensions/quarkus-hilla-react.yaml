@@ -2,7 +2,7 @@
 group-id: "com.github.mcollovati"
 artifact-id: "quarkus-hilla-react"
 versions:
-- "24.5.0-alpha3"
+- "24.5.0"
 - "24.4.2"
 - "24.0.0-alpha2"
 - "2.5.0"

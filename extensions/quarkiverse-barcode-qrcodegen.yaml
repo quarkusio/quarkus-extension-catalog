@@ -2,5 +2,5 @@
 group-id: "io.quarkiverse.barcode"
 artifact-id: "quarkus-qrcodegen"
 versions:
-- "0.0.2"
+- "0.0.3"
 exclude-versions: []

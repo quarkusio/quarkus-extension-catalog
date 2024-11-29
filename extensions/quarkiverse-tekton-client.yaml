@@ -2,6 +2,7 @@
 group-id: "io.quarkiverse.tektonclient"
 artifact-id: "quarkus-tekton-client"
 versions:
+- "1.1.0"
 - "1.0.1"
 - "0.7.0"
 - "0.6.0"

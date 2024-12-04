@@ -2,5 +2,6 @@
 group-id: "io.quarkiverse.barcode"
 artifact-id: "quarkus-zxing"
 versions:
+- "1.0.0"
 - "0.0.3"
 exclude-versions: []

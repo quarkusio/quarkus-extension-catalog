@@ -2,5 +2,6 @@
 group-id: "io.quarkiverse.fury"
 artifact-id: "quarkus-fury"
 versions:
+- "0.2.0"
 - "0.1.0"
 exclude-versions: []

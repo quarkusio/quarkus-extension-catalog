@@ -2,5 +2,5 @@
 group-id: "io.quarkiverse.mavenresolver"
 artifact-id: "quarkus-maven-resolver"
 versions:
-- "0.0.4"
+- "0.0.5"
 exclude-versions: []

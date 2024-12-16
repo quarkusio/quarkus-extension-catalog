@@ -1,0 +1,6 @@
+---
+group-id: "org.drools"
+artifact-id: "drools-quarkus"
+versions:
+- "10.0.0"
+exclude-versions: []

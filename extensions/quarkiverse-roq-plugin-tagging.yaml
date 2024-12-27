@@ -2,7 +2,7 @@
 group-id: "io.quarkiverse.roq"
 artifact-id: "quarkus-roq-plugin-tagging"
 versions:
-- "1.1.0"
+- "1.1.1"
 - "1.0.9"
 - "0.0.9"
 exclude-versions: []

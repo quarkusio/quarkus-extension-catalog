@@ -1,0 +1,6 @@
+---
+group-id: "io.quarkiverse.langchain4j"
+artifact-id: "quarkus-langchain4j-mcp"
+versions:
+- "0.23.0"
+exclude-versions: []

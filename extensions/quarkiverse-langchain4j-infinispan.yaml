@@ -2,7 +2,7 @@
 group-id: "io.quarkiverse.langchain4j"
 artifact-id: "quarkus-langchain4j-infinispan"
 versions:
-- "0.23.0"
+- "0.23.3"
 - "0.22.0"
 - "0.21.0"
 - "0.20.3"

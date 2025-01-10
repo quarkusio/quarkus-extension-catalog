@@ -1,0 +1,6 @@
+---
+group-id: "io.quarkiverse.mcp"
+artifact-id: "quarkus-mcp-server-stdio"
+versions:
+- "1.0.0.Alpha2"
+exclude-versions: []

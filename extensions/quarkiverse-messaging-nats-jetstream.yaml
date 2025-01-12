@@ -2,7 +2,7 @@
 group-id: "io.quarkiverse.reactivemessaging.nats-jetstream"
 artifact-id: "quarkus-messaging-nats-jetstream"
 versions:
-- "3.17.10"
+- "3.17.12"
 - "3.16.6"
 - "3.15.10"
 - "1.14.0"

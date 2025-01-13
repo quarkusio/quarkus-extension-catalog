@@ -2,5 +2,6 @@
 group-id: "io.quarkiverse.azureservices"
 artifact-id: "quarkus-azure-cosmos"
 versions:
+- "1.1.0"
 - "1.0.9"
 exclude-versions: []

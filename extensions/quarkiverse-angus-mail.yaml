@@ -1,0 +1,5 @@
+---
+group-id: "io.quarkiverse.angusmail"
+artifact-id: "quarkus-angus-mail"
+versions:
+- "0.0.1"

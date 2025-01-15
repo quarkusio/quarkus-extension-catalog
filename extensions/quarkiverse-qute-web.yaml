@@ -2,6 +2,7 @@
 group-id: "io.quarkiverse.qute.web"
 artifact-id: "quarkus-qute-web"
 versions:
+- "3.3.0"
 - "3.2.2"
 - "3.1.0"
 - "3.0.2"

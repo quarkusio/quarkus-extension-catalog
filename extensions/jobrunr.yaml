@@ -2,6 +2,7 @@
 group-id: "org.jobrunr"
 artifact-id: "quarkus-jobrunr"
 versions:
+- "7.4.0"
 - "7.3.2"
 - "7.2.3"
 - "7.1.2"

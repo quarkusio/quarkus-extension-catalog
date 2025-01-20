@@ -2,6 +2,6 @@
 group-id: "io.quarkiverse.azureservices"
 artifact-id: "quarkus-azure-eventhubs"
 versions:
-- "1.1.0"
+- "1.1.1"
 - "1.0.9"
 exclude-versions: []

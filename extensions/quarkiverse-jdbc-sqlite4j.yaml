@@ -1,0 +1,2 @@
+group-id: "io.quarkiverse.jdbc"
+artifact-id: "quarkus-jdbc-sqlite4j"

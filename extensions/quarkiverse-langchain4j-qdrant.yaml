@@ -2,6 +2,7 @@
 group-id: "io.quarkiverse.langchain4j"
 artifact-id: "quarkus-langchain4j-qdrant"
 versions:
+- "0.24.0"
 - "0.23.3"
 - "0.22.0"
 - "0.21.0"

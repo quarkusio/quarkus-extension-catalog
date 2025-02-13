@@ -1,0 +1,6 @@
+---
+group-id: "io.quarkiverse.roq"
+artifact-id: "quarkus-roq-plugin-sitemap"
+versions:
+- "1.2.0"
+exclude-versions: []

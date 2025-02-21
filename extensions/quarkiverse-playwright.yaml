@@ -2,7 +2,7 @@
 group-id: "io.quarkiverse.playwright"
 artifact-id: "quarkus-playwright"
 versions:
-- "2.1.0"
+- "2.1.1"
 - "2.0.0"
 exclude-versions:
 - "1.1.0"

@@ -2,6 +2,6 @@
 group-id: "io.quarkiverse.azureservices"
 artifact-id: "quarkus-azure-storage-blob"
 versions:
-- "1.1.1"
+- "1.1.2"
 - "1.0.9"
 exclude-versions: []

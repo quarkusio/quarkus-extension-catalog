@@ -2,5 +2,6 @@
 group-id: "io.quarkiverse.doma"
 artifact-id: "quarkus-doma"
 versions:
+- "1.0.0"
 - "0.0.13"
 exclude-versions: []

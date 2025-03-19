@@ -6,7 +6,7 @@ platform-key: "io.quarkus.platform"
 versions:
 - "3.21.0.CR1"
 - "3.20.0.CR1"
-- "3.19.3"
+- "3.19.4"
 - "3.18.4"
 - "3.17.8"
 - "3.16.4"

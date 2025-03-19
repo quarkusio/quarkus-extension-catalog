@@ -1,6 +1,4 @@
 ---
 group-id: "io.quarkiverse.fluentjdbc"
 artifact-id: "quarkus-fluentjdbc"
-versions:
-  - "1.0.0"
 exclude-versions: []

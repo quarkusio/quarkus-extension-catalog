@@ -2,6 +2,7 @@
 group-id: "io.quarkiverse.mybatis"
 artifact-id: "quarkus-mybatis-plus"
 versions:
+- "2.3.0"
 - "2.2.4"
 - "2.1.0"
 - "2.0.0"

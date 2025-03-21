@@ -2,7 +2,7 @@
 group-id: "com.github.mcollovati"
 artifact-id: "quarkus-hilla"
 versions:
-- "24.7.0-alpha2"
+- "24.7.0"
 - "24.6.2"
 - "24.5.3"
 - "24.4.2"

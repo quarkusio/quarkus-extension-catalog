@@ -2,6 +2,7 @@
 group-id: "io.quarkiverse.cxf"
 artifact-id: "quarkus-cxf-rt-features-logging"
 versions:
+- "3.21.0"
 - "3.20.0"
 - "3.19.0"
 - "3.18.1"

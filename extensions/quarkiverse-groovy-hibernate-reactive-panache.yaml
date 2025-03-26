@@ -2,6 +2,7 @@
 group-id: "io.quarkiverse.groovy"
 artifact-id: "quarkus-groovy-hibernate-reactive-panache"
 versions:
+- "3.21.0"
 - "3.19.3"
 - "3.18.2"
 - "3.17.2"

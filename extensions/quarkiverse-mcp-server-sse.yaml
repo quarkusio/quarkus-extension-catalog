@@ -2,5 +2,5 @@
 group-id: "io.quarkiverse.mcp"
 artifact-id: "quarkus-mcp-server-sse"
 versions:
-- "1.0.0.Alpha5"
+- "1.0.0"
 exclude-versions: []

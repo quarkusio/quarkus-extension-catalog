@@ -2,6 +2,7 @@
 group-id: "org.camunda.bpm.quarkus"
 artifact-id: "camunda-bpm-quarkus-engine"
 versions:
+- "7.23.0"
 - "7.22.0"
 - "7.21.0"
 - "7.20.0"

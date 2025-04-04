@@ -1,2 +1,7 @@
+---
 group-id: "io.quarkiverse.opentelemetry.exporter"
 artifact-id: "quarkus-opentelemetry-exporter-azure"
+versions:
+- "3.18.3.1"
+- "3.5.3.Final"
+exclude-versions: []

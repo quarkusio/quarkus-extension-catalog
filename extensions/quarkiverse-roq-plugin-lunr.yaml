@@ -2,5 +2,6 @@
 group-id: "io.quarkiverse.roq"
 artifact-id: "quarkus-roq-plugin-lunr"
 versions:
+- "1.5.0"
 - "1.4.0"
 exclude-versions: []

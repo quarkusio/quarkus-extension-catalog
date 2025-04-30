@@ -2,5 +2,10 @@
 group-id: "io.quarkiverse.langchain4j"
 artifact-id: "quarkus-langchain4j-chatbot"
 versions:
+- "0.27.0.CR1"
 - "0.26.2"
+- "0.25.0"
+- "0.24.0"
+- "0.23.3"
+- "0.22.0"
 exclude-versions: []

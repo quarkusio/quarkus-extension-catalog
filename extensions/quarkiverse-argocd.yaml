@@ -3,4 +3,7 @@ group-id: "io.quarkiverse.argocd"
 artifact-id: "quarkus-argocd"
 versions:
 - "0.3.0"
+- "0.2.0"
+- "0.1.0"
+- "0.0.3"
 exclude-versions: []

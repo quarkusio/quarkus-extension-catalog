@@ -2,7 +2,6 @@
 group-id: "com.github.mcollovati"
 artifact-id: "quarkus-hilla"
 versions:
-- "24.8.0-test1"
 - "24.7.0"
 - "24.6.2"
 - "24.5.3"
@@ -16,4 +15,5 @@ versions:
 - "2.0.1"
 - "1.3.0"
 - "1.0.1"
-exclude-versions: []
+exclude-versions:
+- "24.8.0-test1"

@@ -1,6 +1,6 @@
 ---
-group-id: io.quarkiverse.jnosql
-artifact-id: quarkus-jnosql-mongodb
+group-id: "io.quarkiverse.jnosql"
+artifact-id: "quarkus-jnosql-mongodb"
 versions:
-- "3.4.0"
+- "3.4.1"
 exclude-versions: []

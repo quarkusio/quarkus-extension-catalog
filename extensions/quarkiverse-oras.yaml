@@ -2,7 +2,7 @@
 group-id: "io.quarkiverse.oras"
 artifact-id: "quarkus-oras"
 versions:
-- "0.0.4"
+- "0.0.5"
 exclude-versions:
 - "0.0.2"
 - "0.0.1"

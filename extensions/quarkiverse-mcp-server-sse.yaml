@@ -2,6 +2,7 @@
 group-id: "io.quarkiverse.mcp"
 artifact-id: "quarkus-mcp-server-sse"
 versions:
+- "1.3.0"
 - "1.2.2"
 - "1.1.1"
 - "1.0.1"

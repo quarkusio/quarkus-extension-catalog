@@ -1,0 +1,6 @@
+---
+group-id: "io.quarkiverse.roq"
+artifact-id: "quarkus-roq-plugin-diagram"
+versions:
+- "1.6.2"
+exclude-versions: []

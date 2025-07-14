@@ -2,7 +2,7 @@
 group-id: "io.quarkiverse.artemis"
 artifact-id: "quarkus-artemis-jms"
 versions:
-- "3.8.2"
+- "3.8.3"
 - "3.7.4"
 - "3.6.4"
 - "3.5.8"

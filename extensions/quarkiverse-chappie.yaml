@@ -1,0 +1,4 @@
+---
+group-id: "io.quarkiverse.chappie"
+artifact-id: "quarkus-chappie"
+exclude-versions: []

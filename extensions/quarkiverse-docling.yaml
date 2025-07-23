@@ -2,5 +2,5 @@
 group-id: "io.quarkiverse.docling"
 artifact-id: "quarkus-docling"
 versions:
-- "0.0.2"
+- "0.0.4"
 exclude-versions: []

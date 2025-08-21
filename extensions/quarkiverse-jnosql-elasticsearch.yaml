@@ -2,5 +2,5 @@
 group-id: "io.quarkiverse.jnosql"
 artifact-id: "quarkus-jnosql-elasticsearch"
 versions:
-- "3.4.8"
+- "3.4.9"
 exclude-versions: []

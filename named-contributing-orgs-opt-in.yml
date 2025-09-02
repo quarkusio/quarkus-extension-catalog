@@ -8,6 +8,9 @@
 # We won't show a guess without an opt-in, which is the function of this list.
 named-sponsors:
   - Red Hat
+  - IBM
+  - Red Hat & IBM
+  - Red Hat/IBM
   - Microsoft
   - KSM Technology Partners
   - Lunatech

@@ -2,5 +2,5 @@
 group-id: "io.quarkiverse.jnosql"
 artifact-id: "quarkus-jnosql-arangodb"
 versions:
-- "3.4.9"
+- "3.4.10"
 exclude-versions: []

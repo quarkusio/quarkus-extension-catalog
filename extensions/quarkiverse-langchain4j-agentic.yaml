@@ -1,0 +1,6 @@
+---
+group-id: "io.quarkiverse.langchain4j"
+artifact-id: "quarkus-langchain4j-agentic"
+versions:
+- "1.2.0.CR1"
+exclude-versions: []

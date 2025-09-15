@@ -2,5 +2,6 @@
 group-id: "io.quarkiverse.azureservices"
 artifact-id: "quarkus-azure-servicebus"
 versions:
+- "1.2.0"
 - "1.1.9"
 exclude-versions: []

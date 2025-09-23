@@ -2,7 +2,7 @@
 group-id: "io.quarkiverse.langchain4j"
 artifact-id: "quarkus-langchain4j-milvus"
 versions:
-- "1.2.0.CR1"
+- "1.2.0"
 - "1.1.4"
 - "1.0.2"
 - "0.27.0.CR2"

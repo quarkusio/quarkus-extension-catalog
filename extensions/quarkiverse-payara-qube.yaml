@@ -1,0 +1,6 @@
+---
+group-id: "io.quarkiverse.payara-qube"
+artifact-id: "quarkus-payara-qube"
+versions:
+- "1.0.0"
+exclude-versions: []

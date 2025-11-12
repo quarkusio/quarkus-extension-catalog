@@ -2,7 +2,7 @@
 group-id: "io.quarkiverse.roq"
 artifact-id: "quarkus-roq-plugin-sitemap"
 versions:
-- "1.10.1"
+- "1.10.2"
 - "1.9.0"
 - "1.8.1"
 - "1.7.1"

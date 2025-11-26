@@ -4,5 +4,5 @@ artifact-id: "quarkus-flow"
 versions:
 - "0.3.0"
 - "0.2.0"
+exclude-versions:
 - "0.1.1"
-exclude-versions: []

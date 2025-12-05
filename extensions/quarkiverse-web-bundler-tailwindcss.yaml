@@ -1,0 +1,6 @@
+---
+group-id: "io.quarkiverse.web-bundler"
+artifact-id: "quarkus-web-bundler-tailwindcss"
+versions:
+- "2.0.0"
+

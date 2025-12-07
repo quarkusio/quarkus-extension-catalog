@@ -2,5 +2,5 @@
 group-id: "io.quarkiverse.web-bundler"
 artifact-id: "quarkus-web-bundler-tailwindcss"
 versions:
-- "2.0.1"
+- "2.0.2"
 exclude-versions: []

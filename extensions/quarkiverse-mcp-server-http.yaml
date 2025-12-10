@@ -2,5 +2,5 @@
 group-id: "io.quarkiverse.mcp"
 artifact-id: "quarkus-mcp-server-http"
 versions:
-- "1.8.0"
+- "1.8.1"
 exclude-versions: []

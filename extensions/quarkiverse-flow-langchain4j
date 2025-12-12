@@ -1,0 +1,5 @@
+---
+group-id: "io.quarkiverse.flow"
+artifact-id: "quarkus-flow-langchain4j"
+versions:
+- "0.4.0"

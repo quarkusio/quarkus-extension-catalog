@@ -2,5 +2,6 @@
 group-id: "io.quarkiverse.web-bundler"
 artifact-id: "quarkus-web-bundler-svelte"
 versions:
+- "2.2.0"
 - "2.1.0"
 exclude-versions: []

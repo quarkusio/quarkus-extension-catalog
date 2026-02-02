@@ -2,7 +2,7 @@
 group-id: "io.quarkiverse.web-bundler"
 artifact-id: "quarkus-web-bundler"
 versions:
-- "2.2.0"
+- "2.2.1"
 - "2.1.0"
 - "2.0.4"
 - "1.9.3"

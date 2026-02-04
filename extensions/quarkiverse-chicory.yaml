@@ -1,0 +1,6 @@
+---
+group-id: "io.quarkiverse.chicory"
+artifact-id: "quarkus-chicory"
+exclude-versions: []
+versions:
+- "0.0.1"

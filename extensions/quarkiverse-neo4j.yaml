@@ -2,7 +2,7 @@
 group-id: "io.quarkiverse.neo4j"
 artifact-id: "quarkus-neo4j"
 versions:
-- "6.3.0"
+- "6.3.1"
 - "6.2.0"
 - "6.1.1"
 - "6.0.1"

@@ -2,5 +2,5 @@
 group-id: "io.quarkiverse.opentelemetry.exporter"
 artifact-id: "quarkus-opentelemetry-exporter-sentry"
 versions:
-- "3.20.0.0"
+- "3.31.4.0"
 exclude-versions: []

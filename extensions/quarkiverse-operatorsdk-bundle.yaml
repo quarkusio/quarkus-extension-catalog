@@ -2,7 +2,7 @@
 group-id: "io.quarkiverse.operatorsdk"
 artifact-id: "quarkus-operator-sdk-bundle-generator"
 versions:
-- "7.7.0"
+- "7.7.3"
 - "7.6.2"
 - "7.5.2"
 - "7.4.0"

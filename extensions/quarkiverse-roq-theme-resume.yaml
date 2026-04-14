@@ -1,0 +1,7 @@
+---
+group-id: "io.quarkiverse.roq"
+artifact-id: "quarkus-roq-theme-resume"
+versions:
+- "2.1.0.CR1"
+- "2.0.5"
+exclude-versions: []

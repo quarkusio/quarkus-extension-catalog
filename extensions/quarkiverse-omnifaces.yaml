@@ -2,7 +2,7 @@
 group-id: "io.quarkiverse.omnifaces"
 artifact-id: "quarkus-omnifaces"
 versions:
-- "5.3.2"
+- "5.3.3"
 - "5.2.3"
 - "5.1.0"
 - "5.0.1"

@@ -2,5 +2,5 @@
 group-id: "io.quarkiverse.httpproblem"
 artifact-id: "quarkus-http-problem"
 versions:
-- "3.33.0"
+- "3.33.1"
 exclude-versions: []

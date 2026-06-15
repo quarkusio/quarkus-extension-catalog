@@ -2,7 +2,7 @@
 group-id: "io.quarkiverse.langchain4j"
 artifact-id: "quarkus-langchain4j-neo4j"
 versions:
-- "1.11.0"
+- "1.11.1"
 - "1.10.0"
 - "1.9.2"
 - "1.8.4"

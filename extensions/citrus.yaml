@@ -2,7 +2,7 @@
 group-id: "org.citrusframework"
 artifact-id: "citrus-quarkus"
 versions:
-- "5.0.0-M1"
+- "5.0.0-M2"
 - "4.10.1"
 - "4.9.4"
 - "4.8.2"

@@ -1,0 +1,6 @@
+---
+group-id: "io.quarkiverse.fory"
+artifact-id: "quarkus-fory"
+versions:
+- "0.5.0"
+exclude-versions: []

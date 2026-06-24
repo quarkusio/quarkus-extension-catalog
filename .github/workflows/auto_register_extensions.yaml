@@ -83,10 +83,10 @@ jobs:
             echo "::notice::No previous successful run found — processing all repos"
           fi
 
-          # List all non-archived quarkiverse repos starting with quarkus-
+          # List all non-archived quarkiverse repos tagged with the quarkus-extension topic
           echo "::group::Listing quarkiverse repos"
-          repos=$(gh_api_with_retry '/orgs/quarkiverse/repos?per_page=100' --paginate \
-            --jq '.[] | select(.archived == false) | select(.is_template == false) | select(.name | startswith("quarkus-")) | [.name, .default_branch] | @tsv')
+          repos=$(gh repo list quarkiverse --topic quarkus-extension --no-archived -L 1000 \
+            --json name,defaultBranchRef --jq '.[] | [.name, .defaultBranchRef.name] | @tsv' | sort)
           repo_count=$(echo "$repos" | grep -c . || echo 0)
           echo "Found ${repo_count} candidate repos"
           echo "::endgroup::"

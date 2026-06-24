@@ -1,0 +1,6 @@
+---
+group-id: "io.quarkiverse.vault"
+artifact-id: "quarkus-vault"
+versions:
+- "4.8.0"
+exclude-versions: []

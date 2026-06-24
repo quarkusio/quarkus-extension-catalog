@@ -1,0 +1,210 @@
+name: "Auto-register Quarkiverse extensions"
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 3,15 * * *'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  auto-register:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Set up JBang
+        uses: jbangdev/setup-jbang@v0.1.1
+
+      - name: Configure Git author
+        run: |
+          git config --local user.name "quarkusbot"
+          git config --local user.email "quarkusbot@users.noreply.github.com"
+
+      - name: Discover and register new extensions
+        env:
+          # github.token intentionally: the draft PR does not need to trigger CI
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          EXTENSIONS_DIR="extensions"
+          original_ref=$(git rev-parse HEAD)
+
+          # Wrapper around gh api that retries on rate-limit (HTTP 403/429)
+          # with exponential backoff (5s, 10s, 20s, 40s, 80s).
+          gh_api_with_retry() {
+            local attempt=0 max_attempts=5 delay=5
+            while true; do
+              if output=$(gh api "$@" 2>&1); then
+                echo "$output"
+                return 0
+              fi
+              local rc=$?
+              if [[ $attempt -ge $max_attempts ]]; then
+                echo "$output" >&2
+                return $rc
+              fi
+              if echo "$output" | grep -qiE 'rate limit|abuse detection|retry-after|API rate limit exceeded'; then
+                attempt=$((attempt + 1))
+                echo "::warning::Rate-limited on 'gh api $1', retrying in ${delay}s (attempt ${attempt}/${max_attempts})" >&2
+                sleep "$delay"
+                delay=$((delay * 2))
+              else
+                echo "$output" >&2
+                return $rc
+              fi
+            done
+          }
+
+          # Find when this workflow last succeeded. Releases published after this
+          # timestamp are new and need crawling. If the workflow has never run
+          # (or never succeeded), we process everything.
+          last_success=$(gh_api_with_retry "repos/${GITHUB_REPOSITORY}/actions/workflows/auto_register_extensions.yaml/runs?status=success&per_page=1" \
+            --jq '.workflow_runs[0].updated_at // empty' 2>/dev/null || echo "")
+          if [[ -n "$last_success" ]]; then
+            echo "::notice::Last successful run: ${last_success}"
+          else
+            echo "::notice::No previous successful run found — processing all repos"
+          fi
+
+          # List all non-archived quarkiverse repos starting with quarkus-
+          echo "::group::Listing quarkiverse repos"
+          repos=$(gh_api_with_retry '/orgs/quarkiverse/repos?per_page=100' --paginate \
+            --jq '.[] | select(.archived == false) | select(.is_template == false) | select(.name | startswith("quarkus-")) | [.name, .default_branch] | @tsv')
+          repo_count=$(echo "$repos" | grep -c . || echo 0)
+          echo "Found ${repo_count} candidate repos"
+          echo "::endgroup::"
+
+          while IFS=$'\t' read -r repo_name default_branch; do
+            [[ -z "$repo_name" ]] && continue
+
+            # Each repo is processed in a subshell so a single failure
+            # does not abort the entire workflow.
+            (
+              set -euo pipefail
+              trap 'git checkout -f "$original_ref" 2>/dev/null; git clean -fd "$EXTENSIONS_DIR" 2>/dev/null' EXIT
+
+              branch_name="bot/auto-register/${repo_name}"
+
+              # Skip if a PR for this repo is already open
+              existing=$(gh pr list --state open --head "$branch_name" --json number --jq 'length' 2>/dev/null || echo 0)
+              if [[ "$existing" -gt 0 ]]; then
+                exit 0
+              fi
+
+              # Check for a release, and skip if it predates our last successful run
+              release_info=$(gh_api_with_retry "repos/quarkiverse/${repo_name}/releases/latest" \
+                --jq '[.tag_name, .published_at] | @tsv' 2>/dev/null) || exit 0
+              [[ -z "$release_info" ]] && exit 0
+
+              IFS=$'\t' read -r release_tag published_at <<< "$release_info"
+              version=$(echo "$release_tag" | grep -oE '[0-9]+(\.[0-9]+)+([-.][A-Za-z0-9]+)*' | head -1)
+              if [[ -z "$version" ]]; then
+                echo "::warning::Could not extract version from tag '${release_tag}' in ${repo_name}"
+                exit 0
+              fi
+
+              if [[ -n "$last_success" && "$published_at" < "$last_success" ]]; then
+                exit 0
+              fi
+
+              echo "::group::Processing ${repo_name} (${version}, released ${published_at})"
+
+              # Walk the POM module tree to discover extensions
+              extensions=$(jbang .github/scripts/discover_extensions.java \
+                "quarkiverse/${repo_name}" "$default_branch" || echo "")
+              if [[ -z "$extensions" ]]; then
+                echo "No extensions discovered"
+                echo "::endgroup::"
+                exit 0
+              fi
+
+              # Extract the owners team from CODEOWNERS (every quarkiverse repo has one)
+              cc=$(gh_api_with_retry "repos/quarkiverse/${repo_name}/contents/.github/CODEOWNERS" \
+                --jq '.content' 2>/dev/null \
+                | base64 --decode 2>/dev/null \
+                | grep -oP '@\Kquarkiverse/quarkiverse-\S+' \
+                | head -1 || echo "")
+
+              new_files=()
+              pr_body_entries=()
+
+              while IFS=: read -r group_id artifact_id; do
+                [[ -z "$artifact_id" ]] && continue
+
+                # Content-based check: skip if this artifact is already registered
+                if grep -rFq "artifact-id: \"${artifact_id}\"" "${EXTENSIONS_DIR}/" 2>/dev/null; then
+                  echo "  ${artifact_id} already registered"
+                  continue
+                fi
+
+                file_name="quarkiverse-${artifact_id#quarkus-}.yaml"
+                file_path="${EXTENSIONS_DIR}/${file_name}"
+
+                if [[ -f "$file_path" ]]; then
+                  echo "  ${file_path} already exists"
+                  continue
+                fi
+
+                {
+                  echo '---'
+                  echo "group-id: \"${group_id}\""
+                  echo "artifact-id: \"${artifact_id}\""
+                  echo 'versions:'
+                  echo "- \"${version}\""
+                  echo 'exclude-versions: []'
+                } > "$file_path"
+
+                new_files+=("$file_path")
+
+                cc_text=""
+                if [[ -n "$cc" ]]; then
+                  cc_text=" (cc @${cc})"
+                fi
+                pr_body_entries+=("- \`${artifact_id}\` (\`${group_id}\`)${cc_text}")
+
+                echo "  Created ${file_path}"
+              done <<< "$extensions"
+
+              echo "::endgroup::"
+
+              if [[ ${#new_files[@]} -eq 0 ]]; then
+                exit 0
+              fi
+
+              git push origin --delete "$branch_name" 2>/dev/null || true
+              git checkout -B "$branch_name"
+              git add "${new_files[@]}"
+              git commit -m "Register extensions from ${repo_name}"
+              git push origin "$branch_name"
+
+              pr_body="This PR registers newly discovered extensions from [${repo_name}](https://github.com/quarkiverse/${repo_name})."
+              pr_body="${pr_body}"$'\n\n'"## New extensions"$'\n\n'
+              pr_body="${pr_body}$(printf '%s\n' "${pr_body_entries[@]}")"
+              pr_body="${pr_body}"$'\n'"---"
+              pr_body="${pr_body}"$'\n'"*Created automatically by [auto-register-extensions](${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/workflows/auto_register_extensions.yaml)*"
+
+              pr_url=$(gh pr create \
+                --title "Register extensions from ${repo_name}" \
+                --body "$pr_body" \
+                --draft)
+
+              echo "::notice::Draft PR created: ${pr_url}"
+            ) || echo "::warning::Failed to process ${repo_name}, skipping"
+          done <<< "$repos"

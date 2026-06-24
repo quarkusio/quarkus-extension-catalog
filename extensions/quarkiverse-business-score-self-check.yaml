@@ -1,0 +1,6 @@
+---
+group-id: "io.quarkiverse.businessscore"
+artifact-id: "quarkus-business-score-self-check"
+versions:
+- "1.0.0"
+exclude-versions: []

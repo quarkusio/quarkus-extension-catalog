@@ -1,0 +1,6 @@
+---
+group-id: "io.quarkiverse.mongock"
+artifact-id: "quarkus-mongock"
+versions:
+- "0.6.0"
+exclude-versions: []

@@ -1,0 +1,6 @@
+---
+group-id: "io.quarkiverse.mfa"
+artifact-id: "quarkus-mfa"
+versions:
+- "0.5.0"
+exclude-versions: []

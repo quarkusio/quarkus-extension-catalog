@@ -1,0 +1,6 @@
+---
+group-id: "io.quarkiverse.quarkus-reactive-h2-client"
+artifact-id: "quarkus-reactive-h2-client"
+versions:
+- "0.6.0"
+exclude-versions: []

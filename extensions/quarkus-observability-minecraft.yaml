@@ -2,6 +2,7 @@
 group-id: "io.quarkiverse.observability.minecraft"
 artifact-id: "quarkus-observability-minecraft"
 versions:
+- "1.3.0"
 - "1.2.1"
 - "0.9.0"
 - "0.8.0"

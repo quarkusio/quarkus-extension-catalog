@@ -137,7 +137,7 @@ jobs:
               fi
 
               # Extract the owners team from CODEOWNERS (every quarkiverse repo has one)
-              cc=$(gh_api_with_retry "repos/quarkiverse/${repo_name}/contents/.github/CODEOWNERS" \
+              owners_team=$(gh_api_with_retry "repos/quarkiverse/${repo_name}/contents/.github/CODEOWNERS" \
                 --jq '.content' 2>/dev/null \
                 | base64 --decode 2>/dev/null \
                 | grep -oP '@\Kquarkiverse/quarkiverse-\S+' \
@@ -173,12 +173,7 @@ jobs:
                 } > "$file_path"
 
                 new_files+=("$file_path")
-
-                cc_text=""
-                if [[ -n "$cc" ]]; then
-                  cc_text=" (cc @${cc})"
-                fi
-                pr_body_entries+=("- \`${artifact_id}\` (\`${group_id}\`)${cc_text}")
+                pr_body_entries+=("- \`${artifact_id}\` (\`${group_id}\`)")
 
                 echo "  Created ${file_path}"
               done <<< "$extensions"
@@ -198,14 +193,18 @@ jobs:
               pr_body="This PR registers newly discovered extensions from [${repo_name}](https://github.com/quarkiverse/${repo_name})."
               pr_body="${pr_body}"$'\n\n'"## New extensions"$'\n\n'
               pr_body="${pr_body}$(printf '%s\n' "${pr_body_entries[@]}")"
+              if [[ -n "$owners_team" ]]; then
+                pr_body="${pr_body}"$'\n\n'"cc [${owners_team}](https://github.com/orgs/quarkiverse/teams/${owners_team#quarkiverse/})"
+              fi
               pr_body="${pr_body}"$'\n'"---"
               pr_body="${pr_body}"$'\n'"*Created automatically by [auto-register-extensions](${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/workflows/auto_register_extensions.yaml)*"
 
               pr_url=$(gh pr create \
                 --title "Register extensions from ${repo_name}" \
-                --body "$pr_body" \
-                --draft)
+                --body "$pr_body")
 
-              echo "::notice::Draft PR created: ${pr_url}"
+              gh pr comment "$pr_url" --body "Once merged, this extension will appear in the Quarkus extension registry and be available in tooling such as [code.quarkus.io](https://code.quarkus.io) and [extensions.quarkus.io](https://extensions.quarkus.io). Cross-org reviews are not possible, so please comment to indicate we should merge this (or add a review as an individual)."
+
+              echo "::notice::PR created: ${pr_url}"
             ) || echo "::warning::Failed to process ${repo_name}, skipping"
           done <<< "$repos"

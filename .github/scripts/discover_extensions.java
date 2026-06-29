@@ -10,17 +10,22 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.stream.Collectors;
 
+import org.apache.maven.model.Dependency;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
+import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
 /**
@@ -43,6 +48,11 @@ class discover_extensions implements Callable<Integer> {
     @Parameters(index = "1", defaultValue = "main", description = "Git ref (branch or tag)")
     String ref;
 
+    @Option(names = "--platform-bom",
+            description = "Maven coordinates (groupId:artifactId:version) of a platform BOM. " +
+                    "Extensions managed by this BOM are excluded from the output.")
+    String platformBom;
+
     public static void main(String... args) {
         int exitCode = new CommandLine(new discover_extensions()).execute(args);
         System.exit(exitCode);
@@ -59,9 +69,18 @@ class discover_extensions implements Callable<Integer> {
             byArtifact.put(mod[1], mod[0]);
         }
 
+        Set<String> platformArtifacts = fetchPlatformArtifacts();
+
         List<String> runtimeArtifacts = byArtifact.keySet().stream()
                 .filter(a -> !a.endsWith("-deployment"))
                 .filter(a -> byArtifact.containsKey(a + "-deployment"))
+                .filter(a -> {
+                    if (platformArtifacts.contains(a)) {
+                        System.out.println("Skipping " + a + " (managed by platform BOM)");
+                        return false;
+                    }
+                    return true;
+                })
                 .sorted()
                 .collect(Collectors.toList());
 
@@ -70,6 +89,38 @@ class discover_extensions implements Callable<Integer> {
         }
 
         return 0;
+    }
+
+    private Set<String> fetchPlatformArtifacts() {
+        if (platformBom == null || platformBom.isEmpty()) {
+            return Collections.emptySet();
+        }
+        String[] parts = platformBom.split(":");
+        if (parts.length != 3) {
+            System.err.println("Warning: --platform-bom must be groupId:artifactId:version, got: " + platformBom);
+            return Collections.emptySet();
+        }
+        String groupPath = parts[0].replace('.', '/');
+        String artifactId = parts[1];
+        String version = parts[2];
+        String url = String.format(
+                "https://repo1.maven.org/maven2/%s/%s/%s/%s-%s.pom",
+                groupPath, artifactId, version, artifactId, version);
+
+        Model model = fetchPomFromUrl(url);
+        if (model == null) {
+            System.err.println("Warning: could not fetch platform BOM from " + url);
+            return Collections.emptySet();
+        }
+
+        Set<String> artifacts = new HashSet<>();
+        if (model.getDependencyManagement() != null) {
+            for (Dependency dep : model.getDependencyManagement().getDependencies()) {
+                artifacts.add(dep.getArtifactId());
+            }
+        }
+        System.err.println("Loaded " + artifacts.size() + " artifacts from platform BOM");
+        return artifacts;
     }
 
     private void walkModules(String basePath, String parentGroupId, List<String[]> collected) {
@@ -107,9 +158,13 @@ class discover_extensions implements Callable<Integer> {
     }
 
     private Model fetchPom(String path) {
+        String url = String.format(
+                "https://raw.githubusercontent.com/%s/%s/%s", repo, ref, path);
+        return fetchPomFromUrl(url);
+    }
+
+    private Model fetchPomFromUrl(String url) {
         try {
-            String url = String.format(
-                    "https://raw.githubusercontent.com/%s/%s/%s", repo, ref, path);
             HttpRequest.Builder builder = HttpRequest.newBuilder()
                     .uri(URI.create(url))
                     .timeout(Duration.ofSeconds(15));
@@ -125,7 +180,7 @@ class discover_extensions implements Callable<Integer> {
                 return pomReader.read(is);
             }
         } catch (Exception e) {
-            System.err.println("Warning: could not read " + path + ": " + e.getMessage());
+            System.err.println("Warning: could not read " + url + ": " + e.getMessage());
             return null;
         }
     }

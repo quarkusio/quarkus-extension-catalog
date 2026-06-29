@@ -83,6 +83,10 @@ jobs:
             echo "::notice::No previous successful run found — processing all repos"
           fi
 
+          # Determine the latest platform BOM version for filtering
+          platform_version=$(grep -oE '[0-9]+\.[0-9]+\.[0-9]+' platforms/quarkus-bom.yaml | head -1)
+          echo "::notice::Platform BOM version: ${platform_version}"
+
           # List all non-archived quarkiverse repos tagged with the quarkus-extension topic
           echo "::group::Listing quarkiverse repos"
           repos=$(gh repo list quarkiverse --topic quarkus-extension --no-archived -L 1000 \
@@ -128,6 +132,7 @@ jobs:
 
               # Walk the POM module tree to discover extensions
               extensions=$(jbang .github/scripts/discover_extensions.java \
+                --platform-bom "io.quarkus.platform:quarkus-bom:${platform_version}" \
                 "quarkiverse/${repo_name}" "$default_branch" || echo "")
               if [[ -z "$extensions" ]]; then
                 echo "No extensions discovered"

@@ -48,10 +48,14 @@ class discover_extensions implements Callable<Integer> {
     @Parameters(index = "1", defaultValue = "main", description = "Git ref (branch or tag)")
     String ref;
 
-    @Option(names = "--platform-bom",
-            description = "Maven coordinates (groupId:artifactId:version) of a platform BOM. " +
-                    "Extensions managed by this BOM are excluded from the output.")
-    String platformBom;
+    @Option(names = "--platform-repo",
+            description = "GitHub repo (e.g. quarkusio/quarkus-platform) whose member BOMs " +
+                    "define platform-managed extensions to exclude from the output.")
+    String platformRepo;
+
+    @Option(names = "--platform-ref", defaultValue = "main",
+            description = "Git ref for the platform repo (default: main)")
+    String platformRef;
 
     public static void main(String... args) {
         int exitCode = new CommandLine(new discover_extensions()).execute(args);
@@ -74,13 +78,7 @@ class discover_extensions implements Callable<Integer> {
         List<String> runtimeArtifacts = byArtifact.keySet().stream()
                 .filter(a -> !a.endsWith("-deployment"))
                 .filter(a -> byArtifact.containsKey(a + "-deployment"))
-                .filter(a -> {
-                    if (platformArtifacts.contains(a)) {
-                        System.out.println("Skipping " + a + " (managed by platform BOM)");
-                        return false;
-                    }
-                    return true;
-                })
+                .filter(a -> !platformArtifacts.contains(a))
                 .sorted()
                 .collect(Collectors.toList());
 
@@ -92,34 +90,39 @@ class discover_extensions implements Callable<Integer> {
     }
 
     private Set<String> fetchPlatformArtifacts() {
-        if (platformBom == null || platformBom.isEmpty()) {
+        if (platformRepo == null || platformRepo.isEmpty()) {
             return Collections.emptySet();
         }
-        String[] parts = platformBom.split(":");
-        if (parts.length != 3) {
-            System.err.println("Warning: --platform-bom must be groupId:artifactId:version, got: " + platformBom);
-            return Collections.emptySet();
-        }
-        String groupPath = parts[0].replace('.', '/');
-        String artifactId = parts[1];
-        String version = parts[2];
-        String url = String.format(
-                "https://repo1.maven.org/maven2/%s/%s/%s/%s-%s.pom",
-                groupPath, artifactId, version, artifactId, version);
 
-        Model model = fetchPomFromUrl(url);
-        if (model == null) {
-            System.err.println("Warning: could not fetch platform BOM from " + url);
+        // Discover platform members by parsing the parent POM's <module> list
+        String parentPomUrl = String.format(
+                "https://raw.githubusercontent.com/%s/%s/generated-platform-project/pom.xml",
+                platformRepo, platformRef);
+        Model parentModel = fetchPomFromUrl(parentPomUrl);
+        if (parentModel == null || parentModel.getModules() == null) {
+            System.err.println("Warning: could not read platform parent POM from " + platformRepo);
             return Collections.emptySet();
         }
 
         Set<String> artifacts = new HashSet<>();
-        if (model.getDependencyManagement() != null) {
+        for (String member : parentModel.getModules()) {
+            String bomUrl = String.format(
+                    "https://raw.githubusercontent.com/%s/%s/generated-platform-project/%s/bom/pom.xml",
+                    platformRepo, platformRef, member);
+            Model model = fetchPomFromUrl(bomUrl);
+            if (model == null || model.getDependencyManagement() == null) {
+                continue;
+            }
+            int count = 0;
             for (Dependency dep : model.getDependencyManagement().getDependencies()) {
                 artifacts.add(dep.getArtifactId());
+                count++;
+            }
+            if (count > 0) {
+                System.err.println("  " + member + ": " + count + " managed artifacts");
             }
         }
-        System.err.println("Loaded " + artifacts.size() + " artifacts from platform BOM");
+        System.err.println("Loaded " + artifacts.size() + " platform artifacts total");
         return artifacts;
     }
 

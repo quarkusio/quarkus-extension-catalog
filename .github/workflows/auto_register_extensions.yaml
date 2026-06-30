@@ -204,7 +204,7 @@ jobs:
                 --body "$pr_body" \
                 --draft)
 
-              gh pr comment "$pr_url" --body "Once merged, this extension will appear in the Quarkus extension registry and be available in tooling such as [code.quarkus.io](https://code.quarkus.io) and [extensions.quarkus.io](https://extensions.quarkus.io). Cross-org reviews are not possible, so please comment to indicate we should merge this (or add a review as an individual)."
+              gh pr comment "$pr_url" --body "Once merged, this extension will appear in the Quarkus extension registry and be available in tooling such as [code.quarkus.io](https://code.quarkus.io) and [extensions.quarkus.io](https://extensions.quarkus.io). See [the Quarkiverse hub](https://hub.quarkiverse.io/checklistfornewprojects/#make-your-extension-available-in-the-tooling) for more details about this.\n Cross-org reviews are not possible, so please comment to indicate we should merge this (or add a review as an individual)."
 
               echo "::notice::Draft PR created: ${pr_url}"
             ) || echo "::warning::Failed to process ${repo_name}, skipping"

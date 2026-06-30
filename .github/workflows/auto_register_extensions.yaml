@@ -201,10 +201,11 @@ jobs:
 
               pr_url=$(gh pr create \
                 --title "Register extensions from ${repo_name}" \
-                --body "$pr_body")
+                --body "$pr_body" \
+                --draft)
 
               gh pr comment "$pr_url" --body "Once merged, this extension will appear in the Quarkus extension registry and be available in tooling such as [code.quarkus.io](https://code.quarkus.io) and [extensions.quarkus.io](https://extensions.quarkus.io). Cross-org reviews are not possible, so please comment to indicate we should merge this (or add a review as an individual)."
 
-              echo "::notice::PR created: ${pr_url}"
+              echo "::notice::Draft PR created: ${pr_url}"
             ) || echo "::warning::Failed to process ${repo_name}, skipping"
           done <<< "$repos"

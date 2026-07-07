@@ -3,7 +3,7 @@ group-id: "io.quarkiverse.json-rpc"
 artifact-id: "quarkus-json-rpc"
 exclude-versions: []
 versions:
-- "1.1.2"
+- "1.1.3"
 - "1.0.2"
 - "0.1.0"
 - "0.0.5"

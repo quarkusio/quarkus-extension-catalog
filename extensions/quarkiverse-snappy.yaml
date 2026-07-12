@@ -3,4 +3,5 @@ group-id: "io.quarkiverse.snappy"
 artifact-id: "quarkus-snappy"
 versions:
 - "0.1.0"
+- "0"
 exclude-versions: []

@@ -143,6 +143,18 @@ jobs:
                 | grep -oP '@\Kquarkiverse/quarkiverse-\S+' \
                 | head -1 || echo "")
 
+              # Resolve team members so we can @mention them individually
+              # (team @mentions do not notify members across org boundaries)
+              team_mentions=""
+              if [[ -n "$owners_team" ]]; then
+                team_slug="${owners_team#quarkiverse/}"
+                members=$(gh_api_with_retry "orgs/quarkiverse/teams/${team_slug}/members" \
+                  --jq '.[].login' 2>/dev/null || echo "")
+                if [[ -n "$members" ]]; then
+                  team_mentions=$(echo "$members" | awk '{printf "@%s ", $1}' | sed 's/ $//')
+                fi
+              fi
+
               new_files=()
               pr_body_entries=()
 
@@ -193,8 +205,8 @@ jobs:
               pr_body="This PR registers newly discovered extensions from [${repo_name}](https://github.com/quarkiverse/${repo_name})."
               pr_body="${pr_body}"$'\n\n'"## New extensions"$'\n\n'
               pr_body="${pr_body}$(printf '%s\n' "${pr_body_entries[@]}")"
-              if [[ -n "$owners_team" ]]; then
-                pr_body="${pr_body}"$'\n\n'"cc [${owners_team}](https://github.com/orgs/quarkiverse/teams/${owners_team#quarkiverse/})"
+              if [[ -n "$team_mentions" ]]; then
+                pr_body="${pr_body}"$'\n\n'"cc ${team_mentions}"
               fi
               pr_body="${pr_body}"$'\n'"---"
               pr_body="${pr_body}"$'\n'"*Created automatically by [auto-register-extensions](${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/workflows/auto_register_extensions.yaml)*"
@@ -204,7 +216,13 @@ jobs:
                 --body "$pr_body" \
                 --draft)
 
-              gh pr comment "$pr_url" --body "Once merged, this extension will appear in the Quarkus extension registry and be available in tooling such as [code.quarkus.io](https://code.quarkus.io) and [extensions.quarkus.io](https://extensions.quarkus.io). See [the Quarkiverse hub](https://hub.quarkiverse.io/checklistfornewprojects/#make-your-extension-available-in-the-tooling) for more details about this.\n Cross-org reviews are not possible, so please comment to indicate we should merge this (or add a review as an individual)."
+              comment_body=$(cat <<'EOF'
+Once merged, this extension will appear in the Quarkus extension registry and be available in tooling such as [code.quarkus.io](https://code.quarkus.io) and [extensions.quarkus.io](https://extensions.quarkus.io). See [the Quarkiverse hub](https://hub.quarkiverse.io/checklistfornewprojects/#make-your-extension-available-in-the-tooling) for more details about this.
+
+Cross-org reviews are not possible, so please comment to indicate we should merge this (or add a review as an individual).
+EOF
+              )
+              gh pr comment "$pr_url" --body "$comment_body"
 
               echo "::notice::Draft PR created: ${pr_url}"
             ) || echo "::warning::Failed to process ${repo_name}, skipping"

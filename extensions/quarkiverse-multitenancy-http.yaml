@@ -1,0 +1,6 @@
+---
+group-id: "io.quarkiverse.multitenancy"
+artifact-id: "quarkus-multitenancy-http"
+versions:
+- "0.1.0"
+exclude-versions: []

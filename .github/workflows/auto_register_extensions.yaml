@@ -216,12 +216,7 @@ jobs:
                 --body "$pr_body" \
                 --draft)
 
-              comment_body=$(cat <<'EOF'
-Once merged, this extension will appear in the Quarkus extension registry and be available in tooling such as [code.quarkus.io](https://code.quarkus.io) and [extensions.quarkus.io](https://extensions.quarkus.io). See [the Quarkiverse hub](https://hub.quarkiverse.io/checklistfornewprojects/#make-your-extension-available-in-the-tooling) for more details about this.
-
-Cross-org reviews are not possible, so please comment to indicate we should merge this (or add a review as an individual).
-EOF
-              )
+              comment_body="Once merged, this extension will appear in the Quarkus extension registry and be available in tooling such as [code.quarkus.io](https://code.quarkus.io) and [extensions.quarkus.io](https://extensions.quarkus.io). See [the Quarkiverse hub](https://hub.quarkiverse.io/checklistfornewprojects/#make-your-extension-available-in-the-tooling) for more details about this."$'\n\n'"Cross-org reviews are not possible, so please comment to indicate we should merge this (or add a review as an individual)."
               gh pr comment "$pr_url" --body "$comment_body"
 
               echo "::notice::Draft PR created: ${pr_url}"

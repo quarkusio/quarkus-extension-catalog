@@ -2,5 +2,17 @@
 group-id: "io.quarkiverse.openapi.generator"
 artifact-id: "quarkus-openapi-generator-moqu-wiremock"
 versions:
+- "2.21.0"
 - "2.20.0"
+- "2.19.0"
+- "2.18.0"
+- "2.17.0-lts"
+- "2.16.0-lts"
+- "2.15.0-lts"
+- "2.14.0-lts"
+- "2.13.0-lts"
+- "2.12.1-lts"
+- "2.11.1-lts"
+- "2.10.0-lts"
+- "2.9.1-lts"
 exclude-versions: []

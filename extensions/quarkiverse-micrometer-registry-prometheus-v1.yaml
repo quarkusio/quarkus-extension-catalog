@@ -1,6 +1,0 @@
----
-group-id: "io.quarkiverse.micrometer.registry"
-artifact-id: "quarkus-micrometer-registry-prometheus-v1"
-versions:
-- "3.5.0"
-exclude-versions: []

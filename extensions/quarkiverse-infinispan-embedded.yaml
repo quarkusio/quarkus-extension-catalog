@@ -1,0 +1,6 @@
+---
+group-id: "io.quarkiverse.infinispan"
+artifact-id: "quarkus-infinispan-embedded"
+versions:
+- "2.0.1"
+exclude-versions: []

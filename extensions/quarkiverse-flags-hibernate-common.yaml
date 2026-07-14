@@ -1,6 +1,0 @@
----
-group-id: "io.quarkiverse.flags"
-artifact-id: "quarkus-flags-hibernate-common"
-versions:
-- "1.0.0.CR2"
-exclude-versions: []

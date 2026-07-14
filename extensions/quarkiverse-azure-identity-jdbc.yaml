@@ -3,4 +3,5 @@ group-id: "io.quarkiverse.azureservices"
 artifact-id: "quarkus-azure-identity-jdbc"
 versions:
 - "1.2.4"
+- "1.1.9"
 exclude-versions: []

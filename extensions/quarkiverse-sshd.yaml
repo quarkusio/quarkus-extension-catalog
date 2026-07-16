@@ -1,0 +1,6 @@
+---
+group-id: "io.quarkiverse.sshd"
+artifact-id: "quarkus-sshd"
+versions:
+- "1.2.0"
+exclude-versions: []

@@ -2,5 +2,6 @@
 group-id: "io.quarkiverse.camunda"
 artifact-id: "quarkus-camunda"
 versions:
+- "2.1.0"
 - "2.0.1"
 exclude-versions: []

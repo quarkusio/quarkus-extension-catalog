@@ -2,5 +2,6 @@
 group-id: "io.quarkiverse.minio"
 artifact-id: "quarkus-minio-admin"
 versions:
+- "3.9.0"
 - "3.8.6"
 exclude-versions: []

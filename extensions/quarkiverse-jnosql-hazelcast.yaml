@@ -2,5 +2,5 @@
 group-id: "io.quarkiverse.jnosql"
 artifact-id: "quarkus-jnosql-hazelcast"
 versions:
-- "3.4.15"
+- "3.4.16"
 exclude-versions: []

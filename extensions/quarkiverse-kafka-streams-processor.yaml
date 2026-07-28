@@ -3,7 +3,7 @@ group-id: "io.quarkiverse.kafkastreamsprocessor"
 artifact-id: "quarkus-kafka-streams-processor"
 versions:
 - "6.0.7"
-- "5.1.4"
+- "5.1.5"
 - "5.0.1"
 - "4.3.2"
 - "4.2.1"

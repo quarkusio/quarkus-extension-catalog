@@ -2,5 +2,5 @@
 group-id: "io.quarkiverse.langchain4j"
 artifact-id: "quarkus-langchain4j-hibernate"
 versions:
-- "1.12.0"
+- "1.12.1"
 exclude-versions: []

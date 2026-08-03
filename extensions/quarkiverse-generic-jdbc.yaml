@@ -1,0 +1,5 @@
+---
+group-id: "io.quarkiverse.jdbc"
+artifact-id: "quarkus-jdbc-generic"
+versions: []
+exclude-versions: []

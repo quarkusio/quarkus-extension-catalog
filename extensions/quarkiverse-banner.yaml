@@ -3,4 +3,5 @@ group-id: "io.quarkiverse.banner"
 artifact-id: "quarkus-banner"
 versions:
 - "1.1.0"
+- "1.0.1"
 exclude-versions: []

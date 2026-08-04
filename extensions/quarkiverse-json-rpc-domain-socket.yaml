@@ -1,0 +1,6 @@
+---
+group-id: "io.quarkiverse.json-rpc"
+artifact-id: "quarkus-json-rpc-domain-socket"
+versions:
+- "2.0.0"
+exclude-versions: []

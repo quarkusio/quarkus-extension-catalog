@@ -143,16 +143,22 @@ jobs:
                 | grep -oP '@\Kquarkiverse/quarkiverse-\S+' \
                 | head -1 || echo "")
 
-              # Resolve team members so we can @mention them individually
+              # Resolve maintainers from recent merge commits (people with merge rights)
               # (team @mentions do not notify members across org boundaries)
-              team_mentions=""
-              if [[ -n "$owners_team" ]]; then
-                team_slug="${owners_team#quarkiverse/}"
-                members=$(gh_api_with_retry "orgs/quarkiverse/teams/${team_slug}/members" \
-                  --jq '.[].login' 2>/dev/null || echo "")
-                if [[ -n "$members" ]]; then
-                  team_mentions=$(echo "$members" | awk '{printf "@%s ", $1}' | sed 's/ $//')
-                fi
+              maintainer_mentions=""
+
+              # Get authors of recent merge commits (merges have 2+ parents)
+              # These are the people who actually merged PRs, indicating merge rights
+              maintainers=$(gh_api_with_retry "repos/quarkiverse/${repo_name}/commits?per_page=100" \
+                --jq '[.[] | select(.parents | length >= 2) | .author.login // empty] | unique | .[] | select(. != null and (contains("[bot]") | not) and . != "web-flow")' \
+                2>/dev/null || echo "")
+
+              if [[ -n "$maintainers" ]]; then
+                # Limit to top 5 most recent unique maintainers to keep mentions reasonable
+                maintainer_mentions=$(echo "$maintainers" | head -5 | awk '{printf "@%s ", $1}' | sed 's/ $//')
+                echo "::notice::Found maintainers from merge commits: ${maintainer_mentions}"
+              else
+                echo "::warning::Could not identify maintainers from merge commits for ${repo_name}"
               fi
 
               new_files=()
@@ -205,8 +211,8 @@ jobs:
               pr_body="This PR registers newly discovered extensions from [${repo_name}](https://github.com/quarkiverse/${repo_name})."
               pr_body="${pr_body}"$'\n\n'"## New extensions"$'\n\n'
               pr_body="${pr_body}$(printf '%s\n' "${pr_body_entries[@]}")"
-              if [[ -n "$team_mentions" ]]; then
-                pr_body="${pr_body}"$'\n\n'"cc ${team_mentions}"
+              if [[ -n "$maintainer_mentions" ]]; then
+                pr_body="${pr_body}"$'\n\n'"cc ${maintainer_mentions}"
               fi
               pr_body="${pr_body}"$'\n'"---"
               pr_body="${pr_body}"$'\n'"*Created automatically by [auto-register-extensions](${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/workflows/auto_register_extensions.yaml)*"

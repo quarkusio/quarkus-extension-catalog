@@ -1,0 +1,6 @@
+---
+group-id: "io.quarkiverse.certmanager"
+artifact-id: "quarkus-certmanager"
+versions:
+- "1.0.3"
+exclude-versions: []

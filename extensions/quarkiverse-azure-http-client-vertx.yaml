@@ -3,6 +3,6 @@ group-id: "io.quarkiverse.azureservices"
 artifact-id: "quarkus-azure-http-client-vertx"
 versions:
 - "1.2.5"
+exclude-versions:
 - "1.1.9"
 - "1.0.9"
-exclude-versions: []

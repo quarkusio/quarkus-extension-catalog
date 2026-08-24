@@ -2,5 +2,5 @@
 group-id: "io.quarkiverse.flags"
 artifact-id: "quarkus-flags-openfeature"
 versions:
-- "1.0.0"
+- "1.0.1"
 exclude-versions: []

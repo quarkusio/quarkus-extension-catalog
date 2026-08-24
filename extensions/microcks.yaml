@@ -2,6 +2,7 @@
 group-id: "io.github.microcks.quarkus"
 artifact-id: "quarkus-microcks"
 versions:
+- "0.5.0"
 - "0.4.4"
 - "0.3.0"
 - "0.2.7"

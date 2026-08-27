@@ -2,6 +2,7 @@
 group-id: "io.quarkiverse.micrometer.registry"
 artifact-id: "quarkus-micrometer-registry-influx"
 versions:
+- "3.7.0"
 - "3.6.0"
 - "3.5.0"
 - "3.4.1"

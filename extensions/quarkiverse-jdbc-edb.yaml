@@ -2,5 +2,6 @@
 group-id: "io.quarkiverse.edb"
 artifact-id: "quarkus-jdbc-edb"
 versions:
+- "1.1.0"
 - "1.0.0"
 exclude-versions: []

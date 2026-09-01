@@ -2,6 +2,7 @@
 group-id: "io.quarkiverse.langfuse"
 artifact-id: "quarkus-langfuse"
 versions:
+- "0.5.0"
 - "0.4.1"
 - "0.3.2"
 - "0.2.3"

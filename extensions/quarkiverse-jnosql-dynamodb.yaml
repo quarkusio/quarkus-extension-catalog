@@ -2,6 +2,6 @@
 group-id: "io.quarkiverse.jnosql"
 artifact-id: "quarkus-jnosql-dynamodb"
 versions:
-- "3.5.0"
+- "3.5.1"
 - "3.4.16"
 exclude-versions: []

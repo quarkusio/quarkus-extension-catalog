@@ -2,5 +2,5 @@
 group-id: "io.carbonintensity"
 artifact-id: "quarkus-green-scheduler"
 versions:
-- "0.8.5"
+- "0.8.6"
 exclude-versions: []

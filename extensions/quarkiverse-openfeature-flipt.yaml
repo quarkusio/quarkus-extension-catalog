@@ -2,5 +2,5 @@
 group-id: "io.quarkiverse.openfeature"
 artifact-id: "quarkus-openfeature-flipt"
 versions:
-- "1.0.0.Alpha1"
+- "1.0.0.Beta1"
 exclude-versions: []

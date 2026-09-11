@@ -1,0 +1,6 @@
+---
+group-id: "io.quarkiverse.opensearch"
+artifact-id: "quarkus-opensearch-client-common"
+versions:
+- "3.4.3"
+exclude-versions: []

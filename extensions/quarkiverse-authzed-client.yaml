@@ -2,6 +2,8 @@
 group-id: "io.quarkiverse.authzed"
 artifact-id: "quarkus-authzed-client"
 versions:
+- "0.24.0"
+- "0.23.0"
 - "0.22.0"
 - "0.21.0"
 - "0.20.0"

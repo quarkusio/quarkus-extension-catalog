@@ -1,0 +1,7 @@
+---
+group-id: "de.caluga"
+artifact-id: "quarkus-morphium"
+versions:
+- "6.3.1"
+- "6.3.0"
+exclude-versions: []

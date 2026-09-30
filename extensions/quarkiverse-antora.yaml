@@ -2,6 +2,7 @@
 group-id: "io.quarkiverse.antora"
 artifact-id: "quarkus-antora"
 versions:
+- "3.40.0"
 - "3.33.2"
 - "3.25.0"
 - "2.2.0"

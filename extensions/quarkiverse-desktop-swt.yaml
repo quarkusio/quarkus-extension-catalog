@@ -1,0 +1,6 @@
+---
+group-id: "io.quarkiverse.desktop"
+artifact-id: "quarkus-desktop-swt"
+versions:
+- "0.2.1"
+exclude-versions: []

@@ -1,0 +1,6 @@
+---
+group-id: "io.quarkiverse.casdoor-auth"
+artifact-id: "quarkus-casdoor-auth"
+versions:
+- "0.1.0"
+exclude-versions: []

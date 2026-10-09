@@ -1,0 +1,6 @@
+---
+group-id: "io.quarkiverse.langchain4j"
+artifact-id: "quarkus-langchain4j-mcp-apicurio-registry"
+versions:
+- "1.13.1"
+exclude-versions: []

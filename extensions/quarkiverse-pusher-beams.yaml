@@ -1,0 +1,6 @@
+---
+group-id: "io.quarkiverse.pusher.beams"
+artifact-id: "quarkus-pusher-beams"
+versions:
+- "1.0.0"
+exclude-versions: []

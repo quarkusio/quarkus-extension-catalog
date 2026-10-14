@@ -1,0 +1,6 @@
+---
+group-id: "io.quarkiverse.roq"
+artifact-id: "quarkus-roq-plugin-asciidoc-l10n"
+versions:
+- "2.2.0"
+exclude-versions: []

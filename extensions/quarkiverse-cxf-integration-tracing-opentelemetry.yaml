@@ -1,0 +1,6 @@
+---
+group-id: "io.quarkiverse.cxf"
+artifact-id: "quarkus-cxf-integration-tracing-opentelemetry"
+versions:
+- "3.37.0"
+exclude-versions: []

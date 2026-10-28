@@ -1,0 +1,6 @@
+---
+group-id: "io.quarkiverse.jms"
+artifact-id: "quarkus-jms"
+versions:
+- "0.1.0"
+exclude-versions: []

@@ -1,0 +1,7 @@
+---
+group-id: "io.github.matheuslealpa"
+artifact-id: "quarkus-rsql"
+versions:
+- "1.0.1"
+- "1.0.0"
+exclude-versions: []

@@ -2,5 +2,5 @@
 group-id: "io.quarkiverse.networkcapture"
 artifact-id: "quarkus-network-capture"
 versions:
-- "0.1.1"
+- "0.1.2"
 exclude-versions: []

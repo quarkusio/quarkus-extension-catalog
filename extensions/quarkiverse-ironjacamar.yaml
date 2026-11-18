@@ -2,6 +2,7 @@
 group-id: "io.quarkiverse.ironjacamar"
 artifact-id: "quarkus-ironjacamar"
 versions:
+- "2.0.0"
 - "1.8.3"
 - "1.7.2"
 - "1.6.1"

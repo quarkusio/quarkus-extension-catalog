@@ -1,0 +1,6 @@
+---
+group-id: "io.quarkiverse.modulith"
+artifact-id: "quarkus-modulith-events-messaging"
+versions:
+- "2.0.0.CR1"
+exclude-versions: []

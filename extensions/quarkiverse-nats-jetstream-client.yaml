@@ -1,0 +1,6 @@
+---
+group-id: "io.quarkiverse.reactivemessaging.nats-jetstream"
+artifact-id: "quarkus-nats-jetstream-client"
+versions:
+- "4.0.0.Beta1"
+exclude-versions: []

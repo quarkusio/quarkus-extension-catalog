@@ -1,0 +1,6 @@
+---
+group-id: "io.quarkiverse.messaging.outbox"
+artifact-id: "quarkus-messaging-outbox-hibernate-reactive"
+versions:
+- "0.1.0"
+exclude-versions: []

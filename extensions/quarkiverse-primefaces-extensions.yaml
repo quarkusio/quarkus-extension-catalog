@@ -1,0 +1,6 @@
+---
+group-id: "io.quarkiverse.primefaces"
+artifact-id: "quarkus-primefaces-extensions"
+versions:
+- "4.15.16"
+exclude-versions: []

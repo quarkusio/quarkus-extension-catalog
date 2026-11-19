@@ -1,0 +1,6 @@
+---
+group-id: "io.quarkiverse.modulith"
+artifact-id: "quarkus-modulith-events-neo4j"
+versions:
+- "1.0.0"
+exclude-versions: []

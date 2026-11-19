@@ -4,6 +4,6 @@ artifact-id: "quarkus-langchain4j-hibernate"
 versions:
 - "1.15.1"
 - "1.14.2"
-- "1.13.4"
+- "1.13.5"
 - "1.12.2"
 exclude-versions: []

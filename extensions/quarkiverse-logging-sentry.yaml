@@ -2,6 +2,7 @@
 group-id: "io.quarkiverse.loggingsentry"
 artifact-id: "quarkus-logging-sentry"
 versions:
+- "4.0.0"
 - "2.3.6"
 - "2.2.0"
 - "2.1.9"

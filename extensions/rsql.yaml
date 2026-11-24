@@ -2,6 +2,7 @@
 group-id: "io.github.matheuslealpa"
 artifact-id: "quarkus-rsql"
 versions:
+- "1.2.0"
 - "1.1.0":
     compatible-with-quarkus-core:
     - "3.27.6"

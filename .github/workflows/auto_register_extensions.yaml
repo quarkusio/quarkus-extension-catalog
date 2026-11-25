@@ -72,11 +72,13 @@ jobs:
             done
           }
 
-          # Find when this workflow last succeeded. Releases published after this
-          # timestamp are new and need crawling. If the workflow has never run
+          # Find when the last successful run of this workflow started. Releases
+          # published after this timestamp are new and need crawling. The start time
+          # is used, not the end time, so a release published while that run was
+          # in progress is not skipped. If the workflow has never run
           # (or never succeeded), we process everything.
           last_success=$(gh_api_with_retry "repos/${GITHUB_REPOSITORY}/actions/workflows/auto_register_extensions.yaml/runs?status=success&per_page=1" \
-            --jq '.workflow_runs[0].updated_at // empty' 2>/dev/null || echo "")
+            --jq '.workflow_runs[0].run_started_at // empty' 2>/dev/null || echo "")
           if [[ -n "$last_success" ]]; then
             echo "::notice::Last successful run: ${last_success}"
           else
